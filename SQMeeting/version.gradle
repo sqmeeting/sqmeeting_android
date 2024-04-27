@@ -1,0 +1,155 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+ext{
+    initVerDebug = false
+    initVerRelease = false
+
+    init = [
+            major : 3,
+            minor : 4,
+            patch : 0
+    ]
+}
+
+def versionCfgSet(String task, File verfile, int major, int minor, int patch, int build){
+    println task
+
+    if (verfile != null && verfile.canRead()){
+        def Properties versionProps = new Properties()
+        versionProps.load(new FileInputStream(verfile))
+
+        build = build + 1
+
+        if(ext.initVerDebug || ext.initVerRelease){
+            major = 1
+            minor = 0
+            patch = 0
+            build = 0
+        }else{
+            major = ext.init.major
+            minor = ext.init.minor
+            patch = ext.init.patch
+        }
+
+        project.ext.versionCode =
+                major * 100000 + minor * 10000 + patch * 1000 + build
+        def versionTmp = "${major}.${minor}.${patch}.${build}"
+        project.ext.versionName = versionTmp
+
+        if(task.contains("Release")){
+            project.ext.versionName = "${major}.${minor}.${patch}.${build}"
+
+            versionProps.setProperty('VERSION_RELEASE_MAJOR', major.toString())
+            versionProps.setProperty('VERSION_RELEASE_MINOR', minor.toString())
+            versionProps.setProperty('VERSION_RELEASE_PATCH', patch.toString())
+            versionProps.setProperty('VERSION_RELEASE_BUILD', build.toString())
+
+            versionProps.setProperty('VERSION_RELEASE_CODE', project.ext.versionCode.toString())
+            versionProps.setProperty('VERSION_RELEASE_NAME', project.ext.versionName)
+            versionProps.store(verfile.newWriter(), null)
+        }else if(task.contains("Debug")){
+            versionProps.setProperty('VERSION_DEBUG_MAJOR', major.toString())
+            versionProps.setProperty('VERSION_DEBUG_MINOR', minor.toString())
+            versionProps.setProperty('VERSION_DEBUG_PATCH', patch.toString())
+            versionProps.setProperty('VERSION_DEBUG_BUILD', build.toString())
+
+            versionProps.setProperty('VERSION_DEBUG_CODE', project.ext.versionCode.toString())
+            versionProps.setProperty('VERSION_DEBUG_NAME', project.ext.versionName)
+            versionProps.store(verfile.newWriter(), null)
+        }
+
+        println '--------Building Complete!----------'
+        println "The new config of version: "
+        println 'Version Code: ' + project.ext.versionCode.toString()
+        println 'Version Name: ' + project.ext.versionName + " ( ${versionTmp} )"
+        println '---------------------------'
+    }else{
+        throw new GradleException("Could not read version.properties!")
+    }
+}
+
+android {
+
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+    def versionBuild = 0
+    def versionFileName = "version.properties";
+    def versionPropsFile = file("${versionFileName}")
+    def taskName = ""
+
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+    println(tskReqStr)
+
+    Pattern pattern = Pattern.compile(":assemble(.*?)(Release|Debug)")
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find()) {
+        println "MATCH FOUND"
+
+        def flavor = matcher.group(2).toLowerCase();
+        taskName = "assemble${matcher.group(2)}"
+        println 'taskName ' + taskName
+
+    } else {
+        println "NO MATCH FOUND"
+        println "Other"
+    }
+
+    if (versionPropsFile != null && versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        if(taskName.contains('Release')){
+            versionMajor = versionProps.getProperty('VERSION_RELEASE_MAJOR', '1').toInteger()
+            versionMinor = versionProps.getProperty('VERSION_RELEASE_MINOR', '0').toInteger()
+            versionPatch = versionProps.getProperty('VERSION_RELEASE_PATCH', '0').toInteger()
+            versionBuild = versionProps.getProperty('VERSION_RELEASE_BUILD', '0').toInteger()
+
+        }else if(taskName.contains('Debug')){
+            versionMajor = versionProps.getProperty('VERSION_DEBUG_MAJOR', '1').toInteger()
+            versionMinor = versionProps.getProperty('VERSION_DEBUG_MINOR', '0').toInteger()
+            versionPatch = versionProps.getProperty('VERSION_DEBUG_PATCH', '0').toInteger()
+            versionBuild = versionProps.getProperty('VERSION_DEBUG_BUILD', '0').toInteger()
+
+        }else{
+            project.ext.versionCode = 0
+            project.ext.versionName = '0.0.0-0'
+        }
+
+        project.ext.versionCode = versionMajor * 100000 + versionMinor * 10000 + versionPatch * 1000 + versionBuild
+        project.ext.versionName = "${versionMajor}.${versionMinor}.${versionPatch}-${versionBuild}"
+
+        println '--------Building----------'
+        println "The old config of version: "
+        println 'PropsFile: ' + versionPropsFile.toString()
+        println 'versionMajor ' + versionMajor.toString()
+        println 'versionMinor ' + versionMinor.toString()
+        println 'versionPatch ' + versionPatch.toString()
+        println 'versionBuild ' + versionBuild.toString()
+        println 'Version Code: ' + project.ext.versionCode.toString()
+        println 'Version Name: ' + project.ext.versionName
+        println '---------------------------'
+    } else {
+        throw new GradleException("Could not read version.properties!")
+    }
+
+    def runTasks = gradle.startParameter.taskNames.toString()
+    if(runTasks.contains(taskName)){
+        if(taskName.contains("Release")){
+            println "Release Building ..."
+            versionCfgSet(taskName, versionPropsFile, versionMajor, versionMinor, versionPatch, versionBuild)
+
+        }else if(taskName.contains("Debug")){
+            println "Debug Building ..."
+            versionCfgSet(taskName, versionPropsFile, versionMajor, versionMinor, versionPatch, versionBuild)
+
+        }else{
+            println "Sync now ..."
+            project.ext.versionCode = 1
+            project.ext.versionName = "0.0.0"
+        }
+    }
+}

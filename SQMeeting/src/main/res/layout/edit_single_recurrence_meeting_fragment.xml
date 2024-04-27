@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context=".ui.component.ScheduledMeetingDetailsFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            style="@style/TitleBarButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/edit_meeting_schedule"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/meeting_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/item_padding_horizontal"
+        android:background="@color/white"
+        android:text=""
+        android:textSize="@dimen/title_text_size_1"
+        android:textColor="@color/text_color_bold"
+        android:textStyle="bold"
+        android:maxLength="48"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_marginTop="6dp"
+        android:paddingVertical="@dimen/margin_medium"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar_layout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_meeting_recurrence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingHorizontal="@dimen/item_padding_horizontal"
+        android:paddingBottom="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_name">
+
+            <TextView
+                android:id="@+id/recurrence_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/text_color_green"
+                android:textSize="@dimen/text_size_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/recurrence_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/recurrence_type"
+                app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/start_time_item"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/menu_item_bg"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_meeting_recurrence">
+
+        <TextView
+            android:id="@+id/start_time_title"
+            style="@style/ItemLabelStyle"
+            android:text="@string/start_time" />
+
+        <TextView
+            android:id="@+id/start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/start_time_edit"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxWidth="215dp"
+            android:text=""
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/start_time_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:src="@drawable/icon_more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <!--<View
+        android:id="@id/split_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_tiny"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_time_item"/>-->
+
+    <RelativeLayout
+        android:id="@+id/meeting_duration_item"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/menu_item_bg"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_time_item">
+
+        <TextView
+            android:id="@+id/meeting_duration_title"
+            style="@style/ItemLabelStyle"
+            android:text="@string/meeting_duration" />
+
+        <TextView
+            android:id="@+id/meeting_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/meeting_duration_edit"
+            android:layout_toEndOf="@+id/meeting_duration_title"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxWidth="215dp"
+            android:text=""
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/meeting_duration_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:src="@drawable/icon_more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <!--<View
+        android:id="@id/split_line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_tiny"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_duration_item"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/menu_item_bg"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_duration_item">
+
+        <TextView
+            android:id="@+id/time_zone_title"
+            style="@style/ItemLabelStyle"
+            android:text="@string/time_zone" />
+
+        <TextView
+            android:id="@+id/time_zone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxWidth="215dp"
+            android:text=""
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="14sp"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/time_zone_title"/>
+
+    </RelativeLayout>
+
+
+
+
+    <Button
+        android:id="@+id/save_meeting_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_btn_height"
+        android:layout_marginStart="@dimen/listview_padding_horizontal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="@dimen/listview_padding_horizontal"
+        android:background="@drawable/bg_blue_btn"
+        android:gravity="center"
+        android:text="@string/save_changes"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text_size_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</android.support.constraint.ConstraintLayout>

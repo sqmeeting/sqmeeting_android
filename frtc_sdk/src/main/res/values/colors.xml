@@ -1,0 +1,47 @@
+<resources>
+    <color name="video_border_participant">#000000</color>
+	<color name="video_border_active_speaker">#1adc5d</color>
+    <color name="content_water_color">#26666666</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_37">#60000000</color>
+    <color name="transparent_44">#70000000</color>
+    <color name="transparent_70">#B3000000</color>
+    <color name="blue">#026ffe</color>
+    <color name="blue_disabled">#3d026ffe</color>
+    <color name="blue_transparent_30">#4d026ffe</color>
+    <color name="gray">#f0f0f5</color>
+    <color name="gray_40">#66f0f0f5</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_80">#cd000000</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="text_color_gray">#666666</color>
+    <color name="text_color_white">#ffffff</color>
+    <color name="text_color_blue">#338bff</color>>
+    <color name="text_color_red">#e32726</color>
+    <color name="text_color_hint">#cccccc</color>
+    <color name="text_color_bold">#222222</color>
+    <color name="text_color_item_title">#333333</color>
+    <color name="text_color_item_content">#999999</color>
+    <color name="text_color_normal">#333333</color>
+    <color name="text_color_disable">#66ffffff</color>
+    <color name="text_color_Chronometer">#D0D0D0</color>
+    <color name="btn_disable_bg">#d7dadd</color>
+    <color name="btn_border_color">#dedede</color>
+    <color name="border_color_red">#e32726</color>
+    <color name="border_color_gray">#b6b7b7</color>
+    <color name="border_color_white">#f5f5f5</color>
+    <color name="switch_focus">#026ffe</color>
+    <color name="switch_unchecked">#ebedef</color>
+    <color name="listview_bg_color">#f9f9f9</color>
+    <color name="divider_color">#d7dadd</color>
+    <color name="separator_color">#eeeff0</color>
+    <color name="title_bg_color">#fcfcfc</color>
+    <color name="bg_color_white">#f8f9fA</color>
+    <color name="bg_color_black">#d6212223</color>
+    <color name="bg_color_unselected">#cc333333</color>
+    <color name="bg_color_text_view">#33004299</color>
+
+</resources>

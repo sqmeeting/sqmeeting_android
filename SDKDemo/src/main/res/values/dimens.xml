@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="home_input_text_size">16sp</dimen>
+    <dimen name="et_padding">5dp</dimen>
+    <dimen name="btn_navi_margin">16dp</dimen>
+    <dimen name="btn_join_height">40dp</dimen>
+</resources>

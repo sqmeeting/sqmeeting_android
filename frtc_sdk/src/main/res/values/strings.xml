@@ -1,0 +1,324 @@
+<resources>
+
+    <string name="app_name">Meeting Demo</string>
+
+    <string name="btn_join_meeting">Join</string>
+
+    <string name="meeting_id_label">Meeting ID: </string>
+    <string name="meeting_name_postfix">\'s meeting</string>
+
+    <string name="invite_you_to_meeting">invites you to a meeting</string>
+    <string name="guest_invite_you_to_meeting">Invite you to a meeting</string>
+
+    <string name="search_hint">Search</string>
+    <string name="no_search_result_prefix">No\"</string>
+    <string name="no_search_result_postfix">\"related results</string>
+
+    <string name="network_unavailable_notice">Failed to connect server, please check your network and server settings.</string>
+    <string name="connecting_notice">Connecting…</string>
+    <string name="save_notice">Saved successfully</string>
+
+    <string name="tool_bar_end_meeting">End</string>
+    <string name="tool_bar_mute">Mute</string>
+    <string name="tool_bar_unmute">Unmute</string>
+    <string name="tool_bar_video_mute">Stop Video</string>
+    <string name="tool_bar_video_unmute">Start Video</string>
+    <string name="tool_bar_share_content">Share Content</string>
+    <string name="tool_bar_stop_content">Stop Content</string>
+    <string name="tool_bar_participants">Participants</string>
+    <string name="tool_bar_more">More</string>
+
+    <string name="tool_bar_invite">Invite</string>
+    <string name="tool_bar_start_overlay">Overlay</string>
+    <string name="tool_bar_stop_overlay">Stop</string>
+    <string name="tool_bar_start_live">Live</string>
+    <string name="tool_bar_stop_live">End</string>
+    <string name="tool_bar_start_record">Record</string>
+    <string name="tool_bar_stop_record">End</string>
+    <string name="tool_bar_setting">Setting</string>
+    <string name="tool_bar_receiving_videos">Receiving Videos</string>
+    <string name="tool_bar_stop_receiving_videos">Stop Receiving Videos</string>
+    <string name="tool_bar_float_window_display">float window</string>
+
+    <string name="mute_remote_video_notice">You have stopped receiving videos</string>
+    <string name="unmute_remote_video_notice">You have started receiving videos</string>
+
+    <string name="network_status_dlg_content">Your network is not good now.To ensure the quality of the meeting,you can stop the video.</string>
+    <string name="network_status_dlg_positive_btn">Stop Video</string>
+    <string name="network_status_dlg_negative_btn">Ignore</string>
+
+    <string name="pin_for_meeting">Pin</string>
+    <string name="unpin_for_meeting">UnPin</string>
+    <string name="pin_for_meeting_notice">The screen is pinned</string>
+    <string name="unpin_for_meeting_notice">The screen is unpinned</string>
+    <string name="pinned_for_meeting_notice">You are pinned by the host</string>
+    <string name="unpinned_for_meeting_notice">You are unpinned by the host</string>
+
+    <string name="live_status">Living</string>
+    <string name="recording_status">Recording</string>
+    <string name="start_live_notice">Live started by the host</string>
+    <string name="stop_live_notice">Live ended by the host</string>
+    <string name="start_recording_notice">Recording started by the host</string>
+    <string name="stop_recording_notice">Recording ended by the host</string>
+
+    <string name="start_live_dlg_title">Start live Stream？</string>
+    <string name="start_live_dlg_content">It will live meeting audio,video and shared screen,and inform all members.</string>
+    <string name="start_live_dlg_switch_content">Password protection</string>
+    <string name="start_live_dlg_switch_content_info">It will make your live streaming safer.</string>
+    <string name="start_live_dlg_ok_btn">Start Live</string>
+    <string name="start_live_toast_content">Live streaming has started</string>
+    <string name="stop_live_dlg_content">Audiences are watching the live,are you sure to end the live?</string>
+    <string name="stop_live_dlg_ok_btn">End</string>
+    <string name="live_status_share">Share</string>
+    <string name="live_status_stop">End</string>
+    <string name="live_stop">Live ended</string>
+    <string name="share_live_dlg_title">Share Live Streaming</string>
+    <string name="share_live_dlg_content">invites you to a “%1$s” live streaming</string>
+    <string name="share_live_url_title">Click the link to watch:</string>
+    <string name="share_live_pwd_title">Password:</string>
+    <string name="share_info_dialog_copy_btn">Copy live info</string>
+    <string name="copy_live_notice">Live info copied to the clipboard</string>
+    <string name="live_info">live info</string>
+    <string name="recording_server_error">Recording and streaming service error</string>
+
+    <string name="start_record_dlg_title">Start Cloud Recording?</string>
+    <string name="start_record_dlg_content">It will record meeting audio,video and shared screen,and inform all members.</string>
+    <string name="start_record_dlg_ok_btn">Start</string>
+    <string name="start_record_toast_content">Recording has started</string>
+    <string name="started_record_dlg_title">Recording</string>
+    <string name="started_record_dlg_ok_btn">Got it</string>
+    <string name="stop_record_dlg_title">End Cloud Recording?</string>
+    <string name="stop_record_dlg_content">After recording ended，go to "Meeting Web portal-Meeting Recording" to check recorded files.</string>
+    <string name="stop_record_dlg_ok_btn">End</string>
+    <string name="record_status_stop">End</string>
+    <string name="record_stopped_notice">Recording ended</string>
+
+    <string name="end_meeting_btn">End Meeting</string>
+    <string name="leave_meeting_btn">Leave Meeting</string>
+
+    <string name="participants_title">Participants</string>
+    <string name="participants_me">Me</string>
+    <string name="participants_host">Host</string>
+    <string name="participants_lecturer">Lecturer</string>
+    <string name="participants_invite_to_join_meeting">Invite</string>
+    <string name="participants_mute_all">Mute All</string>
+    <string name="participants_unmute_all">Unmute All</string>
+
+    <string name="local_content_cell_title">Your screen is in the sharing:</string>
+    <string name="local_content_cell_stop_content_btn">Stop</string>
+    <string name="local_content_cell_audio_off">Sharing audio device: Off</string>
+
+    <string name="share_content_stop_notice">Sharing stopped</string>
+    <string name="share_content_uplink_bitrate_low_notice">System restricts the content sharing ability for Bad Network State.</string>
+
+    <string name="meeting_info">Meeting Info</string>
+    <string name="network_condition">Network Status</string>
+    <string name="meeting_number">Meeting ID</string>
+    <string name="meeting_pw">Password</string>
+    <string name="host">Host</string>
+    <string name="invitation_link">Meeting Link</string>
+    <string name="copy_info">Copy Invitation</string>
+
+    <string name="statistics_info_test">Statistics(Internal Test)</string>
+    <string name="delay">Delay</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="share">Content</string>
+    <string name="none">-</string>
+
+    <string name="participant">Participants</string>
+    <string name="media">Media</string>
+    <string name="media_format">Format</string>
+    <string name="rate">Call Rate</string>
+    <string name="actual_rate">Actual Rate</string>
+    <string name="packet_loss">Packet Loss</string>
+    <string name="frame_rate">Frame Rate</string>
+    <string name="network_jitter">Jitter</string>
+    <string name="call_rate_label">Call Rate: </string>
+
+    <string name="meeting_muted_forced_notice">You have been muted</string>
+    <string name="meeting_muted_notice">You have been muted, please unmute before speaking</string>
+    <string name="meeting_unmuted_notice">You have been unmuted</string>
+
+    <string name="unmute_self_dlg_title">You are muted</string>
+    <string name="unmute_self_dlg_content">The host does not allow unmuting,you can request to do so.</string>
+    <string name="unmute_self_dlg_positive_btn">Ask to unmute</string>
+    <string name="unmute_self_request_success">Request sent successfully</string>
+    <string name="unmute_self_requested_dlg_title">Requesting to be unmuted</string>
+    <string name="unmute_self_requested_dlg_content">You are asking the host to unmute,please wait.</string>
+    <string name="unmute_self_rsp_dlg_title">Request approved</string>
+    <string name="unmute_self_rsp_dlg_content">The host has approved your request to be unmuted.</string>
+    <string name="unmute_self_rsp_dlg_positive_btn">UnMute</string>
+    <string name="unmute_self_rsp_dlg_negative_btn">Keep Mute</string>
+
+    <string name="participants_permissions_notify_content">&#160;ask to unmute</string>
+    <string name="participants_permissions_dlg_title">Participant’s Requests</string>
+    <string name="participants_permissions_dlg_unmute_content">Unmute</string>
+    <string name="participants_permissions_dlg_no_content">No requests</string>
+    <string name="participants_permissions_dlg_content_ok_btn">Agree</string>
+    <string name="participants_permissions_dlg_ok_btn">Agree All</string>
+    <string name="participants_permissions_rsp_toast">Agreed the request</string>
+    <string name="participants_permissions_all_rsp_toast">Agreed the all requests</string>
+    <string name="participants_permissions_view_btn">View</string>
+
+    <string name="muted_notice">You have been muted, please unmute before speaking</string>
+    <string name="network_status_poor_notice">Your network quality is poor</string>
+
+    <string name="meeting_dialog_positive_btn">OK</string>
+    <string name="meeting_dialog_negative_btn">Cancel</string>
+    <string name="dialog_settings_btn">Settings</string>
+
+    <string name="end_meeting_dialog_title">Are you sure to end the meeting?</string>
+    <string name="end_meeting_dialog_content">End meeting will dismiss all participants!</string>
+
+    <string name="meeting_end_dialog_title">Meeting Ended</string>
+    <string name="meeting_end_dialog_content_end">The meeting has been ended by the host</string>
+    <string name="meeting_end_dialog_content_out">You have been removed from the meeting by the host</string>
+
+    <string name="unmute_dialog_title">Unmute</string>
+    <string name="unmute_dialog_content">The host would like you to unmute your microphone</string>
+    <string name="unmute_dialog_positive_btn">Unmute Now</string>
+    <string name="unmute_dialog_negative_btn">Keep Muted</string>
+
+    <string name="password_dialog_title">Meeting password</string>
+    <string name="password_dialog_input_hint">Please enter meeting password</string>
+    <string name="password_dialog_error">Invalid Meeting Password</string>
+    <string name="password_dialog_multiple_times_error">The maximum number of incorrect passwords has been reached, please rejoin the meeting</string>
+    <string name="password_dialog_positive_btn">Start</string>
+
+    <string name="participant_dialog_mute_btn">Mute</string>
+    <string name="participant_dialog_unmute_btn">Unmute</string>
+    <string name="change_display_name_btn">Rename</string>
+    <string name="participant_dialog_lecture_btn">Set Lecturer</string>
+    <string name="participant_dialog_unlecture_btn">Cancel Lecturer</string>
+    <string name="participant_dialog_remove_btn">Remove</string>
+    <string name="change_display_name_empty_notice">Name cannot be empty</string>
+    <string name="change_display_name_length_notice">Name up to 48 characters</string>
+    <string name="change_display_name_content">Your name in this meeting has been changed to “%1$s”</string>
+    <string name="change_others_display_name_content">Your change saved</string>
+    <string name="network_fail">Network exception, please try again later</string>
+    <string name="participant_dialog_lecture_content">Set lecturer successfully</string>
+    <string name="participant_dialog_unlecture_content">Cancel lecturer successfully</string>
+    <string name="participant_dialog_lecture_content_noticed">You have been set as the lecturer by the host</string>
+    <string name="participants_dialog_mute_all_title">Mute All</string>
+    <string name="participants_dialog_mute_all_btn">Mute All</string>
+    <string name="participants_dialog_mute_all_option">Allow Self Unmute</string>
+    <string name="participants_dialog_unmute_all_title">Unmute All</string>
+    <string name="participants_dialog_unmute_all_btn">Unmute All</string>
+    <string name="mute_all_success">Mute all successfully</string>
+    <string name="unmute_all_success">Unmute all successfully</string>
+
+    <string name="meeting_disconnect_participants_dialog_title">Remove</string>
+    <string name="meeting_disconnect_participants_dialog_content">Are you sure to remove this user from the meeting?</string>
+    <string name="meeting_disconnect_participants_notice">Remove user successfully</string>
+
+    <string name="overlay_dlg_content">Message</string>
+    <string name="overlay_dlg_content_default_value">Welcome!</string>
+    <string name="overlay_dlg_scroll">Rolling</string>
+    <string name="overlay_dlg_repeat">Repetitions</string>
+    <string name="overlay_dlg_position">Position</string>
+    <string name="overlay_dlg_top">Top</string>
+    <string name="overlay_dlg_center">Center</string>
+    <string name="overlay_dlg_bottom">Bottom</string>
+
+    <string name="overlay_started_notice">Overlay started</string>
+    <string name="overlay_stopped_notice">Overlay stopped</string>
+    <string name="overlay_content_empty_notice">Message cannot be empty</string>
+    <string name="overlay_content_length_notice">Message up to 1024 characters</string>
+    <string name="overlay_repeat_value_notice">Repetitions between 1–999</string>
+
+    <string name="connection_failed_dialog_title">Connection failed</string>
+    <string name="meeting_failed_dialog_title">Join Meeting Failed</string>
+
+    <string name="meeting_not_exist_notice">The meeting requires sign in or doesn\'t exist.Retry after sign in. </string>
+    <string name="meeting_locked_dialog_content">Meeting locked </string>
+    <string name="meeting_expired_dialog_content">Meeting expired</string>
+    <string name="meeting_not_started_dialog_content">You can join the meeting 30 minutes before the meeting starts </string>
+    <string name="guest_not_allowed_dialog_content">Guests are not allowed to join the meeting. Please sign in and try again. </string>
+    <string name="meeting_full_dialog_content">The meeting is full and cannot be joined </string>
+    <string name="no_license_dialog_content">No software license or license has expired </string>
+    <string name="license_max_reached_dialog_content">The number of users has reached the maximum, please upgrade your software license </string>
+
+    <string name="meeting_disconnect_if_reconnect">Network exception. Check your network or try re-join.</string>
+    <string name="meeting_leave_btn">Leave Meeting </string>
+    <string name="meeting_reconnect_btn">Join Again </string>
+
+    <string name="user_log_out_dialog_title">Offline Notification </string>
+    <string name="user_log_out_dialog_content">Verification failed. Please sign in and join meeting again</string>
+
+    <string name="cancel_text">Cancel </string>
+
+    <string name="scan_title">Scan QR code </string>
+    <string name="msg_qrscan_result_error">Unrecognized QR code </string>
+    <string name="msg_qrscan_camera_permission_request">Please allow%1$s to access the camera in the system settings </string>
+    <string name="msg_open_photo_grant_permission">Please allow%1$s to access storage in system settings </string>
+    <string name="msg_camera_error">Unfortunately, there is a problem with the Android camera. You may need to restart the device</string>
+    <string name="msg_default_status">Align QR code scanning </string>
+    <string name="btn_confirm_ok">OK </string>
+    <string name="msg_save_server">The server address\n%1$s\n of this meeting is different from  the default address. Save it as the default address?</string>
+    <string name="msg_question_contact_administrator">If you have any questions, please contact the administrator</string>
+
+    <string name="meeting_ended">The meeting has ended </string>
+    <string name="meeting_in_progress">The meeting is in progress </string>
+    <string name="copy_meeting_info">Meeting invitation has been copied to the clipboard </string>
+
+    <string name="meeting_theme_title">Meeting Topic:&#160;</string>
+    <string name="start_time_title">Start Time:&#160;</string>
+    <string name="end_time_title">End Time:&#160;</string>
+    <string name="repetition_period_title">Repetition Period:&#160;</string>
+    <string name="meeting_number_title">Meeting ID:&#160;</string>
+    <string name="meeting_password_title">Password:&#160;</string>
+    <string name="copy_invitation_notice_with_password">Open the Meeting client and enter the Meeting ID and Password to join the meeting.</string>
+    <string name="copy_invitation_notice_without_password">Open the Meeting client and enter the Meeting ID to join the meeting.</string>
+    <string name="invitation_url_title">Or click the following URL to join:</string>
+    <string name="copy_invitation_btn">Copy invitation</string>
+    <string name="copy_meeting_notice">Meeting invitation has been copied to the clipboard </string>
+
+    <string name="net_abnormal_connecting">Network exception, reconnecting… </string>
+
+    <string name="server_common_error">Common error</string>
+    <string name="server_parameters_error">Parameters error</string>
+    <string name="server_authorization_error">Authorization error</string>
+    <string name="server_permission_error">Permission error</string>
+    <string name="server_meeting_not_exist">Meeting not exist</string>
+    <string name="server_meeting_data_error">Meeting data error</string>
+    <string name="server_operation_forbidden">Operation is forbidden</string>
+    <string name="server_meeting_status_error">Meeting status error</string>
+    <string name="server_length_error">Length error</string>
+    <string name="server_format_error">	Format error</string>
+    <string name="server_license_error">License error</string>
+    <string name="live_fail">Live streaming failed</string>
+    <string name="live_server_error">Live streaming server error</string>
+    <string name="live_failed_license_max_reached_dialog_content">The live streaming  users has reached the maximum, please upgrade the software license.</string>
+    <string name="cannot_start_live_repeatedly">Cannot start live streaming repeatedly</string>
+    <string name="record_fail">Recording failed</string>
+    <string name="record_failed_license_max_reached_dialog_content">The recording users has reached the maximum, please upgrade the software license.</string>
+    <string name="cannot_start_record_repeatedly">Cannot start recording repeatedly</string>
+    <string name="record_server_error">Recording and playing server error</string>
+
+    <string name="meeting_reminders">%1$s Meeting Reminders</string>
+    <string name="meeting_reminders_ignore_btn">Ignore</string>
+    <string name="meeting_owner_label">Creator:</string>
+    <string name="meeting_system_notification_click_prompt">You are in a meeting currently. If you need to join other meeting. Please exit the current meeting first.</string>
+
+    <string name="float_view_meeting_name">Meeting</string>
+    <string name="float_view_share_name">Screen Sharing</string>
+
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="repetition_frequency_content">Every %1$s</string>
+    <string name="repetition_type_one_day">day</string>
+    <string name="repetition_type_one_week">week</string>
+    <string name="repetition_type_one_month">month</string>
+    <string name="repetition_type_day">day(s)</string>
+    <string name="repetition_type_day_th">th</string>
+    <string name="repetition_type_week">week(s)</string>
+    <string name="repetition_type_month">month(s)</string>
+
+    <string name="leave_meeting_before_add_meeting">Please leave meeting first before adding meeting</string>
+</resources>

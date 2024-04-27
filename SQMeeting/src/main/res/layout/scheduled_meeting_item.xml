@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:background="@drawable/menu_item_bg">
+
+    <TextView
+        android:id="@+id/meeting_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:text=""
+        android:textSize="@dimen/text_size_1"
+        android:textColor="@color/text_color_common"
+        android:gravity="start|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/listview_item_margin_top"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/invited_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/listview_item_margin_top"
+        android:background="@drawable/icon_invited_meeting"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="2dp"
+        android:text="@string/scheduled_meeting_status_invited"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/meeting_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recurrence_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/recurrence_sign"
+        android:paddingHorizontal="4dp"
+        android:text="@string/meeting_recurrence"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/listview_item_margin_top"
+        app:layout_constraintStart_toEndOf="@+id/invited_sign"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/start_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scheduled_meeting_status_started"
+        android:textColor="@color/started_status_text_color"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/listview_item_margin_top"
+        app:layout_constraintStart_toEndOf="@+id/recurrence_sign"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/meeting_number_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meeting_id_label"
+        android:textColor="@color/text_color_light_gray"
+        android:textSize="@dimen/text_size_3"
+        android:gravity="start|center_vertical"
+        android:singleLine="true"
+        android:layout_marginBottom="@dimen/listview_item_margin_bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/meeting_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/text_color_light_gray"
+        android:textSize="@dimen/text_size_3"
+        android:gravity="start|center_vertical"
+        android:singleLine="true"
+        android:layout_marginBottom="@dimen/listview_item_margin_bottom"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintStart_toEndOf="@+id/meeting_number_label"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/meeting_time"
+        style="@style/ListItemStyle"
+        android:layout_width ="wrap_content"
+        android:layout_height ="wrap_content"
+        android:textColor="@color/text_color_light_gray"
+        android:textSize="@dimen/text_size_3"
+        android:gravity="end|center_vertical"
+        android:layout_marginStart="@dimen/item_margin_horizontal"
+        android:layout_marginBottom="@dimen/listview_item_margin_bottom"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/meeting_number"
+        />
+
+    <ImageView
+        android:id="@+id/show_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_more"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

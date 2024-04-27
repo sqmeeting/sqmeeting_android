@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
+
+    <TextView
+        android:id="@+id/meeting_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="230dp"
+        android:text=""
+        android:textSize="@dimen/title_text_size_1"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_item_title"
+        android:gravity="start|center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/listview_item_margin_top"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/meeting_time"
+        style="@style/ItemStyle"
+        android:layout_width ="wrap_content"
+        android:layout_height ="wrap_content"
+        android:textColor="@color/text_color_item_content"
+        android:textSize="@dimen/text_size_3"
+        android:gravity="end|center_vertical"
+
+        android:layout_marginBottom="@dimen/listview_item_margin_bottom"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/meeting_owner_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meeting_owner_label"
+        android:textColor="@color/text_color_item_content"
+        android:textSize="@dimen/text_size_3"
+        android:gravity="start|center_vertical"
+        android:singleLine="true"
+        android:layout_marginBottom="@dimen/listview_item_margin_bottom"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/meeting_time"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/meeting_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="85dp"
+        android:text=""
+        android:textColor="@color/text_color_item_content"
+        android:textSize="@dimen/text_size_3"
+        android:ellipsize="end"
+        android:gravity="start|center_vertical"
+        android:singleLine="true"
+        android:layout_marginBottom="@dimen/listview_item_margin_bottom"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintStart_toEndOf="@+id/meeting_owner_label"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/call_btn"
+        android:layout_width="72dp"
+        android:layout_height="28dp"
+        android:background="@drawable/bg_blue_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_1"
+        android:textAllCaps="false"
+        android:text="@string/btn_join_meeting"
+        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

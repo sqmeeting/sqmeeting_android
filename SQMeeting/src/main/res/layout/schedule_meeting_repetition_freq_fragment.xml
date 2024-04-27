@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context=".ui.component.ScheduleMeetingRateFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            style="@style/TitleBarButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/repetition_frequency"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar_layout">
+
+        <TextView
+            android:id="@+id/freq_no"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/no_frequency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/freq_no_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintEnd_toEndOf="@+id/freq_no"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_no"
+            app:layout_constraintTop_toTopOf="@+id/freq_no" />
+
+        <TextView
+            android:id="@+id/freq_day"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/repetition_frequency_day"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freq_no" />
+
+        <TextView
+            android:id="@+id/freq_end_day"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|start"
+            android:maxWidth="250dp"
+            android:text=""
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/freq_day_selected"
+            app:layout_constraintTop_toTopOf="@+id/freq_day"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_day"/>
+
+        <ImageView
+            android:id="@+id/freq_day_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_more"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_day"
+            app:layout_constraintEnd_toEndOf="@+id/freq_day"
+            app:layout_constraintTop_toTopOf="@+id/freq_day" />
+
+        <TextView
+            android:id="@+id/freq_week"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/repetition_frequency_week"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freq_day" />
+
+        <TextView
+            android:id="@+id/freq_end_week"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxWidth="250dp"
+            android:text=""
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/freq_week_selected"
+            app:layout_constraintTop_toTopOf="@+id/freq_week"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_week"/>
+
+        <ImageView
+            android:id="@+id/freq_week_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_more"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_week"
+            app:layout_constraintEnd_toEndOf="@+id/freq_week"
+            app:layout_constraintTop_toTopOf="@+id/freq_week" />
+
+        <TextView
+            android:id="@+id/freq_month"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/repetition_frequency_month"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freq_week" />
+
+        <TextView
+            android:id="@+id/freq_end_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxWidth="250dp"
+            android:text=""
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/freq_month_selected"
+            app:layout_constraintTop_toTopOf="@+id/freq_month"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_month"/>
+
+        <ImageView
+            android:id="@+id/freq_month_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_more"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_month"
+            app:layout_constraintEnd_toEndOf="@+id/freq_month"
+            app:layout_constraintTop_toTopOf="@+id/freq_month" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

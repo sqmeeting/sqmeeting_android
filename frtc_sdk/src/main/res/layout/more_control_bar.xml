@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/more_control_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/more_menu_bg"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    tools:context=".ui.FrtcMeetingActivity" >
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/invite_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/start_overlay_layout"
+        android:background="@drawable/more_menu_btn_bg">
+
+        <ImageView
+            android:id="@+id/invite_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_invite"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_invite"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_invite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_invite"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/start_overlay_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/invite_layout"
+        app:layout_constraintRight_toLeftOf="@+id/stop_overlay_layout"
+        android:background="@drawable/more_menu_btn_bg">
+
+        <ImageView
+            android:id="@+id/start_overlay_btn"
+            android:layout_width="28dp"
+            android:layout_height="26dp"
+            android:background="@color/transparent"
+            android:src="@drawable/call_icon_start_overlay"
+            app:layout_constraintBottom_toTopOf="@+id/text_start_overlay"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_start_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_start_overlay"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/stop_overlay_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/start_overlay_layout"
+        app:layout_constraintRight_toLeftOf="@+id/record_layout"
+        android:background="@drawable/more_menu_btn_bg">
+
+        <ImageView
+            android:id="@+id/stop_overlay_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_stop_overlay"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_stop_overlay"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_stop_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_stop_overlay"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/record_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/stop_overlay_layout"
+        app:layout_constraintRight_toLeftOf="@+id/live_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/record_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_record"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_record"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_start_record"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/live_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/record_layout"
+        app:layout_constraintRight_toLeftOf="@+id/setting_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/live_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_live"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_live"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_start_live"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/setting_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/live_layout"
+        app:layout_constraintRight_toLeftOf="@+id/remote_video_mute_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_setting"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_setting"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_setting"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/remote_video_mute_host_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/invite_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/float_window_display_host_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/remote_video_mute_host_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_unmute_remote_video"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_remote_video_mute_host"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_remote_video_mute_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:text="@string/tool_bar_stop_receiving_videos"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/remote_video_mute_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/setting_layout"
+
+        app:layout_constraintRight_toLeftOf="@id/float_window_display_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/remote_video_mute_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_unmute_remote_video"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_remote_video_mute"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_remote_video_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:text="@string/tool_bar_stop_receiving_videos"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/float_window_display_host_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/remote_video_mute_host_layout"
+        app:layout_constraintLeft_toRightOf="@+id/remote_video_mute_host_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/float_window_display_host_btn"
+            android:layout_width="28dp"
+            android:layout_height="26dp"
+            android:src="@drawable/call_icon_float_window_display"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_float_window_display_host"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_float_window_display_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:text="@string/tool_bar_float_window_display"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/float_window_display_layout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/remote_video_mute_layout"
+        app:layout_constraintLeft_toRightOf="@+id/remote_video_mute_layout"
+        android:background="@drawable/more_menu_btn_bg"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/float_window_display_btn"
+            android:layout_width="28dp"
+            android:layout_height="26dp"
+            android:src="@drawable/call_icon_float_window_display"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_float_window_display"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/text_float_window_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:text="@string/tool_bar_float_window_display"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/cancel_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/more_menu_btn_bg"
+        android:layout_marginTop="18dp"
+        android:textAllCaps="false"
+        android:text="@string/cancel_text"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/remote_video_mute_host_layout"/>
+
+</android.support.constraint.ConstraintLayout>

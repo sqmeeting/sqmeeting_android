@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="bottom">
+
+    <RelativeLayout
+        android:id="@+id/rl_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        android:paddingHorizontal="8dp"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/edit_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_btn_height"
+            android:background="@drawable/bg_dialog"
+            android:layout_centerHorizontal="true"
+            android:text="@string/edit_meeting"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/title_text_size_1" />
+
+        <View
+            android:id="@+id/separator"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edit_meeting"
+            android:background="@color/separator_color_2"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/edit_recurrence_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_btn_height"
+            android:background="@drawable/bg_dialog"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/separator"
+            android:text="@string/edit_recurrence_meeting"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/title_text_size_1" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/confirm_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_btn_height"
+        android:paddingHorizontal="8dp"
+        android:layout_below="@+id/rl_edit"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_dialog"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_back"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color_common"
+        android:textSize="@dimen/title_text_size_1" />
+
+</RelativeLayout>

@@ -1,0 +1,3 @@
+include ':SQMeeting'
+include ':frtc_sdk'
+include ':SDKDemo'

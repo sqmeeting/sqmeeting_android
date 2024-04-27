@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context=".ui.component.ScheduleMeetingRateFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            style="@style/TitleBarButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/repetition_frequency_setting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="@string/done"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_1"
+            android:textColor="@color/blue"
+            android:gravity="center_vertical|end"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/freq_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/text_color_common"
+        android:textSize="@dimen/text_size_1"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:gravity="center_vertical"
+        android:text="@string/repetition_frequency_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar_layout"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/picker_header"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/freq_desc">
+
+        <TextView
+            android:id="@+id/freq_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/repetition_frequency_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/freq_content"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/repetition_frequency_content"
+            app:layout_constraintEnd_toEndOf="@+id/freq_title"
+            app:layout_constraintBottom_toBottomOf="@+id/freq_title"
+            app:layout_constraintTop_toTopOf="@+id/freq_title"  />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <com.frtc.sqmeetingce.ui.picker.wheelpicker.widget.LinkageWheelLayout
+        android:id="@+id/repetitive_rule_picker"
+        android:layout_width="match_parent"
+        android:layout_height="207dp"
+        android:background="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:wheel_thirdVisible="false"
+        app:wheel_curtainColor="#F4F4F5"
+        app:wheel_curtainEnabled="true"
+        app:wheel_indicatorEnabled="false"
+
+        app:wheel_itemTextSize="20sp"
+        app:wheel_itemTextSizeSelected="20sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/picker_header"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repetitive_rule_picker"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/freq_date_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+
+            android:text="@string/repetition_week_day"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <GridView
+            android:id="@+id/calendar_body_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/white"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:columnWidth="38dp"
+            android:horizontalSpacing="8dp"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freq_date_title"
+            />
+
+        <com.frtc.sqmeetingce.ui.picker.view.MonthContentView
+            android:id="@+id/view_monthcontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="17dp"
+            android:paddingBottom="10dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freq_date_title"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/ll_meeting_end_date"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/menu_item_bg"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_calendar">
+
+        <TextView
+            android:id="@+id/meeting_end_title"
+            style="@style/ItemLabelStyle"
+            android:text="@string/repetition_meeting_end_date" />
+
+        <TextView
+            android:id="@+id/meeting_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|end"
+            android:maxWidth="215dp"
+            android:text=""
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            android:layout_toEndOf="@+id/meeting_end_title"
+            android:layout_toStartOf="@+id/meeting_end_edit"/>
+
+        <ImageView
+            android:id="@+id/meeting_end_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:src="@drawable/icon_more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

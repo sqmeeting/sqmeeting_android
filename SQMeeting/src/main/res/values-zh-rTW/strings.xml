@@ -1,0 +1,358 @@
+<resources>
+
+    <string name="web_portal_label">神旗官網:</string>
+    <string name="opensource_website_label">開源地址:</string>
+    <string name="web_portal">https://shenqi.isgo.com</string>
+    <string name="opensource_website">https://github.com/sqmeeting</string>
+
+    <string name="app_name">神旗CE</string>
+
+    <string name="build_version">版本：</string>
+    <string name="main_title">神旗</string>
+
+    <string name="sign_in">登入</string>
+    <string name="join_meeting">加入會議</string>
+
+    <string name="set_server_notice">入會或登入須先設定服務器！</string>
+    <string name="setting_notice">去設定</string>
+
+    <string name="settings">設定</string>
+    <string name="setting_server">服務器設定</string>
+    <string name="setting_server_ip_title">服務器地址</string>
+    <string name="input_server_address">輸入服務器地址</string>
+    <string name="intelligent_noise_reduction">智能降噪</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_save">保存</string>
+    <string name="setting_saved_notice">已保存設置</string>
+    <string name="setting_recording_title">我的錄製</string>
+    <string name="setting_recording">電腦登錄“神旗系統web管理系統”查看</string>
+
+    <string name="btn_join_meeting">加入會議</string>
+    <string name="join_meeting_audio_only">語音會議</string>
+    <string name="join_meeting_audio_only_notice">語音會議不能收發視屏及荧幕共享</string>
+
+    <string name="meeting_id_edit_hint">輸入會議號</string>
+    <string name="display_name_edit_hint">輸入妳的名字</string>
+
+    <string name="user_sign_in">賬號密碼登入</string>
+    <string name="username_or_account">用戶名/賬號</string>
+    <string name="user_password">密碼</string>
+
+    <string name="instant">即時會議</string>
+    <string name="join">加入會議</string>
+    <string name="schedule">預約會議</string>
+
+    <string name="enter_meeting">進入會議</string>
+    <string name="camera_on">開啓視頻</string>
+    <string name="use_my_own_meeting_id">使用我的個人會議號</string>
+    <string name="no_meeting_room_notice">當前賬號無個人會議號</string>
+    <string name="done">完成</string>
+
+    <string name="text_history_meeting">曆史會議</string>
+    <string name="text_scheduled_meeting">預約會議</string>
+    <string name="clear_history_meeting">清除記錄</string>
+    <string name="text_scheduled_meeting_refresh_success">重繪成功</string>
+
+    <string name="text_no_history_meeting">無曆史會議</string>
+    <string name="text_no_scheduled_meeting">無預約會議</string>
+
+    <string name="scheduled_meeting_cancel_notice">已取消會議</string>
+    <string name="scheduled_meeting_update_notice">已更新會議</string>
+
+    <string name="scheduled_meeting_failed_notice">預約會議失敗</string>
+    <string name="scheduled_meeting_cancel_failed_notice">取消預約會議失敗</string>
+    <string name="scheduled_meeting_update_failed_notice">更新預約會議失敗</string>
+
+    <string name="meeting_id_label">會議號：</string>
+    <string name="meeting_name_postfix">的會議</string>
+    <string name="schedule_meeting_postfix">的預約會議</string>
+
+    <string name="meeting_details_title">會議詳情</string>
+    <string name="delete_meeting">刪除會議</string>
+    <string name="meeting_time">時間</string>
+    <string name="meeting_id">會議號</string>
+    <string name="meeting_spent_time">用時</string>
+    <string name="meeting_password">密碼</string>
+    <string name="today">今天</string>
+
+    <string name="invite_you_to_meeting">邀請您參加會議</string>
+    <string name="password_of_meeting">會議密碼</string>
+
+    <string name="cancel_meeting">取消會議</string>
+
+    <string name="scheduled_meeting_status_started">已開始</string>
+    <string name="scheduled_meeting_status_starting">即將開始</string>
+
+    <string name="meeting_introduction">會議介紹</string>
+    <string name="start_time">開始時間</string>
+    <string name="meeting_duration">會議時長</string>
+    <string name="time_zone">時區</string>
+    <string name="invited_users">受邀用戶</string>
+    <string name="meeting_rate">速率</string>
+    <string name="join_time">提前入會時間</string>
+    <string name="join_time_30_minutes">30分鐘</string>
+    <string name="join_time_any_time">任意時間</string>
+    <string name="mute_in_meeting">入會靜音</string>
+    <string name="allow_visitors_to_dial_in">允許訪客撥入</string>
+    <string name="shared_screen_watermark">共享屏幕水印</string>
+    <string name="repetition_frequency">重復頻率</string>
+    <string name="no_frequency">不重復</string>
+    <string name="repetition_end">結束重復</string>
+    <string name="repetition_end_content">於%s結束 共%s場會議</string>
+    <string name="repetition_frequency_day">每天</string>
+    <string name="repetition_frequency_week">每周</string>
+    <string name="repetition_frequency_month">每月</string>
+    <string name="repetition_frequency_setting">重復頻率設置</string>
+    <string name="repetition_frequency_desc">會議將於每%1$s重復</string>
+    <string name="repetition_frequency_title">頻率</string>
+    <string name="repetition_frequency_content">每%1$s</string>
+    <string name="repetition_meeting_end_date">結束日期</string>
+    <string name="repetition_week_day">請選擇周幾重復</string>
+    <string name="repetition_month_day">請選擇重復日期</string>
+    <string name="not_cancel_selected_meeting_start_date">無法取消已選擇的會議開始日期</string>
+    <string name="repetition_type_one_day">天</string>
+    <string name="repetition_type_one_week">周</string>
+    <string name="repetition_type_one_month">月</string>
+    <string name="repetition_type_day">天</string>
+    <string name="repetition_type_day_th">日</string>
+    <string name="repetition_type_week">周</string>
+    <string name="repetition_type_month">月</string>
+    <string name="repetition_adj">的</string>
+    <string name="meeting_recurrence">周期</string>
+    <string name="recurrence_meeting">周期會議</string>
+    <string name="recurrence_content">會議將於%1$s重復</string>
+    <string name="recurrence_end">結束於%s 剩余%s場會議</string>
+    <string name="edit_meeting">修改本次會議</string>
+    <string name="edit_recurrence_meeting">修改該系列周期性會議</string>
+    <string name="edit_meeting_schedule">修改會議预约</string>
+    <string name="save_changes">保存修改</string>
+    <string name="copy_invitation">復制邀請</string>
+    <string name="edit_recurrence_meetings">修改周期性會議</string>
+    <string name="cancel_recurrence_meetings">取消周期性會議</string>
+    <string name="saving_calendar">正在保存...</string>
+    <string name="btn_schedule">預約</string>
+    <string name="year_picker">年</string>
+    <string name="month_picker">月</string>
+    <string name="day_picker">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="second">秒</string>
+    <string name="sunday">周日</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    <string name="recurrence_remain">剩余%s場</string>
+    <string name="edit_meeting_btn">修改會議</string>
+    <string name="get_recurrence_meetings_fail">獲取周期會議失敗</string>
+
+    <string name="start_time_valid_notice">開始時間必須晚于當前時間。</string>
+    <string name="duration_time_valid_notice">會議時長不能設定爲零分鍾。</string>
+    <string name="meeting_name_valid_notice">會議名稱不能爲空。</string>
+    <string name="start_time_later_than_recurrence_start_time">開始時間必須晚於週期的開始時間。</string>
+    <string name="start_time_later_than_previous_single_meeting_end_time">開始時間不可早於周期中前壹次會議的結束時間。</string>
+    <string name="end_time_earlier_than_latter_single_meeting_start_time">結束時間不可晚於周期中後壹次會議的開始時間。</string>
+    <string name="start_time_earlier_than_recurrence_end_time">開始時間必須早於週期的結束時間。</string>
+
+    <string name="rate_128k">128K</string>
+    <string name="rate_512k">512K</string>
+    <string name="rate_1m">1024K</string>
+    <string name="rate_2m">2048K</string>
+    <string name="rate_2560K">2560K</string>
+    <string name="rate_3m">3072K</string>
+    <string name="rate_4m">4096K</string>
+    <string name="rate_6m">6144K</string>
+    <string name="rate_8m">8192K</string>
+
+    <string name="open_shared_screen_watermark">開啓共享屏幕水印</string>
+    <string name="watermark_style">水印樣式</string>
+    <string name="single">單排</string>
+    <string name="multiple">多排</string>
+    <string name="single_watermark_effect">單排水印效果</string>
+    <string name="watermark_note">所有參會者觀看屏幕共享時，將看到水印嵌入共享內容中。</string>
+
+    <string name="add_meeting_introduction_title">添加會議介紹</string>
+    <string name="meeting_introduction_hint">輸入會議介紹</string>
+
+    <string name="maximum_number_of_participants_title">人數上限</string>
+    <string name="meeting_participants_limitation_content">邀請人數目前限制100人</string>
+
+    <string name="cancel_meeting_content">取消會議後，其他成員將無法參會</string>
+    <string name="cancel_meeting_positive_btn">取消會議</string>
+    <string name="cancel_meeting_negative_btn">再想想</string>
+    <string name="cancel_meeting_title1">確定取消該會議？</string>
+    <string name="cancel_meeting_content1">同時取消該系列周期會議</string>
+    <string name="cancel_meeting_title2">取消周期性會議？</string>
+
+    <string name="add_user">增加用戶</string>
+    <string name="added_Users_title">已添加用戶</string>
+    <string name="search_hint">搜素</string>
+    <string name="search_results">搜索結果</string>
+    <string name="no_search_result_prefix">沒有找到\"</string>
+    <string name="no_search_result_postfix">\"相關結果</string>
+    <string name="edit_btn">修改</string>
+    <string name="next">下壹步</string>
+    <string name="added_user_number">已添加用戶 %1$s 人</string>
+
+    <string name="user_information_title">個人信息</string>
+    <string name="user_information_account">賬號</string>
+    <string name="user_information_password">更改密碼</string>
+    <string name="user_sign_out">登出</string>
+
+    <string name="user_update_password">更新密碼</string>
+    <string name="user_old_password">舊密碼</string>
+    <string name="user_new_password">新密碼</string>
+    <string name="user_confirm_password">確認</string>
+    <string name="user_old_password_hint">核對妳的密碼</string>
+    <string name="user_new_password_hint">設定新密碼</string>
+    <string name="user_confirm_password_hint">確認密碼</string>
+
+    <string name="sign_in_wrong">賬號或密碼不正確</string>
+    <string name="sign_in_other_error">賬號或密碼不正確</string>
+    <string name="sign_in_error_multiple_times_dlg_content">用戶名或密碼多次輸入錯誤，請在5分鍾後再嘗試登入。</string>
+    <string name="sign_in_account_locked_dlg_title">賬戶已鎖</string>
+    <string name="sign_in_account_locked_dlg_content">請聯系管理員解鎖。</string>
+
+    <string name="network_unavailable_notice">無法連接服務器，請檢查您的網絡和服務器設定</string>
+
+    <string name="password_min_length">密碼最少包含6位字符。</string>
+    <string name="password_max_length">密碼最多包含48位字符。</string>
+
+    <string name="user_display_name">顯示名字</string>
+    <string name="user_change_display_name_title">修改入會顯示名字</string>
+
+    <string name="user_password_changed_failed_notice">密碼修改失敗</string>
+
+    <string name="recording_server_error">錄播服務錯誤</string>
+
+    <string name="meeting_info">會議信息</string>
+
+    <string name="dialog_positive_btn">確定</string>
+    <string name="dialog_negative_btn">取消</string>
+
+    <string name="app_exit_confirm_title">退出</string>
+    <string name="app_exit_confirm_content">退出當前應用?</string>
+
+
+    <string name="log_out_dialog_title">下線通知</string>
+    <string name="log_out_dialog_content">驗證失效，請重新登入後再入會。</string>
+
+
+    <string name="set_server_dialog_title">設定成功</string>
+    <string name="set_server_dialog_content">您的服務器地址已更換，請重新登入</string>
+
+    <string name="password_change_dialog_title">密碼已修改</string>
+    <string name="password_change_dialog_content">您的密碼已修改，請重新登入</string>
+
+    <string name="delete_history_meeting_dialog_title">刪除會議</string>
+    <string name="delete_history_meeting_dialog_content">確定從曆史會議中刪除該會議嗎？</string>
+
+    <string name="clear_history_meeting_dialog_title">清除記錄</string>
+    <string name="clear_history_meeting_dialog_content">確定要清除曆史會議記錄嗎？</string>
+
+    <string name="title_meeting_id">會議號碼</string>
+    <string name="title_username">顯示的名字</string>
+    <string name="remember_name">記住名字</string>
+    <string name="microphone">打開麥克風</string>
+    <string name="camera">開啓攝像頭</string>
+    <string name="server_ip_error">服務器地址不能爲空</string>
+    <string name="server_address_format_error">服務器地址格式不正確</string>
+    <string name="meeting_id_error">會議號碼不能爲空</string>
+    <string name="username_error">名字不能爲空</string>
+    <string name="server_ip_title">服務器地址</string>
+
+    <string name="display_name_error">入會名字不能爲空</string>
+
+    <string name="btn_back">取消</string>
+
+    <string name="display_name">用戶名</string>
+    <string name="set_server_address_title">請先設定服務器地址</string>
+    <string name="confirm_password_error">確認密碼與新密碼不同</string>
+
+    <string name="settings_version_label">版本信息</string>
+    <string name="starting">啓動中&#8230;</string>
+    <string name="signin_pwd_error">密碼不能爲空</string>
+
+    <string name="network_not_available">無法連接服務器</string>
+    <string name="network_not_available_try_again">無法連接服務器，請重試</string>
+
+    <string name="password_normal_complexity">密碼長度6到48位，由大、小寫字母，數字，特殊字符組成。</string>
+    <string name="password_high_complexity">密碼長度8到48位，必須包含大、小寫字母，數字和特殊字符。</string>
+
+    <string name="msg_qrscan_result_error">無法識別的二維碼</string>
+    <string name="msg_qrscan_camera_permission_request">請在系統設定裏允許 %1$s 訪問相機</string>
+    <string name="btn_confirm_ok">確定</string>
+
+    <string name="title_meeting_password">會議密碼</string>
+
+    <string name="copy_meeting_info">會議信息已複制到剪貼板</string>
+
+    <string name="meeting_theme_title">會議主題：</string>
+    <string name="start_time_title">開始時間：</string>
+    <string name="end_time_title">結束時間：</string>
+    <string name="meeting_number_title">會議號碼：</string>
+    <string name="meeting_password_title">會議密碼：</string>
+    <string name="copy_invitation_notice_with_password">請打開神旗App，輸入會議號、密碼入會。</string>
+    <string name="copy_invitation_notice_without_password">請打開神旗App，輸入會議號入會。</string>
+    <string name="invitation_url_title">或點擊以下連結直接加入會議：</string>
+
+    <string name="settings_language_title">語言</string>
+    <string name="language_setting_title">語言設定</string>
+    <string name="language_setting_done">完成</string>
+    <string name="language_simplified_chinese">简体中文</string>
+    <string name="language_traditional_chinese">繁體中文</string>
+    <string name="language_english">English</string>
+
+    <string name="time_minutes">分鍾</string>
+    <string name="time_hours">小時</string>
+    <string name="time_seconds">秒</string>
+
+    <string name="server_common_error">通用錯誤</string>
+    <string name="server_parameters_error">參數錯誤</string>
+    <string name="server_authorization_error">認證錯誤</string>
+    <string name="server_permission_error">權限錯誤</string>
+    <string name="server_meeting_not_exist">會議不存在</string>
+    <string name="server_meeting_data_error">會議數據錯誤</string>
+    <string name="server_operation_forbidden">禁止操作</string>
+    <string name="server_meeting_status_error">會議狀態錯誤</string>
+    <string name="server_length_error">數據長度錯誤</string>
+    <string name="server_format_error">數據格式錯誤</string>
+    <string name="server_license_error">許可錯誤</string>
+
+    <string name="meeting_owner_label">發起人：</string>
+    <string name="meeting_time_label">會議時間：</string>
+    <string name="meeting_add_calendar">添加到系統日歷</string>
+    <string name="meeting_add_calendar_success">保存成功</string>
+    <string name="meeting_add_calendar_fail">保存失敗</string>
+    <string name="receive_meeting_reminders">接收會議提醒</string>
+    <string name="open_meeting_reminders_prompt">將在會議開始前5分鐘，提醒您參加會議</string>
+
+    <string name="problem_diagnosis_title">問題診斷</string>
+    <string name="problem_diagnosis_description">在使用過程中，如出現任何功能異常，請上傳日誌來幫助我們更好的定位和解决問題，深表感謝！</string>
+    <string name="log_upload_btn">上傳日誌</string>
+    <string name="problem_diagnosis_content">請描述下您遇到的問題（必填，100字以内）</string>
+    <string name="problem_diagnosis_content_empty">請描述下您遇到的問題（必填，100字以内）</string>
+    <string name="log_upload_title">上傳日誌</string>
+    <string name="log_uploading">正在上傳日誌</string>
+    <string name="log_uploading_speed">正在上傳日誌，速度 %1$s MB/s</string>
+    <string name="log_upload_cancel_btn">取消上傳</string>
+    <string name="log_upload_canceled">已取消上傳</string>
+    <string name="log_upload_success">上傳日誌成功</string>
+    <string name="return_btn">返回</string>
+    <string name="log_upload_fail">上傳日誌失敗，請重試</string>
+    <string name="log_reupload_btn">重新上傳</string>
+
+    <string name="not_support_join_external_system">不支持加入到外部系統的會議</string>
+    <string name="login_first_before_add_meeting">請先登入后，再添加會議</string>
+    <string name="added_to_meeting_list_successfully">已成功添加到會議列表</string>
+    <string name="adding_to_meeting_list_failed">添加會議失敗</string>
+    <string name="remove_from_meeting_list_successfully">移除會議成功</string>
+    <string name="remove_meeting">移除會議</string>
+    <string name="remove_recurrence_meeting">移除周期性會議？</string>
+    <string name="remove_recurrence_meeting_from_meeting_list">將該系列周期會議從會議列表中移除</string>
+    <string name="remove_meeting_title">移除會議?</string>
+    <string name="remove_meeting_content">將該會議從會議列表中移除</string>
+
+</resources>

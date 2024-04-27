@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.component.UploadLogFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            style="@style/TitleBarButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/log_upload_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/view_space"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/bg_white"
+        app:layout_constraintTop_toBottomOf="@id/title_bar_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/upload_log_img"
+        android:layout_width="80dp"
+        android:layout_height="84dp"
+        android:background="@drawable/image_upload_log"
+        android:layout_marginTop="77dp"
+        app:layout_constraintTop_toBottomOf="@id/view_space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"  />
+
+    <TextView
+        android:id="@+id/upload_log_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="@color/text_color_common"
+        android:layout_marginTop="39dp"
+        app:layout_constraintTop_toBottomOf="@+id/upload_log_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/upload_progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        app:layout_constraintTop_toBottomOf="@id/upload_log_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progress_horizontal"
+            style="@style/uploadProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginEnd="89dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/progress_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_common"
+            android:layout_marginStart="11dp"
+            app:layout_constraintStart_toEndOf="@+id/progress_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/icon_success"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/icon_success"
+            android:layout_marginStart="11dp"
+            app:layout_constraintStart_toEndOf="@+id/progress_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/icon_fail"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/icon_fail"
+            android:layout_marginStart="11dp"
+            app:layout_constraintStart_toEndOf="@+id/progress_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/reupload_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/blue_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_text_size_1"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="54dp"
+        android:layout_marginTop="47dp"
+        android:text="@string/log_reupload_btn"
+        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_progress_layout"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/cancel_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/cancel_upload_btn_bg"
+        android:layout_marginHorizontal="54dp"
+        android:layout_marginTop="24dp"
+        android:elevation="0dp"
+        android:text="@string/btn_back"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/title_text_size_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reupload_btn"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/cancel_upload_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/cancel_upload_btn_bg"
+        android:layout_marginHorizontal="54dp"
+        android:layout_marginTop="24dp"
+        android:elevation="0dp"
+        android:text="@string/log_upload_cancel_btn"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/title_text_size_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_progress_layout" />
+
+    <Button
+        android:id="@+id/return_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/cancel_upload_btn_bg"
+        android:layout_marginHorizontal="54dp"
+        android:layout_marginTop="24dp"
+        android:elevation="0dp"
+        android:text="@string/return_btn"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/title_text_size_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload_progress_layout"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/ll_canceling"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/transparent_37"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="@style/ProgressBarStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

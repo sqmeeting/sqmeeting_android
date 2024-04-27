@@ -1,0 +1,354 @@
+<resources>
+
+    <string name="web_portal_label">SQMeeting Web Portal:</string>
+    <string name="opensource_website_label">Opensource Website:</string>
+    <string name="web_portal">https://shenqi.isgo.com</string>
+    <string name="opensource_website">https://github.com/sqmeeting</string>
+
+    <string name="app_name">SQMeetingCE</string>
+    <string name="build_version">Version: </string>
+    <string name="main_title">ShenQi</string>
+
+    <string name="sign_in">Sign In</string>
+    <string name="join_meeting">Join Meeting</string>
+
+    <string name="set_server_notice">Please set server address before logging in or joining meeting!</string>
+    <string name="setting_notice">Go to set</string>
+
+    <string name="settings">Settings</string>
+    <string name="setting_server">Server Setting</string>
+    <string name="setting_server_ip_title">Server Address</string>
+    <string name="input_server_address">Input server address</string>
+    <string name="intelligent_noise_reduction">Intelligent Noise Reduction</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Save</string>
+    <string name="setting_saved_notice">Saved successfully</string>
+    <string name="setting_recording_title">My Recordings</string>
+    <string name="setting_recording">Log in to \"SQMeeting Web portal\" with a computer to view</string>
+
+    <string name="btn_join_meeting">Join</string>
+    <string name="join_meeting_audio_only" >Voice Meeting</string>
+    <string name="join_meeting_audio_only_notice">Video and screen sharing don\'t work in voice mode</string>
+
+    <string name="meeting_id_edit_hint">Input meeting ID</string>
+    <string name="display_name_edit_hint">Input your name</string>
+
+    <string name="user_sign_in">User Sign In</string>
+    <string name="username_or_account">Username/Account</string>
+    <string name="user_password">Password</string>
+
+    <string name="instant">Instant</string>
+    <string name="join">Join</string>
+    <string name="schedule">Schedule</string>
+
+    <string name="enter_meeting">Enter Meeting</string>
+    <string name="camera_on">Turn on Camera</string>
+    <string name="use_my_own_meeting_id">Use Personal Meeting ID</string>
+    <string name="no_meeting_room_notice">No Personal Meeting ID</string>
+    <string name="done">Done</string>
+
+    <string name="text_history_meeting">History</string>
+    <string name="text_scheduled_meeting">Scheduled</string>
+    <string name="clear_history_meeting">Clear History</string>
+    <string name="text_scheduled_meeting_refresh_success">Refresh successfully</string>
+
+    <string name="text_no_history_meeting">No history</string>
+    <string name="text_no_scheduled_meeting">No scheduled meetings</string>
+
+    <string name="scheduled_meeting_cancel_notice">Meeting canceled</string>
+    <string name="scheduled_meeting_update_notice">Meeting updated</string>
+
+    <string name="scheduled_meeting_failed_notice">Schedule meeting failed</string>
+    <string name="scheduled_meeting_cancel_failed_notice">Failed to cancel scheduled meeting</string>
+    <string name="scheduled_meeting_update_failed_notice">Failed to update scheduled meeting</string>
+
+    <string name="meeting_id_label">Meeting ID: </string>
+    <string name="meeting_name_postfix">\'s meeting</string>
+    <string name="schedule_meeting_postfix">\'s meeting</string>
+
+    <string name="meeting_details_title">Meeting Detail</string>
+    <string name="delete_meeting">Delete</string>
+    <string name="meeting_time">Start Time</string>
+    <string name="meeting_id">Meeting ID</string>
+    <string name="meeting_spent_time">Duration</string>
+    <string name="meeting_password">Password</string>
+    <string name="today">Today</string>
+
+    <string name="invite_you_to_meeting">invites you to a SQMeeting meeting</string>
+    <string name="password_of_meeting">Meeting Password</string>
+
+    <string name="cancel_meeting">Cancel Meeting</string>
+
+    <string name="scheduled_meeting_status_started">In Progress</string>
+    <string name="scheduled_meeting_status_starting">Upcoming</string>
+    <string name="scheduled_meeting_status_invited">Invited</string>
+
+    <string name="meeting_introduction">Meeting Description</string>
+    <string name="start_time">Start Time</string>
+    <string name="meeting_duration">Duration</string>
+    <string name="time_zone">Time Zone</string>
+    <string name="invited_users">Invited Users</string>
+    <string name="meeting_rate">Call Rate</string>
+    <string name="join_time">Join Time Ahead</string>
+    <string name="join_time_30_minutes">30 minutes</string>
+    <string name="join_time_any_time">Any time</string>
+    <string name="mute_in_meeting">Mute When Join</string>
+    <string name="allow_visitors_to_dial_in">Allow Guest</string>
+    <string name="shared_screen_watermark">Screen Sharing Watermark</string>
+    <string name="repetition_frequency">Frequency</string>
+    <string name="no_frequency">No</string>
+    <string name="repetition_end">End Series</string>
+    <string name="repetition_end_content">on %s %s meetings in total</string>
+    <string name="repetition_frequency_day">Daily</string>
+    <string name="repetition_frequency_week">Weekly</string>
+    <string name="repetition_frequency_month">Monthly</string>
+    <string name="repetition_frequency_setting">End Series Settings</string>
+    <string name="repetition_frequency_desc">The meeting will repeat every %1$s </string>
+    <string name="repetition_frequency_title">Recur every</string>
+    <string name="repetition_frequency_content">Every %1$s</string>
+    <string name="repetition_meeting_end_date">Due Date</string>
+    <string name="repetition_week_day">Select the repeat day(s) of the week</string>
+    <string name="repetition_month_day">Select the repeat date(s)</string>
+    <string name="not_cancel_selected_meeting_start_date">Unable to cancel the selected meeting start date</string>
+    <string name="repetition_type_one_day">day</string>
+    <string name="repetition_type_one_week">week</string>
+    <string name="repetition_type_one_month">month</string>
+    <string name="repetition_type_day">&#160;day(s)</string>
+    <string name="repetition_type_day_th">th</string>
+    <string name="repetition_type_week">&#160;week(s)</string>
+    <string name="repetition_type_month">&#160;month(s)</string>
+    <string name="repetition_adj"> </string>
+    <string name="meeting_recurrence">Recurring</string>
+    <string name="recurrence_meeting">Recurring Meeting</string>
+    <string name="recurrence_content">The meeting will repeat on %1$s </string>
+    <string name="recurrence_end">End on %s %s remaining meetings</string>
+    <string name="edit_meeting">Edit Current Meeting</string>
+    <string name="edit_recurrence_meeting">Edit Recurring Meeting</string>
+    <string name="edit_meeting_schedule">Edit Recurring Meeting</string>
+    <string name="save_changes">Done</string>
+    <string name="copy_invitation">Copy Invitation</string>
+    <string name="edit_recurrence_meetings">Edit Recurring Meeting</string>
+    <string name="cancel_recurrence_meetings">Cancel Recurring Meeting</string>
+    <string name="saving_calendar">Saving...</string>
+    <string name="btn_schedule">Schedule</string>
+    <string name="year_picker">y</string>
+    <string name="month_picker">m</string>
+    <string name="day_picker">d</string>
+    <string name="hour">h</string>
+    <string name="minute">min</string>
+    <string name="second">sec</string>
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="recurrence_remain">, %s remaining meetings</string>
+    <string name="edit_meeting_btn">Edit Meeting</string>
+    <string name="get_recurrence_meetings_fail">Get recurrence meetings failed</string>
+
+    <string name="start_time_valid_notice">The start time should not be earlier than the current time</string>
+    <string name="duration_time_valid_notice">Duration can not be 0 minutes.</string>
+    <string name="meeting_name_valid_notice">Meeting topic can not be empty. </string>
+    <string name="start_time_later_than_recurrence_start_time">The start time should be later than the start time of the recurrence meeting.</string>
+    <string name="start_time_later_than_previous_single_meeting_end_time">Start time cannot be earlier than the end time of the previous meeting in recurring meeting.</string>
+    <string name="end_time_earlier_than_latter_single_meeting_start_time">End time cannot be later than the start time of the next meeting in recurring meeting.</string>
+    <string name="start_time_earlier_than_recurrence_end_time">The start time should be earlier than the end time of the recurrence meeting.</string>
+
+    <string name="rate_128k">128K</string>
+    <string name="rate_512k">512K</string>
+    <string name="rate_1m">1024K</string>
+    <string name="rate_2m">2048K</string>
+    <string name="rate_2560K">2560K</string>
+    <string name="rate_3m">3072K</string>
+    <string name="rate_4m">4096K</string>
+    <string name="rate_6m">6144K</string>
+    <string name="rate_8m">8192K</string>
+
+    <string name="open_shared_screen_watermark">Enable Screen Sharing Watermark</string>
+    <string name="watermark_style">Watermark Style</string>
+    <string name="single">Single</string>
+    <string name="multiple">Multiple</string>
+    <string name="single_watermark_effect">Single watermark effect</string>
+    <string name="watermark_note">Watermark will be embedded in the shared content.</string>
+
+    <string name="add_meeting_introduction_title">Add meeting description</string>
+    <string name="meeting_introduction_hint">Input meeting description</string>
+
+    <string name="maximum_number_of_participants_title">Maximum number of participants</string>
+    <string name="meeting_participants_limitation_content">Maximum number of participants is 100</string>
+
+    <string name="cancel_meeting_content">All participants can not join this meeting once canceled</string>
+    <string name="cancel_meeting_positive_btn">Yes</string>
+    <string name="cancel_meeting_negative_btn">No</string>
+    <string name="cancel_meeting_title1">Are you sure you want to cancel this meeting?</string>
+    <string name="cancel_meeting_content1">Cancel the entire series as well</string>
+    <string name="cancel_meeting_title2">Cancel Recurring Meeting?</string>
+
+    <string name="add_user">Add user</string>
+    <string name="added_Users_title">Added Users</string>
+    <string name="search_hint">Search</string>
+    <string name="search_results">Results</string>
+    <string name="no_search_result_prefix">No\"</string>
+    <string name="no_search_result_postfix">\"related results</string>
+    <string name="edit_btn">Edit</string>
+    <string name="next">Next</string>
+    <string name="added_user_number">Added %1$s users</string>
+
+    <string name="user_information_title">Personal Info</string>
+    <string name="user_information_account">Account</string>
+    <string name="user_information_password">Update Password</string>
+    <string name="user_sign_out">Sign Out</string>
+
+    <string name="user_update_password">Update Password</string>
+    <string name="user_old_password">Old</string>
+    <string name="user_new_password">New</string>
+    <string name="user_confirm_password">Confirm</string>
+    <string name="user_old_password_hint">Old password</string>
+    <string name="user_new_password_hint">Set new password</string>
+    <string name="user_confirm_password_hint">Confirm new password</string>
+
+    <string name="sign_in_wrong">Incorrect account or password</string>
+    <string name="sign_in_other_error">Incorrect account or password</string>
+    <string name="sign_in_error_multiple_times_dlg_content">User has been locked, please retry after 5 minutes. </string>
+    <string name="sign_in_account_locked_dlg_title">User Locked</string>
+    <string name="sign_in_account_locked_dlg_content">Please contact administrator.</string>
+
+    <string name="network_unavailable_notice">Failed to connect server, please check your network and server settings.</string>
+
+    <string name="password_min_length" >The password must contain at least 6 characters</string>
+    <string name="password_max_length" >The password can contain up to 48 characters</string>
+
+    <string name="user_display_name">Display name</string>
+    <string name="user_change_display_name_title">Change display name</string>
+    <string name="user_password_changed_failed_notice">Update password failed</string>
+    <string name="recording_server_error">Recording and streaming service error</string>
+
+    <string name="meeting_info">Meeting Info</string>
+
+    <string name="dialog_positive_btn">OK</string>
+    <string name="dialog_negative_btn">Cancel</string>
+
+    <string name="app_exit_confirm_title">Exit</string>
+    <string name="app_exit_confirm_content">Exit this APP?</string>
+
+    <string name="log_out_dialog_title" >Offline Notification </string>
+    <string name="log_out_dialog_content" >Verification failed. Please sign in and join meeting again</string>
+
+    <string name="set_server_dialog_title">Server address changed</string>
+    <string name="set_server_dialog_content" >Please sign in again </string>
+
+    <string name="password_change_dialog_title" >Password Updated </string>
+    <string name="password_change_dialog_content" >Your password has been updated, please sign in again </string>
+
+    <string name="delete_history_meeting_dialog_title" >Delete Meeting </string>
+    <string name="delete_history_meeting_dialog_content" >Are you sure to delete this meeting?</string>
+
+    <string name="clear_history_meeting_dialog_title" >Clear history </string>
+    <string name="clear_history_meeting_dialog_content" >Are you sure to clear the meeting history?</string>
+
+    <string name="title_meeting_id" >Meeting ID </string>
+    <string name="title_username" >Display Name </string>
+    <string name="remember_name" >Remember the name </string>
+    <string name="microphone" >Turn on Microphone </string>
+    <string name="camera" >Turn on Camera </string>
+    <string name="server_ip_error" >Server address can not be empty </string>
+    <string name="server_address_format_error" >The server address format is incorrect </string>
+    <string name="meeting_id_error" >Meeting ID can\'t be empty </string>
+    <string name="username_error" >Please input your display name </string>
+    <string name="server_ip_title" >Server Address </string>
+
+    <string name="display_name_error" >Display name cannot be empty </string>
+    <string name="btn_back" >Cancel </string>
+
+    <string name="display_name" >Display name </string>
+    <string name="set_server_address_title" >Please set the server address first </string>
+    <string name="confirm_password_error" >Confirm password is inconsistent with new password </string>
+
+    <string name="settings_version_label" >Version Info </string>
+    <string name="starting" >Starting&amp;#8230</string>
+    <string name="signin_pwd_error" >Password can\'t be empty </string>
+
+    <string name="network_not_available">Unable to connect to the server </string>
+    <string name="network_not_available_try_again">Unable to connect to the serve, please try again</string>
+
+
+    <string name="title_meeting_password">Meeting Password </string>
+    <string name="password_normal_complexity" >Password length must be between 6 and 48 characters, can be upper and lower case letters, numbers, or special characters</string>
+    <string name="password_high_complexity" >Password length must be between 8 and 48 characters, must contain upper and lower case letters, numbers, and special characters</string>
+
+    <string name = "msg_qrscan_result_error" >Unrecognized QR code </string>
+    <string name = "msg_qrscan_camera_permission_request" >Please allow%1$s to access the camera in the system settings </string>
+    <string name = "btn_confirm_ok" >OK </string>
+    <string name = "password_dialog_label" >Meeting Password </string>
+
+    <string name="copy_meeting_info">Meeting invitation has been copied to the clipboard </string>
+    <string name="meeting_theme_title">Meeting Topic:&#160;</string>
+    <string name="start_time_title">Start Time:&#160;</string>
+    <string name="end_time_title">End Time:&#160;</string>
+    <string name="meeting_number_title">Meeting ID:&#160;</string>
+    <string name="meeting_password_title">Password:&#160;</string>
+
+    <string name="copy_invitation_notice_with_password">Open the ShenQi client and enter the Meeting ID and Password to join the meeting.</string>
+    <string name="copy_invitation_notice_without_password">Open the ShenQi client and enter the Meeting ID to join the meeting.</string>
+    <string name="invitation_url_title">Or click the following URL to join:</string>
+
+    <string name="settings_language_title">Language </string>
+    <string name="language_setting_title">Language setting </string>
+    <string name="language_setting_done">Done </string>
+    <string name="language_simplified_chinese">简体中文</string>
+    <string name="language_traditional_chinese">繁體中文</string>
+    <string name="language_english">English</string>
+
+    <string name="time_minutes">Min</string>
+    <string name="time_hours">h</string>
+    <string name="time_seconds">s</string>
+
+    <string name="server_common_error">Common error</string>
+    <string name="server_parameters_error">Parameters error</string>
+    <string name="server_authorization_error">Authorization error</string>
+    <string name="server_permission_error">Permission error</string>
+    <string name="server_meeting_not_exist">Meeting not exist</string>
+    <string name="server_meeting_data_error">Meeting data error</string>
+    <string name="server_operation_forbidden">Operation is forbidden</string>
+    <string name="server_meeting_status_error">Meeting status error</string>
+    <string name="server_length_error">Length error</string>
+    <string name="server_format_error">	Format error</string>
+    <string name="server_license_error">License error</string>
+
+    <string name="meeting_owner_label">Creator:</string>
+    <string name="meeting_time_label">Meeting Time:</string>
+    <string name="meeting_add_calendar">Save to System Calendar</string>
+    <string name="meeting_add_calendar_success">Saved successfully</string>
+    <string name="meeting_add_calendar_fail">Save Failed</string>
+    <string name="receive_meeting_reminders">Receive Meeting Reminders</string>
+    <string name="open_meeting_reminders_prompt">Remind you to attend the meeting 5 minutes before it starts</string>
+
+    <string name="problem_diagnosis_title">Problem Diagnosis</string>
+    <string name="problem_diagnosis_description">If you encounted an error while using App, please upload log to help us locate and solve the problem. Thank you!</string>
+    <string name="log_upload_btn">Upload Log</string>
+    <string name="problem_diagnosis_content">Please describe what went wrong (required, within 100 words)</string>
+    <string name="problem_diagnosis_content_empty">Please describe the problem</string>
+    <string name="log_upload_title">Upload Log</string>
+    <string name="log_uploading">Uploading</string>
+    <string name="log_uploading_speed">Uploading, speed %1$s MB/s</string>
+    <string name="log_upload_cancel_btn">Cancel Upload</string>
+    <string name="log_upload_canceled">Cancel upload successfully</string>
+    <string name="log_upload_success">Uploaded successfully</string>
+    <string name="return_btn">Return</string>
+    <string name="log_upload_fail">Upload failed, please try again</string>
+    <string name="log_reupload_btn">Reupload</string>
+
+    <string name="not_support_join_external_system">Not supported for joining external systems meeting</string>
+    <string name="login_first_before_add_meeting">Please log in first before adding meeting</string>
+    <string name="added_to_meeting_list_successfully">Added to the meeting list successfully</string>
+    <string name="adding_to_meeting_list_failed">Adding to meeting list failed</string>
+    <string name="remove_from_meeting_list_successfully">Removed meeting successfully</string>
+    <string name="remove_meeting">Remove Meeting</string>
+    <string name="remove_recurrence_meeting">Remove the recurring meeting?</string>
+    <string name="remove_recurrence_meeting_from_meeting_list">You will remove the recurring meeting from the meeting list</string>
+    <string name="remove_meeting_title">Remove the meeting?</string>
+    <string name="remove_meeting_content">You will remove the meeting from the meeting list</string>
+
+</resources>

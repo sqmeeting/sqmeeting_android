@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dialog">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/text_color_item_title"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="-3dp">
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="11dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@null"
+                android:gravity="center_horizontal|top"
+                android:text=""
+                android:textColor="@color/text_color_bold"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/content2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/content"
+                android:layout_marginHorizontal="11dp"
+                android:layout_marginBottom="8dp"
+                android:background="@null"
+                android:text=""
+                android:textColor="@color/text_color_gray"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/content_layout">
+
+            <Button
+                android:id="@+id/negative_btn"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_negative_btn_bg"
+                android:gravity="center"
+                android:text="@string/meeting_dialog_negative_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_item_title"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/positive_btn"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_positive_btn_bg"
+                android:gravity="center"
+                android:text="@string/meeting_dialog_positive_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_selector"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

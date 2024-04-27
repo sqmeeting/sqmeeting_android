@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@color/white"
+    android:paddingHorizontal="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="@string/participant"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="start|center_vertical"
+        app:layout_constraintHorizontal_weight="6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/media" />
+
+    <TextView
+        android:id="@+id/media"
+        android:layout_width="65dp"
+        android:layout_height="match_parent"
+        android:text="@string/media"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/resolution" />
+
+    <TextView
+        android:id="@+id/resolution"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="@string/media_format"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="center"
+        app:layout_constraintHorizontal_weight="5"
+        app:layout_constraintStart_toEndOf="@id/media"
+        app:layout_constraintEnd_toStartOf="@id/real_rate" />
+
+    <TextView
+        android:id="@+id/real_rate"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="@string/actual_rate"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:ellipsize="end"
+        app:layout_constraintHorizontal_weight="6"
+        app:layout_constraintStart_toEndOf="@id/resolution"
+        app:layout_constraintEnd_toStartOf="@id/frame_rate" />
+
+    <TextView
+        android:id="@+id/frame_rate"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:text="@string/frame_rate"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/real_rate"
+        app:layout_constraintEnd_toStartOf="@id/packet_loss" />
+
+    <TextView
+        android:id="@+id/packet_loss"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="@string/packet_loss"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="center"
+        app:layout_constraintHorizontal_weight="7"
+        app:layout_constraintStart_toEndOf="@id/frame_rate"
+        app:layout_constraintEnd_toEndOf="@id/jitter" />
+
+    <TextView
+        android:id="@+id/jitter"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:text="@string/network_jitter"
+        android:textColor="#222222"
+        android:textSize="11sp"
+        android:gravity="end|center_vertical"
+        app:layout_constraintStart_toEndOf="@id/packet_loss"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

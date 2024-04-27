@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name">Meeting Demo</string>
+
+    <string name="input_server_address">Input server address</string>
+    <string name="btn_join_meeting">Join</string>
+    <string name="meeting_id_edit_hint">Input meeting ID</string>
+    <string name="sign_in_username_or_account">Username/Account</string>
+    <string name="sign_in_pwd_label">Password</string>
+
+    <string name="network_unavailable_notice">Failed to connect server, please check your network and server settings.</string>
+
+    <string name="password_min_length">The password must contain at least 6 characters</string>
+    <string name="password_max_length">The password can contain up to 48 characters</string>
+    <string name="password_dialog_input_hint">Please enter meeting password</string>
+    <string name="password_dialog_error">Invalid Meeting Password</string>
+    <string name="sign_in_wrong">Incorrect account or password</string>
+    <string name="meeting_system_notification_click_prompt">You are in a meeting currently. If you need to join other meeting. Please exit the current meeting first.</string>
+
+    <string name="server_empty_error" >Server address can not be empty </string>
+    <string name="meeting_id_empty_error" >Meeting ID can\'t be empty </string>
+    <string name="username_empty_error" >Please input your display name </string>
+
+    <string name="sdk_demo_title">欢迎使用 SDK Demo</string>
+    <string name="float_btn">Join with Float Window</string>
+    <string name="call_screen_share_btn">Scree Share</string>
+    <string name="version_and_copyright">SDK Version: </string>
+</resources>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context=".ui.component.ScheduleMeetingRateFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            style="@style/TitleBarButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/meeting_rate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar_layout">
+
+        <TextView
+            android:id="@+id/rate_128k"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_128k"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/rate_128k_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintEnd_toEndOf="@+id/rate_128k"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_128k"
+            app:layout_constraintTop_toTopOf="@+id/rate_128k"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_512k"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_512k"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_128k" />
+
+        <ImageView
+            android:id="@+id/rate_512k_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_512k"
+            app:layout_constraintEnd_toEndOf="@+id/rate_512k"
+            app:layout_constraintTop_toTopOf="@+id/rate_512k"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_1m"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_1m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_512k" />
+
+        <ImageView
+            android:id="@+id/rate_1m_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_1m"
+            app:layout_constraintEnd_toEndOf="@+id/rate_1m"
+            app:layout_constraintTop_toTopOf="@+id/rate_1m"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_2m"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_2m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_1m" />
+
+        <ImageView
+            android:id="@+id/rate_2m_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_2m"
+            app:layout_constraintEnd_toEndOf="@+id/rate_2m"
+            app:layout_constraintTop_toTopOf="@+id/rate_2m"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_2560k"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_2560K"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_2m" />
+
+        <ImageView
+            android:id="@+id/rate_2560k_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_2560k"
+            app:layout_constraintEnd_toEndOf="@+id/rate_2560k"
+            app:layout_constraintTop_toTopOf="@+id/rate_2560k"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_3m"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_3m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_2560k" />
+
+        <ImageView
+            android:id="@+id/rate_3m_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:paddingEnd="20dp"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_3m"
+            app:layout_constraintEnd_toEndOf="@+id/rate_3m"
+            app:layout_constraintTop_toTopOf="@+id/rate_3m"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_4m"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_4m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_3m" />
+
+        <ImageView
+            android:id="@+id/rate_4m_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="20dp"
+            android:focusable="false"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_4m"
+            app:layout_constraintEnd_toEndOf="@+id/rate_4m"
+            app:layout_constraintTop_toTopOf="@+id/rate_4m"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_6m"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_6m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_4m"/>
+
+        <ImageView
+            android:id="@+id/rate_6m_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="20dp"
+            android:focusable="false"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_6m"
+            app:layout_constraintEnd_toEndOf="@+id/rate_6m"
+            app:layout_constraintTop_toTopOf="@+id/rate_6m"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/rate_8m"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/title_text_size_1"
+            android:gravity="center_vertical"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/rate_8m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rate_6m" />
+
+        <ImageView
+            android:id="@+id/rate_8m_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="20dp"
+            android:focusable="false"
+            android:src="@drawable/icon_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/rate_8m"
+            app:layout_constraintEnd_toEndOf="@+id/rate_8m"
+            app:layout_constraintTop_toTopOf="@+id/rate_8m"
+            android:visibility="invisible"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,32 @@
+<resources>
+
+    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="AppTheme.NoTitle">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="SDKMeetingItemEditStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/text_color_normal</item>
+        <item name="android:textSize">@dimen/home_input_text_size</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:textSelectHandle">@drawable/edit_text_select_handle</item>
+        <item name="android:paddingStart">@dimen/et_padding</item>
+        <item name="android:paddingEnd">@dimen/et_padding</item>
+    </style>
+
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+  <style name="CaptureTheme" parent="android:Theme.Holo">
+    <item name="android:windowActionModeOverlay">true</item>
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
+
+  <style name="DialogTheme.Base" parent="@android:style/Theme.Dialog" />
+
+  <style name="DialogTheme.Fade" parent="DialogTheme.Base">
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:windowAnimationStyle">@style/DialogFadeAnimation</item>
+  </style>
+
+  <style name="DialogTheme.Sheet" parent="DialogTheme.Base">
+    <item name="android:backgroundDimEnabled">false</item>
+    <item name="android:windowAnimationStyle">@style/DialogSheetAnimation</item>
+  </style>
+</resources>

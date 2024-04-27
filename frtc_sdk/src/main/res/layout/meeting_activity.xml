@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<frtc.sdk.ui.view.MeetingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/meeting_activity"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <FrameLayout
+        android:id="@+id/meeting_state_manager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" />
+
+    <RelativeLayout
+        android:id="@+id/stage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" >
+
+        <RelativeLayout
+            android:id="@+id/meeting_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/page_number_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/first_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/page_circle_bg" />
+
+        <ImageView
+            android:id="@+id/second_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/first_page"
+            android:src="@drawable/page_circle_bg" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/control_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/title_bar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true" />
+
+        <include
+            android:id="@id/tool_bar"
+            layout="@layout/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+        <include
+            android:id="@+id/more_control_bar"
+            layout="@layout/more_control_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="65dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/overlay_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_view_height"
+        layout="@layout/rolling_text_layout"
+        android:visibility="gone"/>
+
+
+    <RelativeLayout
+        android:id="@+id/liveRecordingMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <include
+            android:id="@+id/live_menu"
+            layout="@layout/live_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentTop="true"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/recording_menu"
+            layout="@layout/recording_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/live_menu"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/reconnecting_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/transparent_44"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="@style/ProgressBarStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:text="@string/net_abnormal_connecting"
+            android:textSize="18sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+</frtc.sdk.ui.view.MeetingLayout>
+

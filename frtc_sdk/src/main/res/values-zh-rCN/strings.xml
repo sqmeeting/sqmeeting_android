@@ -1,0 +1,330 @@
+<resources>
+
+    <string name="app_name">会议demo</string>
+
+    <string name="btn_join_meeting">加入会议</string>
+    <string name="meeting_id_label">会议号：</string>
+    <string name="meeting_name_postfix">的会议</string>
+
+    <string name="invite_you_to_meeting">邀请您参加会议</string>
+    <string name="guest_invite_you_to_meeting">邀请您参加会议</string>
+
+    <string name="search_hint">搜素</string>
+    <string name="no_search_result_prefix">没有找到\"</string>
+    <string name="no_search_result_postfix">\"相关结果</string>
+
+    <string name="network_unavailable_notice">无法连接服务器，请检查您的网络和服务器设置</string>
+    <string name="connecting_notice">连接中…</string>
+
+    <string name="save_notice">保存成功</string>
+
+    <string name="tool_bar_end_meeting">结束</string>
+    <string name="tool_bar_mute">静音</string>
+    <string name="tool_bar_unmute">解除静音</string>
+    <string name="tool_bar_video_mute">停止视频</string>
+    <string name="tool_bar_video_unmute">开启视频</string>
+    <string name="tool_bar_share_content">共享屏幕</string>
+    <string name="tool_bar_stop_content">停止共享</string>
+    <string name="tool_bar_participants">参会者</string>
+    <string name="tool_bar_more">更多</string>
+
+    <string name="tool_bar_invite">邀请入会</string>
+    <string name="tool_bar_start_overlay">启用横幅</string>
+    <string name="tool_bar_stop_overlay">停止横幅</string>
+    <string name="tool_bar_start_live">直播</string>
+    <string name="tool_bar_stop_live">结束直播</string>
+    <string name="tool_bar_start_record">录制</string>
+    <string name="tool_bar_stop_record">结束录制</string>
+    <string name="tool_bar_setting">设置</string>
+    <string name="tool_bar_receiving_videos">接收视频</string>
+    <string name="tool_bar_stop_receiving_videos">停止接收视频</string>
+    <string name="tool_bar_float_window_display">浮窗显示</string>
+
+    <string name="mute_remote_video_notice">您已停止接收视频</string>
+    <string name="unmute_remote_video_notice">您已开始接收视频</string>
+
+    <string name="network_status_dlg_content">当前您的网略状态不佳，为保证会议质量，建议您暂停视频</string>
+    <string name="network_status_dlg_positive_btn">关闭视频</string>
+    <string name="network_status_dlg_negative_btn">忽略</string>
+
+    <string name="pin_for_meeting">固定画面</string>
+    <string name="unpin_for_meeting">取消固定</string>
+    <string name="pin_for_meeting_notice">已固定画面</string>
+    <string name="unpin_for_meeting_notice">已取消固定画面</string>
+    <string name="pinned_for_meeting_notice">您的画面视窗已被固定</string>
+    <string name="unpinned_for_meeting_notice">您的画面视窗已被取消固定</string>
+
+    <string name="live_status">直播中</string>
+    <string name="recording_status">录制中</string>
+    <string name="start_live_notice">主持人已开启会议直播</string>
+    <string name="stop_live_notice">主持人已结束会议直播</string>
+    <string name="start_recording_notice">主持人已开启会议录制</string>
+    <string name="stop_recording_notice">主持人已结束会议录制</string>
+
+    <string name="start_live_dlg_title">开始直播？</string>
+    <string name="start_live_dlg_content">开始后，将直播会议中音频、视频画面、共享屏幕内容，并告知所有参会成员</string>
+    <string name="start_live_dlg_switch_content">开启密码保护</string>
+    <string name="start_live_dlg_switch_content_info">开启密码保护，让您的会议直播更安全。</string>
+    <string name="start_live_dlg_ok_btn">开始直播</string>
+    <string name="start_live_toast_content">直播已开始</string>
+    <string name="stop_live_dlg_content">观众正在观看直播，确定要结束直播？</string>
+    <string name="stop_live_dlg_ok_btn">结束直播</string>
+    <string name="live_status_share">分享</string>
+    <string name="live_status_stop">结束</string>
+    <string name="live_stop">直播已结束</string>
+    <string name="share_live_dlg_title">分享会议直播</string>
+    <string name="share_live_dlg_content">邀请您观看“%1$s”的会议直播</string>
+    <string name="share_live_url_title">请点击以下链接观看：</string>
+    <string name="share_live_pwd_title">直播密码：</string>
+    <string name="share_info_dialog_copy_btn">复制直播信息</string>
+    <string name="copy_live_notice">直播信息已复制到粘贴板</string>
+    <string name="live_info">直播信息</string>
+    <string name="recording_server_error">录播服务错误</string>
+
+    <string name="start_record_dlg_title">开始云录制？</string>
+    <string name="start_record_dlg_content">开始后，将录制会议中音频、视频画面、共享屏幕内容，并告知所有参会成员</string>
+    <string name="start_record_dlg_ok_btn">开始录制</string>
+    <string name="start_record_toast_content">录制已开启</string>
+    <string name="started_record_dlg_title">会议录制中</string>
+    <string name="started_record_dlg_ok_btn">知道了</string>
+    <string name="stop_record_dlg_title">结束云录制？</string>
+    <string name="stop_record_dlg_content">录制结束后，可通过“会议系统Web管理系统”-“会议录制”查看录制文件</string>
+    <string name="stop_record_dlg_ok_btn">结束录制</string>
+    <string name="record_status_stop">结束录制</string>
+    <string name="record_stopped_notice">录制已结束</string>
+
+    <string name="end_meeting_btn">结束会议</string>
+    <string name="leave_meeting_btn">离开会议</string>
+
+    <string name="participants_title">参会者</string>
+    <string name="participants_me">我</string>
+    <string name="participants_host">主持人</string>
+    <string name="participants_lecturer">演讲者</string>
+    <string name="participants_invite_to_join_meeting">邀请入会</string>
+    <string name="participants_mute_all">全体静音</string>
+    <string name="participants_unmute_all">解除全体静音</string>
+
+    <string name="local_content_cell_title">您正在共享屏幕</string>
+    <string name="local_content_cell_stop_content_btn">停止共享</string>
+    <string name="local_content_cell_audio_off">共享设备音频：关</string>
+
+    <string name="share_content_stop_notice">共享屏幕已停止</string>
+    <string name="share_content_uplink_bitrate_low_notice">当前网络状态不佳，系统限制了分享内容的能力</string>
+
+    <string name="meeting_info">会议信息</string>
+    <string name="network_condition">网络状态</string>
+    <string name="meeting_number">会议号</string>
+    <string name="meeting_pw">入会密码</string>
+    <string name="host">主持人</string>
+    <string name="invitation_link">邀请链接</string>
+    <string name="copy_info">复制信息</string>
+
+    <string name="statistics_info_test">统计信息（测试）</string>
+    <string name="delay">延迟</string>
+    <string name="audio">音频</string>
+    <string name="video">视频</string>
+    <string name="share">共享</string>
+    <string name="none">-</string>
+
+    <string name="participant">参会者</string>
+    <string name="media">媒体</string>
+    <string name="media_format">格式</string>
+    <string name="rate">速率</string>
+    <string name="actual_rate">实际速率</string>
+    <string name="frame_rate">帧率</string>
+    <string name="packet_loss">丢包</string>
+    <string name="network_jitter">抖动</string>
+
+    <string name="call_rate_label">呼叫速率：</string>
+
+    <string name="meeting_muted_forced_notice">主持人已对您开启静音</string>
+    <string name="meeting_muted_notice">已对您开启静音，如需发言可自行解除静音</string>
+    <string name="meeting_unmuted_notice">已对您解除静音</string>
+
+    <string name="unmute_self_dlg_title">您已静音</string>
+    <string name="unmute_self_dlg_content">主持人不允许解除静音，您可以向主持人申请解除静音</string>
+    <string name="unmute_self_dlg_positive_btn">申请解除静音</string>
+    <string name="unmute_self_request_success">已发送解除静音申请</string>
+    <string name="unmute_self_requested_dlg_title">已发送申请</string>
+    <string name="unmute_self_requested_dlg_content">您的解除静音申请已发送，请等待主持人操作</string>
+    <string name="unmute_self_rsp_dlg_title">主持人同意申请</string>
+    <string name="unmute_self_rsp_dlg_content">主持人已同意您的解除静音申请</string>
+    <string name="unmute_self_rsp_dlg_positive_btn">解除静音</string>
+    <string name="unmute_self_rsp_dlg_negative_btn">保持静音</string>
+    <string name="participants_permissions_notify_content">正在申请解除静音</string>
+    <string name="participants_permissions_dlg_title">参会者权限申请</string>
+    <string name="participants_permissions_dlg_unmute_content">申请解除静音</string>
+    <string name="participants_permissions_dlg_no_content">无参会者申请</string>
+    <string name="participants_permissions_dlg_content_ok_btn">同意</string>
+    <string name="participants_permissions_dlg_ok_btn">全部同意</string>
+    <string name="participants_permissions_rsp_toast">已同意申请</string>
+    <string name="participants_permissions_all_rsp_toast">已同意全部申请</string>
+    <string name="participants_permissions_view_btn">查看</string>
+
+    <string name="muted_notice">您已静音，请开启麦克风后发言</string>
+    <string name="network_status_poor_notice">您的网络状态差</string>
+
+    <string name="meeting_dialog_positive_btn">确定</string>
+    <string name="meeting_dialog_negative_btn">取消</string>
+
+    <string name="dialog_settings_btn">设置</string>
+
+    <string name="end_meeting_dialog_title">您要结束此会议吗？</string>
+    <string name="end_meeting_dialog_content">结束会议，全体参会者将被解散！</string>
+
+    <string name="meeting_end_dialog_title">会议已结束</string>
+
+    <string name="meeting_end_dialog_content_end">主持人结束了这次会议。</string>
+    <string name="meeting_end_dialog_content_out">您被主持人移出了会议。</string>
+
+    <string name="unmute_dialog_title">解除静音</string>
+    <string name="unmute_dialog_content">主持人要求您打开麦克风</string>
+    <string name="unmute_dialog_positive_btn">打开麦克风</string>
+    <string name="unmute_dialog_negative_btn">继续静音</string>
+
+    <string name="password_dialog_title">入会密码</string>
+    <string name="password_dialog_input_hint">请输入会议密码</string>
+    <string name="password_dialog_error">密码错误</string>
+    <string name="password_dialog_multiple_times_error">密码错误已达上限,请重新加入会议</string>
+    <string name="password_dialog_positive_btn">开始</string>
+
+    <string name="participant_dialog_mute_btn">静音</string>
+    <string name="participant_dialog_unmute_btn">解除静音</string>
+    <string name="change_display_name_btn">改名</string>
+    <string name="participant_dialog_lecture_btn">设为演讲者</string>
+    <string name="participant_dialog_unlecture_btn">取消演讲者</string>
+    <string name="participant_dialog_remove_btn">移出会议</string>
+    <string name="change_display_name_empty_notice">名字不能为空</string>
+    <string name="change_display_name_length_notice">名字最多48个字符</string>
+    <string name="change_display_name_content">您在该会议中的名字已被改为“%1$s”</string>
+    <string name="change_others_display_name_content">修改已保存</string>
+    <string name="network_fail">网络异常，设置失败请稍后再试</string>
+    <string name="participant_dialog_lecture_content">该用户已被设为演讲者</string>
+    <string name="participant_dialog_unlecture_content">该用户已被取消演讲者</string>
+    <string name="participant_dialog_lecture_content_noticed">您已被主持人设为演讲者</string>
+
+    <string name="participants_dialog_mute_all_title">全体参会者静音</string>
+    <string name="participants_dialog_mute_all_btn">全体静音</string>
+    <string name="participants_dialog_mute_all_option">允许参会者自我解除静音</string>
+    <string name="participants_dialog_unmute_all_title">解除全体参会者静音</string>
+    <string name="participants_dialog_unmute_all_btn">解除全体静音</string>
+    <string name="mute_all_success">已开启全体静音</string>
+    <string name="unmute_all_success">已解除全体静音</string>
+
+    <string name="meeting_disconnect_participants_dialog_title">移出会议</string>
+    <string name="meeting_disconnect_participants_dialog_content">您要把该用户移出会议吗？</string>
+    <string name="meeting_disconnect_participants_notice">该用户已被移出会议</string>
+
+    <string name="overlay_dlg_content">横幅内容</string>
+    <string name="overlay_dlg_content_default_value">欢迎！</string>
+    <string name="overlay_dlg_scroll">滚动</string>
+    <string name="overlay_dlg_repeat">播放次数</string>
+    <string name="overlay_dlg_position">横幅位置</string>
+    <string name="overlay_dlg_top">顶部</string>
+    <string name="overlay_dlg_center">中部</string>
+    <string name="overlay_dlg_bottom">底部</string>
+
+    <string name="overlay_started_notice">横幅已启用</string>
+    <string name="overlay_stopped_notice">横幅已停止</string>
+    <string name="overlay_content_empty_notice">横幅内容不能为空</string>
+    <string name="overlay_content_length_notice">横幅内容最多1024个字符</string>
+    <string name="overlay_repeat_value_notice">播放次数为1到999</string>
+
+    <string name="connection_failed_dialog_title">无法连接</string>
+
+    <string name="meeting_failed_dialog_title">入会失败</string>
+
+    <string name="meeting_not_exist_notice">入会失败: 该会议需要登录或会议不存在，请重试。</string>
+    <string name="meeting_locked_dialog_content">该会议已锁定，无法入会</string>
+    <string name="meeting_expired_dialog_content">该会议已过期，无法入会</string>
+    <string name="meeting_not_started_dialog_content">会议开始前30分钟方可入会</string>
+    <string name="guest_not_allowed_dialog_content">该会议室不允许访客入会，请登录后重试</string>
+    <string name="meeting_full_dialog_content">该会议已满员，无法入会</string>
+    <string name="no_license_dialog_content">服务未获取软件许可或软件许可已过期</string>
+    <string name="license_max_reached_dialog_content">用户数已达到上限，请升级软件许可</string>
+
+    <string name="meeting_disconnect_if_reconnect">网络异常，请检查网络设置， 或尝试重新入会</string>
+    <string name="meeting_leave_btn">离开会议</string>
+    <string name="meeting_reconnect_btn">重新入会</string>
+
+
+    <string name="user_log_out_dialog_title">下线通知</string>
+    <string name="user_log_out_dialog_content">验证失效，请重新登录后再入会。</string>
+
+    <string name="cancel_text">取消</string>
+
+    <string name="scan_title">扫描二维码</string>
+    <string name="msg_qrscan_result_error">无法识别的二维码</string>
+    <string name="msg_qrscan_camera_permission_request">请在系统设置里允许 %1$s 访问相机</string>
+    <string name="msg_open_photo_grant_permission">请在系统设置里允许 %1$s 访问存储</string>
+    <string name="msg_camera_error">很遗憾，Android 相机出现问题。你可能需要重启设备。</string>
+    <string name="msg_default_status">对准二维码扫描</string>
+    <string name="btn_confirm_ok">确定</string>
+    <string name="msg_save_server">当前入会所用的服务器地址\n %1$s \n与默认地址不一致，是否保存为默认地址</string>
+    <string name="msg_question_contact_administrator">如有疑问，请联系管理员</string>
+
+    <string name="meeting_ended">会议已结束</string>
+    <string name="meeting_in_progress">会议进行中</string>
+    <string name="copy_meeting_info">会议信息已复制到剪贴板</string>
+
+    <string name="meeting_theme_title">会议主题：</string>
+    <string name="start_time_title">开始时间：</string>
+    <string name="end_time_title">结束时间：</string>
+    <string name="repetition_period_title">重复周期：</string>
+    <string name="meeting_number_title">会议号码：</string>
+    <string name="meeting_password_title">会议密码：</string>
+    <string name="copy_invitation_notice_with_password">请打开会议App，输入会议号、密码入会。</string>
+    <string name="copy_invitation_notice_without_password">请打开会议App，输入会议号入会。</string>
+    <string name="invitation_url_title">或点击以下链接直接加入会议：</string>
+    <string name="copy_invitation_btn">复制会议信息邀请入会</string>
+    <string name="copy_meeting_notice">邀请信息已复制到粘贴板</string>
+
+    <string name="net_abnormal_connecting">网络异常，正在连接...</string>
+
+    <string name="server_common_error">通用错误</string>
+    <string name="server_parameters_error">参数错误</string>
+    <string name="server_authorization_error">认证错误</string>
+    <string name="server_permission_error">权限错误</string>
+    <string name="server_meeting_not_exist">会议不存在</string>
+    <string name="server_meeting_data_error">会议数据错误</string>
+    <string name="server_operation_forbidden">禁止操作</string>
+    <string name="server_meeting_status_error">会议状态错误</string>
+    <string name="server_length_error">数据长度错误</string>
+    <string name="server_format_error">数据格式错误</string>
+    <string name="server_license_error">许可错误</string>
+    <string name="live_fail">直播失败</string>
+    <string name="live_failed_license_max_reached_dialog_content">直播用户数已达到上限，请升级软件许可</string>
+    <string name="cannot_start_live_repeatedly">不能重复开始直播</string>
+    <string name="live_server_error">直播服务器出现错误</string>
+    <string name="record_fail">录制失败</string>
+    <string name="record_failed_license_max_reached_dialog_content">录制用户数已达到上限，请升级软件许可</string>
+    <string name="cannot_start_record_repeatedly">不能重复开始录制</string>
+    <string name="record_server_error">录播服务器出现错误</string>
+
+    <string name="meeting_reminders">%1$s 个会议提醒</string>
+    <string name="meeting_reminders_ignore_btn">忽略</string>
+    <string name="meeting_owner_label">发起人：</string>
+    <string name="meeting_system_notification_click_prompt">您已在会议中，如需参会，请退出当前会议后，重新入会</string>
+
+    <string name="float_view_meeting_name">会议中</string>
+    <string name="float_view_share_name">共享中</string>
+
+    <string name="sunday">周日</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    <string name="repetition_frequency_content">每%1$s</string>
+    <string name="repetition_type_one_day">天</string>
+    <string name="repetition_type_one_week">周</string>
+    <string name="repetition_type_one_month">月</string>
+    <string name="repetition_type_day">天</string>
+    <string name="repetition_type_day_th">日</string>
+    <string name="repetition_type_week">周</string>
+    <string name="repetition_type_month">月</string>
+
+    <string name="leave_meeting_before_add_meeting">请结束当前会议再添加</string>
+
+</resources>

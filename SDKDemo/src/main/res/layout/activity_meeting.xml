@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_white">
+
+    <View
+        android:id="@+id/split_space"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#F8F9FA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/split_space1"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/navigation_bar_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/split_space"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/navigation_bar_bg"
+        android:textColor="@color/text_color_bold"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="@string/sdk_demo_title"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/split_space1"/>
+
+
+    <!--Input View-->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/meeting_id_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <!--Input meeting id...-->
+        <EditText
+            android:id="@+id/meeting_id"
+            style="@style/SDKMeetingItemEditStyle"
+            android:gravity="center_vertical"
+            android:ems="10"
+            android:maxLength="20"
+            android:text=""
+            android:saveEnabled="false"
+            android:hint="@string/meeting_id_edit_hint"
+            android:textColorHint="@color/text_color_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--error msg-->
+        <Button
+            android:id="@+id/meeting_id_clear_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icon_clear"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/meeting_id"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="@+id/meeting_id"
+            app:layout_constraintTop_toTopOf="@+id/meeting_id" />
+
+
+        <ImageView
+            android:id="@+id/number_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_notice"
+            android:layout_marginEnd="@dimen/btn_navi_margin"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_id"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/meeting_id_error_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/btn_navi_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/transparent"
+            android:textColor="@color/text_color_error_msg"
+            android:textSize="@dimen/text_size_3"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/number_notice"
+            app:layout_constraintTop_toTopOf="@+id/number_notice"
+            app:layout_constraintBottom_toBottomOf="@+id/number_notice"
+            android:visibility="gone"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/meeting_password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_id_layout">
+
+        <EditText
+            android:id="@+id/meeting_password"
+            style="@style/SDKMeetingItemEditStyle"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/password_dialog_input_hint"
+            android:imeOptions="flagNoExtractUi"
+            android:maxLength="8"
+            android:saveEnabled="false"
+            android:singleLine="true"
+            android:text=""
+            android:textColorHint="@color/text_color_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/meeting_password_clear_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:textAllCaps="false"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/icon_clear"
+            app:layout_constraintBottom_toBottomOf="@+id/meeting_password"
+            app:layout_constraintEnd_toEndOf="@+id/meeting_password"
+            app:layout_constraintTop_toTopOf="@+id/meeting_password"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/edit_type"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"
+            android:layout_alignEnd="@+id/meeting_password"
+            android:layout_marginEnd="10.5dp"
+            android:background="@drawable/visible_selector"
+            android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/meeting_password"
+            app:layout_constraintEnd_toEndOf="@+id/meeting_password"
+            app:layout_constraintTop_toTopOf="@+id/meeting_password"
+            android:visibility="gone" />
+
+        <!--error msg-->
+        <ImageView
+            android:id="@+id/notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_notice"
+            app:layout_constraintStart_toStartOf="@+id/meeting_password"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_password"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_3"
+            android:text="@string/password_dialog_error"
+            app:layout_constraintStart_toStartOf="@+id/notice"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_password"
+            android:visibility="gone" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/server_address_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_password_layout">
+
+        <EditText
+            android:id="@+id/server_address"
+            style="@style/SDKMeetingItemEditStyle"
+            android:ems="10"
+            android:maxLength="50"
+            android:text=""
+            android:saveEnabled="false"
+            android:hint="@string/input_server_address"
+            android:textColorHint="@color/text_color_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/server_address_clear_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icon_clear"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/server_address"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="@+id/server_address"
+            app:layout_constraintTop_toTopOf="@+id/server_address"
+            android:visibility="gone"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/user_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/server_address_layout">
+
+        <EditText
+            android:id="@+id/user_name"
+            style="@style/SDKMeetingItemEditStyle"
+            android:ems="10"
+            android:maxLength="48"
+            android:text=""
+            android:saveEnabled="false"
+            android:hint="@string/sign_in_username_or_account"
+            android:textColorHint="@color/text_color_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--android:background="@null"-->
+
+        <Button
+            android:id="@+id/user_name_clear_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icon_clear"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/user_name"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="@+id/user_name"
+            app:layout_constraintTop_toTopOf="@+id/user_name"
+            android:visibility="gone"/>
+
+        <!--error msg-->
+        <ImageView
+            android:id="@+id/name_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_notice"
+            android:layout_marginEnd="@dimen/btn_navi_margin"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+        <TextView
+            android:id="@+id/title_your_name_error_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/btn_navi_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/transparent"
+            android:textColor="@color/text_color_error_msg"
+            android:textSize="@dimen/text_size_3"
+            android:visibility="gone"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/name_notice"
+            app:layout_constraintTop_toTopOf="@+id/name_notice"
+            app:layout_constraintBottom_toBottomOf="@+id/name_notice"/>
+
+        <!--<View
+            android:id="@+id/split_line"
+            android:layout_height="0.5dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="#BCC0C7"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/user_name" />-->
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/user_pwd_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_layout">
+
+        <EditText
+            android:id="@+id/user_pwd"
+            style="@style/SDKMeetingItemEditStyle"
+            android:ems="10"
+            android:maxLength="32"
+            android:text=""
+            android:saveEnabled="false"
+            android:hint="@string/sign_in_pwd_label"
+            android:textColorHint="@color/text_color_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/user_pwd_clear_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icon_clear"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/user_pwd"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="@+id/user_pwd"
+            app:layout_constraintTop_toTopOf="@+id/user_pwd"
+            android:visibility="gone"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <!--Call button-->
+    <Button
+        android:id="@+id/call_btn"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/btn_join_height"
+        android:background="@drawable/bg_blue_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_text_size"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="19.5dp"
+        android:text="@string/btn_join_meeting"
+        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_pwd_layout" />
+
+    <Button
+        android:id="@+id/call_float_btn"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/btn_join_height"
+        android:background="@drawable/bg_blue_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_text_size"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="19.5dp"
+        android:text="@string/float_btn"
+        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/call_btn" />
+
+    <Button
+        android:id="@+id/call_screen_share_btn"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/btn_join_height"
+        android:background="@drawable/bg_blue_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_text_size"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="19.5dp"
+        android:text="@string/call_screen_share_btn"
+        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/call_float_btn" />
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:text="版本："
+        android:textColor="#999999"
+        android:textSize="10sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/call_screen_share_btn"
+        app:layout_constraintVertical_bias="0.75" />
+
+</android.support.constraint.ConstraintLayout>

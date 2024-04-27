@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/listview_item_height"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12.5dp"
+        android:src="@drawable/call_icon_avatar" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="5dp">
+
+        <TextView
+            android:id="@+id/participant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_vertical|start"
+            android:layout_toStartOf="@+id/role"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/text_color_bold"
+            android:textSize="@dimen/button_text_size" />
+
+        <TextView
+            android:id="@+id/role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="5dp"
+            android:lines="1"
+            android:text=""
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/button_text_size" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/pin_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/call_icon_participant_pin" />
+
+    <ImageView
+        android:id="@+id/audio_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/call_icon_participant_audio_on" />
+
+    <ImageView
+        android:id="@+id/video_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/call_icon_participant_video_on" />
+
+</LinearLayout>

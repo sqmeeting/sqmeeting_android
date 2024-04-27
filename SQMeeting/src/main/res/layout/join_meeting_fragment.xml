@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context=".ui.component.JoinMeetingFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="@string/btn_back"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_1"
+            android:textColor="@color/blue"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/join_meeting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/separator"
+        style="@style/SeparatorStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar_layout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/video_call_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator">
+
+        <TextView
+            android:id="@+id/title_meeting_id"
+            style="@style/TitleRowStyle"
+            android:text="@string/title_meeting_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/meeting_id"
+            style="@style/EditTextStyle"
+            android:ems="10"
+            android:maxLength="20"
+            android:text=""
+            android:saveEnabled="false"
+            android:hint="@string/meeting_id_edit_hint"
+            android:textColorHint="@color/text_color_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_meeting_id" />
+
+        <Button
+            android:id="@+id/btn_show_meeting_rooms"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="5dp"
+            android:textAllCaps="false"
+            app:layout_constraintDimensionRatio="h,1:1"
+            android:background="@drawable/icon_triangle"
+            app:layout_constraintEnd_toEndOf="@+id/meeting_id"
+            app:layout_constraintTop_toTopOf="@+id/meeting_id"
+            app:layout_constraintBottom_toBottomOf="@+id/meeting_id"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/meeting_id_clear_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/icon_clear"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/meeting_id"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btn_show_meeting_rooms"
+            app:layout_constraintTop_toTopOf="@+id/meeting_id"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/number_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_notice"
+            android:layout_marginEnd="@dimen/button_margin"
+            android:layout_marginStart="@dimen/button_margin"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_id" />
+
+        <TextView
+            android:id="@+id/meeting_id_error_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/button_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/transparent"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_3"
+            android:visibility="gone"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/number_notice"
+            app:layout_constraintTop_toTopOf="@+id/number_notice"
+            app:layout_constraintBottom_toBottomOf="@+id/number_notice"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/video_call_name_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/listview_padding_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_id_error_msg">
+
+            <TextView
+                android:id="@+id/title_name"
+                style="@style/TitleRowStyle"
+                android:text="@string/title_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/display_name"
+                style="@style/EditTextStyle"
+                android:ems="10"
+                android:maxLength="48"
+                android:ellipsize="end"
+                android:saveEnabled="false"
+                android:text=""
+                android:hint="@string/display_name_edit_hint"
+                android:textColorHint="@color/text_color_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_name"
+                android:paddingEnd="46dp"/>
+
+            <Button
+                android:id="@+id/display_name_clear_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:textAllCaps="false"
+                app:layout_constraintDimensionRatio="h,1:1"
+                android:background="@drawable/icon_clear"
+                android:layout_marginEnd="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/display_name"
+                app:layout_constraintTop_toTopOf="@+id/display_name"
+                app:layout_constraintEnd_toEndOf="@+id/display_name"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/name_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_notice"
+                android:layout_marginEnd="@dimen/button_margin"
+                android:layout_marginStart="@dimen/button_margin"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/display_name" />
+
+            <TextView
+                android:id="@+id/title_your_name_error_msg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/button_margin"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/transparent"
+                android:textColor="@color/text_color_gray"
+                android:textSize="@dimen/text_size_3"
+                android:visibility="gone"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/name_notice"
+                app:layout_constraintTop_toTopOf="@+id/name_notice"
+                app:layout_constraintBottom_toBottomOf="@+id/name_notice"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/video_call_name_item"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/title_meeting_password"
+                style="@style/TitleRowStyle"
+                android:text="@string/title_meeting_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/meeting_password"
+                style="@style/EditTextStyle"
+                android:ems="10"
+                android:maxLength="20"
+                android:saveEnabled="false"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_meeting_password" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/button_margin"
+                android:layout_marginTop="2dp"
+                android:background="@color/transparent"
+                android:textColor="@color/text_color_gray"
+                android:textSize="@dimen/text_size_3"
+                android:visibility="invisible"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/meeting_password" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/separator_second"
+        style="@style/SeparatorStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_call_input_layout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/video_call_switch_view_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator_second">
+
+        <Switch
+            android:id="@+id/switch_remember_name"
+            style="@style/JoinMeetingSwitchStyle"
+            android:text="@string/remember_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
+
+        <Switch
+            android:id="@+id/switch_audio"
+            style="@style/JoinMeetingSwitchStyle"
+            android:text="@string/microphone"
+            android:background="@drawable/menu_item_bg"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_remember_name" />
+
+        <Switch
+            android:id="@+id/switch_camera"
+            style="@style/JoinMeetingSwitchStyle"
+            android:text="@string/camera"
+            android:background="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_audio" />
+
+        <View
+            android:id="@+id/separator_third"
+            style="@style/SeparatorStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_camera" />
+
+        <Switch
+            android:id="@+id/switch_only_voice"
+            style="@style/JoinMeetingSwitchStyle"
+            android:text="@string/join_meeting_audio_only"
+            android:background="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separator_third" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/call_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_blue_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_text_size"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="19.5dp"
+        android:text="@string/btn_join_meeting"
+        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_call_switch_view_layout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/meeting_number_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_30"
+        android:elevation="10dp"
+        android:visibility="gone">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/recycle_view_bg">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/meeting_rooms_title"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingStart="@dimen/listview_padding_horizontal"
+                android:paddingEnd="@dimen/listview_padding_horizontal"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/btn_clear"
+                    android:background="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/clear_history_meeting"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_size_1"
+                    android:textColor="@color/text_color_gray"
+                    android:gravity="center_vertical|start"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:background="@null"
+                    android:text="@string/done"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/button_text_size"
+                    android:textColor="@color/blue"
+                    android:gravity="center_vertical|end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/meeting_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/meeting_rooms_title"
+                />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

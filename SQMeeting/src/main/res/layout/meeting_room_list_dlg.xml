@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="255dp"
+    android:layout_gravity="bottom"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:background="@drawable/recycle_view_bg">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/meeting_rooms_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingStart="@dimen/listview_padding_horizontal"
+        android:paddingEnd="@dimen/listview_padding_horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:background="@null"
+            android:text="@string/done"
+            android:textAllCaps="false"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/blue"
+            android:gravity="center_vertical|end"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/meeting_room_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_rooms_title"
+        />
+
+</android.support.constraint.ConstraintLayout>

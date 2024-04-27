@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/listview_item_height"
+    android:maxWidth="276dp"
+    android:background="@drawable/unmute_request_notify_bg"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="70dp">
+
+    <LinearLayout
+        android:id="@+id/layout_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12.5dp"
+        android:src="@drawable/icon_unmute_notify" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_1"
+            android:maxWidth="85dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_unmute_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:lines="1"
+            android:text="@string/participants_permissions_notify_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_1" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/icon_arrow_right" />
+    </LinearLayout>
+
+</LinearLayout>

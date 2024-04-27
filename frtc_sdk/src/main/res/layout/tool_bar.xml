@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tool_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tool_bar_height"
+    android:background="@color/bg_color_black"
+    android:paddingHorizontal="@dimen/padding_horizontal"
+    android:paddingTop="@dimen/tool_bar_padding_top"
+    tools:context=".ui.FrtcMeetingActivity" >
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mute_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="40dp"
+        android:layout_marginBottom="@dimen/tool_bar_margin_bottom"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/video_mute_layout">
+
+        <ImageView
+            android:id="@+id/mute_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_mute"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_mute"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_mute"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/video_mute_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="40dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/tool_bar_margin_bottom"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/mute_layout"
+        app:layout_constraintRight_toLeftOf="@+id/share_content_layout">
+
+        <ImageView
+            android:id="@+id/video_mute_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_camera_off"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_video_mute"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_video_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_video_mute"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/share_content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="40dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/tool_bar_margin_bottom"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/video_mute_layout"
+        app:layout_constraintRight_toLeftOf="@+id/participants_layout">
+
+        <ImageView
+            android:id="@+id/share_content_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_share_content"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_share_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_share_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_share_content"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/participants_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="40dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/tool_bar_margin_bottom"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/share_content_layout"
+        app:layout_constraintRight_toLeftOf="@+id/more_layout">
+
+        <ImageView
+            android:id="@+id/participants_btn"
+            android:layout_width="22dp"
+            android:layout_height="37dp"
+            android:background="@color/transparent"
+            android:src="@drawable/call_icon_participants"
+            app:layout_constraintBottom_toTopOf="@+id/text_participants"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/request_notify"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="-3dp"
+            android:background="@drawable/request_notify_bg"
+            app:layout_constraintRight_toRightOf="@+id/participants_btn"
+            app:layout_constraintTop_toTopOf="@+id/participants_btn"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/participant_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintLeft_toRightOf="@+id/participants_btn"
+            app:layout_constraintTop_toTopOf="@+id/participants_btn"/>
+
+        <TextView
+            android:id="@+id/text_participants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_participants"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/more_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="40dp"
+        android:layout_marginBottom="@dimen/tool_bar_margin_bottom"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/participants_layout"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:id="@+id/more_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/call_icon_more"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_more"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/text_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar_more"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingHorizontal="24dp"
+        android:background="@drawable/bg_dialog"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/text_color_item_title"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/layout_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:background="@drawable/single_white_btn"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/mute_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/participant_dialog_mute_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_blue"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/separator_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separator_color"
+                android:layout_below="@id/mute_tv"/>
+
+            <TextView
+                android:id="@+id/change_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/separator_1"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/change_display_name_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_blue"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/separator_2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separator_color"
+                android:layout_below="@id/change_name_tv"/>
+
+            <TextView
+                android:id="@+id/lecture_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/separator_2"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/participant_dialog_lecture_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_blue"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <View
+                android:id="@+id/separator_3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separator_color"
+                android:layout_below="@id/lecture_tv"/>
+
+            <TextView
+                android:id="@+id/pin_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/separator_3"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/pin_for_meeting"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_blue"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <View
+                android:id="@+id/separator_4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separator_color"
+                android:layout_below="@id/pin_tv"/>
+
+            <TextView
+                android:id="@+id/remove_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/separator_4"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/participant_dialog_remove_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_red"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/cancel_tv"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/layout_control"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/meeting_dialog_negative_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color_bold"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

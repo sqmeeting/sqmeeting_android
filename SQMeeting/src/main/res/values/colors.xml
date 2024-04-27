@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_30">#4d000000</color>
+    <color name="transparent_44">#70000000</color>
+    <color name="transparent_70">#B3000000</color>
+    <color name="blue">#026ffe</color>
+    <color name="gray">#f0f0f5</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="starting_status_text_color">#ff7218</color>
+    <color name="started_status_text_color">#23D862</color>
+    <color name="text_color_hint">#cccccc</color>
+    <color name="text_color_gray">#666666</color>
+    <color name="text_color_red">#e32726</color>
+    <color name="text_color_green">#14C853</color>
+    <color name="text_color_bold">#222222</color>
+    <color name="text_color_common">#333333</color>
+    <color name="text_color_light_gray">#999999</color>
+    <color name="text_color_default_hint">#B6B6B6</color>
+    <color name="bg_white">#f8f9fA</color>
+    <color name="bg_color_text">#aacefb</color>
+    <color name="bg_color_press">#e6e6e6</color>
+    <color name="border_color_white">#f5f5f5</color>
+    <color name="border_color_gray">#b6b7b7</color>
+    <color name="separator_color">#eeeff0</color>
+    <color name="separator_color_2">#d7dadd</color>
+    <color name="separator_color_3">#e7e8e9</color>
+    <color name="progress_bg">#E6E8EF</color>
+    <color name="progress_green">#00D773</color>
+    <color name="blue_press">#3588F5</color>
+</resources>

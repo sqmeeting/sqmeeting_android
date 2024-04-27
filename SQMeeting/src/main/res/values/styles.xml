@@ -1,0 +1,188 @@
+<resources>
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="eula_dialog_theme" parent="DialogTheme">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="AppTheme.NoTitle">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ContainerStyle">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/menu_item_bg</item>
+        <item name="android:paddingEnd">@dimen/listview_padding_horizontal</item>
+        <item name="android:paddingStart">@dimen/listview_padding_horizontal</item>
+    </style>
+
+    <style name="NameTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_color_common</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <style name="ContentTextStyle">
+        <item name="android:layout_width">179dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:gravity">end|center_vertical</item>
+        <item name="android:textColor">@color/text_color_light_gray</item>
+        <item name="android:textSize">@dimen/text_size_1</item>
+    </style>
+
+    <style name="TitleRowStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">@dimen/button_margin</item>
+        <item name="android:textColor">@color/text_color_common</item>
+        <item name="android:textSize">@dimen/text_size_1</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_marginHorizontal">@dimen/button_margin</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/edit_text_bg</item>
+        <item name="android:textColor">@color/text_color_common</item>
+        <item name="android:textSize">@dimen/button_text_size_2</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:textSelectHandle">@drawable/edit_text_select_handle</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+    </style>
+
+    <style name="ItemFillStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_height</item>
+        <item name="android:background">@drawable/menu_item_bg</item>
+        <item name="android:paddingHorizontal">@dimen/item_padding_horizontal</item>
+    </style>
+
+    <style name="ListItemStyle">
+        <item name="android:layout_width">179dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:textColor">@color/text_color_light_gray</item>
+        <item name="android:textSize">@dimen/text_size_1</item>
+        <item name="android:gravity">end|center_vertical</item>
+    </style>
+
+    <style name="ItemLabelStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/text_color_common</item>
+        <item name="android:textSize">@dimen/title_text_size_1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ContentRowStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/text_color_light_gray</item>
+        <item name="android:textSize">@dimen/text_size_1</item>
+        <item name="android:gravity">end|center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="JoinMeetingSwitchStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:textColor">@color/text_color_common</item>
+        <item name="android:textSize">@dimen/text_size_1</item>
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:track">@drawable/switch_track_selector</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="SwitchStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textColor">@color/text_color_common</item>
+        <item name="android:textSize">@dimen/title_text_size_1</item>
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:track">@drawable/switch_track_selector</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="TitleBarTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#222222</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+
+    <style name="TitleBarButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:src">@drawable/icon_back</item>
+    </style>
+
+    <style name="SeparatorStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:background">#eeeff0</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="AppTheme">
+        <item name="colorControlNormal">@color/text_color_hint</item>
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
+
+    <style name="uploadProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/upload_progressbar_style</item>
+    </style>
+
+    <declare-styleable name="ConstraintHeightListView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
+    <style name="WheelDefault">
+        <item name="wheel_visibleItemCount">5</item>
+        <item name="wheel_itemTextAlign">center</item>
+        <item name="wheel_itemSpace">30dp</item>
+        <item name="wheel_itemTextColor">#FF999999</item>
+        <item name="wheel_itemTextColorSelected">#FF000000</item>
+        <item name="wheel_itemTextSize">18sp</item>
+        <item name="wheel_itemTextSizeSelected">18sp</item>
+        <item name="wheel_itemTextBoldSelected">false</item>
+        <item name="wheel_sameWidthEnabled">false</item>
+        <item name="wheel_atmosphericEnabled">true</item>
+        <item name="wheel_curtainEnabled">false</item>
+        <item name="wheel_curtainColor">#FFDEDEDE</item>
+        <item name="wheel_curvedEnabled">false</item>
+        <item name="wheel_curvedMaxAngle">90</item>
+        <item name="wheel_cyclicEnabled">false</item>
+        <item name="wheel_indicatorEnabled">true</item>
+        <item name="wheel_indicatorColor">#FFDEDEDE</item>
+        <item name="wheel_indicatorSize">1dp</item>
+    </style>
+
+</resources>

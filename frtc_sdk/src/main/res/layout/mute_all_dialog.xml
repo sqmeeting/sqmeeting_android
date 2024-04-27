@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="316dp"
+        android:layout_height="221dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="24dp"
+        android:background="@drawable/bg_dialog"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/participants_dialog_mute_all_title"
+            android:textColor="@color/text_color_item_title"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/mute_all_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/title"
+            android:text="@string/participants_dialog_mute_all_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:background="@drawable/single_blue_btn"
+            />
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/mute_all_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/single_white_btn"
+            android:gravity="center"
+            android:text="@string/meeting_dialog_negative_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color_item_title"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/switch_allow_unmute"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/cancel_btn"
+            android:background="@color/transparent"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="start|center_vertical"
+            android:text="@string/participants_dialog_mute_all_option"
+            android:textColor="@color/text_color_bold"
+            android:textSize="14sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector"
+            android:showText="false"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

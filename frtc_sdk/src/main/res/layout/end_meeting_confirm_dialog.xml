@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black_80"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/positive_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/leave_meeting"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/end_meeting_selector"
+            android:text="@string/leave_meeting_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size_1" />
+
+        <Button
+            android:id="@+id/end_meeting"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/leave_meeting"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/end_meeting_selector"
+            android:text="@string/end_meeting_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size_1"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/positive_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/call_icon_cancel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/cancel_btn"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/meeting_dialog_negative_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size_1" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

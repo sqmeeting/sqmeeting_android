@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dialog">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/start_live_dlg_title"
+            android:textColor="@color/text_color_bold"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginHorizontal="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:text="@string/start_live_dlg_content"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/content"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:text="@string/cancel_meeting_content1"
+            android:textColor="@color/text_color_common"
+            android:textSize="14sp"
+            android:theme="@style/CheckBoxStyle" />
+
+        <TextView
+            android:id="@+id/content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox"
+            android:layout_marginHorizontal="11dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:text="@string/start_live_dlg_switch_content_info"
+            android:textColor="@color/text_color_light_gray"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/content2"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/negative_btn"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_negative_btn_bg"
+                android:gravity="center"
+                android:text="@string/meeting_dialog_negative_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_common"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/positive_btn"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_positive_btn_bg"
+                android:gravity="center"
+                android:text="@string/start_live_dlg_ok_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_red"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

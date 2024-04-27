@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name">会议demo</string>
+
+    <string name="input_server_address">输入服务器地址</string>
+    <string name="btn_join_meeting">加入会议</string>
+    <string name="meeting_id_edit_hint">输入会议号</string>
+    <string name="sign_in_username_or_account">用户名/账号</string>
+    <string name="sign_in_pwd_label">密码</string>
+
+    <string name="network_unavailable_notice">无法连接服务器，请检查您的网络和服务器设置</string>
+
+    <string name="password_min_length">密码最少包含6位字符。</string>
+    <string name="password_max_length">密码最多包含48位字符。</string>
+    <string name="password_dialog_input_hint">请输入会议密码</string>
+    <string name="password_dialog_error">密码错误</string>
+    <string name="sign_in_wrong">账号或密码不正确</string>
+    <string name="meeting_system_notification_click_prompt">您已在会议中，如需参会，请退出当前会议后，重新入会</string>
+
+    <string name="server_empty_error">服务器地址不能为空</string>
+    <string name="meeting_id_empty_error">会议号码不能为空</string>
+    <string name="username_empty_error">名字不能为空</string>
+
+    <string name="sdk_demo_title">欢迎使用 SDK Demo</string>
+    <string name="float_btn">小窗口入会</string>
+    <string name="call_screen_share_btn">共享屏幕</string>
+    <string name="version_and_copyright">SDK版本：</string>
+</resources>

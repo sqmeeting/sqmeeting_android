@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/call_statics"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/room_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color_bold"
+                    android:singleLine="true"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_back" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_height="0.5dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider_color"
+            android:clickable="false"
+            android:focusable="false"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@color/title_bg_color">
+
+            <TextView
+                android:id="@+id/room_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|end"
+                android:text="@string/meeting_id_label"
+                android:singleLine="true"
+                android:textColor="@color/text_color_item_title"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/room_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|start"
+                android:layout_marginEnd="22dp"
+                android:singleLine="true"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
+                android:layout_toEndOf="@+id/room_id_label"/>
+
+            <TextView
+                android:id="@+id/rate_label"
+                android:text="@string/call_rate_label"
+                android:textSize="13sp"
+                android:textColor="@color/text_color_item_title"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|end"
+                android:layout_toEndOf="@+id/room_number"/>
+
+            <TextView
+                android:id="@+id/rate"
+                android:textSize="13sp"
+                android:textColor="@color/blue"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|start"
+                android:layout_toEndOf="@+id/rate_label"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_height="0.5dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider_color"
+            android:clickable="false"
+            android:focusable="false"/>
+
+        <include
+            layout="@layout/meeting_stats_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <View
+            android:layout_height="0.5dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider_color"
+            android:clickable="false"
+            android:focusable="false"/>
+
+        <ListView
+            android:id="@+id/stats_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/listview_padding_horizontal"
+            android:background="@color/listview_bg_color"
+            android:divider="@color/divider_color"
+            android:dividerHeight="0.5dp"
+            android:fadingEdgeLength="0dp"
+            android:layout_weight="1"
+            android:visibility="visible"/>
+
+
+    </LinearLayout>
+</LinearLayout>
+

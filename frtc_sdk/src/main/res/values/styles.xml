@@ -1,0 +1,58 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="AppTheme">
+        <item name="colorControlNormal">@color/text_color_hint</item>
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
+
+    <style name="ItemStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">199dp</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:textColor">@color/text_color_item_content</item>
+        <item name="android:textSize">@dimen/text_size_1</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <style name="ActivityTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="NoMaskDialogTheme" parent="android:Theme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="ProgressBarStyle">
+        <item name="android:indeterminateDrawable">@drawable/progress_rotate</item>
+        <item name="android:minWidth">25dp</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:maxWidth">150dp</item>
+        <item name="android:maxHeight">150dp</item>
+    </style>
+
+    <declare-styleable name="ConstraintHeightListView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>
