@@ -936,6 +936,12 @@ public class MeetingService implements IMeetingService {
         return getMeetingConfig().isRemoteVideoMuted();
     }
 
+    @Override
+    public void requestParticipants(){
+        Log.d(TAG,"requestParticipants:"+getParticipantInfos());
+        broadcastParticipantStateNotify(getParticipantInfos(), true, "");
+        getMeetingLayoutView().setMuteState(getParticipantInfos());
+    }
 
     public void onCancelUploadLogsNotify() {
         try {
@@ -1162,7 +1168,7 @@ public class MeetingService implements IMeetingService {
                 String jsonString = msg.getData().getString(FrtcConstant.DATA);
                 setParticipantState(JSONUtil.transform(jsonString, ParticipantStateInfo.class));
             } catch (Exception e) {
-                Log.e(TAG, "onParticipantStateNotify error:" + e.getMessage());
+                Log.e(TAG, "onParticipantStateNotify getMsg error:" + e);
             }
         }
         if (getParticipantState() == null) {
@@ -1180,27 +1186,29 @@ public class MeetingService implements IMeetingService {
                 broadcastParticipantStateNotify(getParticipantInfos(), true, "");
             } else {
                 String selfNewName = "";
-                for (ParticipantInfo info : getParticipantState().getParti_status_change()) {
-                    for (ParticipantInfo participantInfo : getParticipantInfos()) {
-                        if (StringUtils.isNotBlank(info.getUuid())
-                                && info.getUuid().equals(participantInfo.getUuid())) {
-                            if (info.getUuid().equals(getMeetingStatusInfo().getClientId())) {
-                                if(!getMeetingStatusInfo().getDisplayName().equals(info.getDisplay_name())) {
-                                    getMeetingStatusInfo().setDisplayName(info.getDisplay_name());
-                                    selfNewName = info.getDisplay_name();
+                if(getParticipantState().getParti_status_change() != null){
+                    for (ParticipantInfo info : getParticipantState().getParti_status_change()) {
+                        for (ParticipantInfo participantInfo : getParticipantInfos()) {
+                            if (StringUtils.isNotBlank(info.getUuid())
+                                    && info.getUuid().equals(participantInfo.getUuid())) {
+                                if (info.getUuid().equals(getMeetingStatusInfo().getClientId())) {
+                                    if(!getMeetingStatusInfo().getDisplayName().equals(info.getDisplay_name())) {
+                                        getMeetingStatusInfo().setDisplayName(info.getDisplay_name());
+                                        selfNewName = info.getDisplay_name();
+                                    }
                                 }
+                                participantInfo.setAudioMuted(info.getAudioMuted());
+                                participantInfo.setVideoMuted(info.getVideoMuted());
+                                participantInfo.setDisplay_name(info.getDisplay_name());
                             }
-                            participantInfo.setAudioMuted(info.getAudioMuted());
-                            participantInfo.setVideoMuted(info.getVideoMuted());
-                            participantInfo.setDisplay_name(info.getDisplay_name());
                         }
                     }
+                    broadcastParticipantStateNotify(getParticipantInfos(), false, selfNewName);
                 }
-                broadcastParticipantStateNotify(getParticipantInfos(), false, selfNewName);
             }
             getMeetingLayoutView().setMuteState(getParticipantInfos());
         } catch (Exception e) {
-            Log.e(TAG, "onParticipantStateNotify error:" + e.getMessage());
+            Log.e(TAG, "onParticipantStateNotify update error:" + e);
         }
     }
 

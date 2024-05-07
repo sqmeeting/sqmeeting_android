@@ -83,4 +83,5 @@ public interface IMeetingService {
     int getCameraId();
     void setCameraId(int cameraId);
     boolean isRemoteVideoMuted();
+    void requestParticipants();
 }
