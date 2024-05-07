@@ -378,4 +378,9 @@ public final class FrtcCall implements IFrtcCallAPI {
         return meetingManager.isRemoteVideoMuted();
     }
 
+    @Override
+    public void requestParticipants(){
+        meetingManager.requestParticipants();
+    }
+
 }

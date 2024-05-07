@@ -298,8 +298,12 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
 
     private void meetingResume() {
         entered_first = false;
+        if(isLocalParticipantInfoAvailable()){
+            meetingControlBar.setToolbarParticipantCount(Integer.toString(participantInfos.size()));
+        }else{
+            frtcCall.requestParticipants();
+        }
         meetingControlBar.setMeetingName(localStore.getMeetingName());
-        meetingControlBar.setToolbarParticipantCount(Integer.toString(participantInfos.size()));
         meetingControlBar.resumeChronometer(localStore.getElapsedRealtime());
         meetingControlBar.updateHostPermission(isHost(), isOperatorOrAdmin());
         onHeadsetEnableSpeakerNotify(frtcCall.isHeadsetEnableSpeaker());
@@ -2350,7 +2354,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     @Override
     public void onParticipantStateChangeNotify(ParticipantStateChangeNotify participantStateChangeNotify) {
         boolean isFullList = participantStateChangeNotify.isFullList();
-        if (participantStateChangeNotify.getParticipantList() == null || participantStateChangeNotify.getParticipantList().size() <= 0) {
+        if (participantStateChangeNotify.getParticipantList() == null || participantStateChangeNotify.getParticipantList().isEmpty()) {
             return;
         }
         participantInfos.clear();

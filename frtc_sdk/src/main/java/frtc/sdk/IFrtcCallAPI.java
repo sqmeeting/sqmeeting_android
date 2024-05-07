@@ -86,4 +86,5 @@ public interface IFrtcCallAPI extends IFrtcAPI {
     int getCameraId();
     void setCameraId(int cameraId);
     boolean isRemoteVideoMuted();
+    void requestParticipants();
 }
