@@ -1746,6 +1746,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     }
 
     public void onLeaveMeeting() {
+        Log.d(TAG,"onLeaveMeeting");
         removeEventsAndEnterCleanMode();
         if(isSharingContent){
             frtcCall.stopSendContent();
@@ -2187,7 +2188,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
             localStore = LocalStoreBuilder.getInstance(this).getLocalStore();
         }
         localStore.setMeetingID(meetingNumber);
-
+        Log.d(TAG,"onMeetingStateNotify:"+meetingStatus+",callEndReason:"+callEndReason);
         handleMeetingStateChangedNotify(meetingStatus, callEndReason);
     }
 
