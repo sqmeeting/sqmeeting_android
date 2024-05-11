@@ -1424,7 +1424,6 @@ public class MeetingService implements IMeetingService {
                 curContentState = MeetingContentState.idle;
             }
             for (IFrtcCallListener listener : meetingMessageListeners) {
-                Log.d(TAG, "broadcastMeetingStateNotify listener = " + listener);
                 listener.onMeetingStateNotify(notify);
             }
         } catch (Exception e) {

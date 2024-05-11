@@ -33,7 +33,7 @@ public class AudioRawUtil {
                 }
                 player.release();
             } catch (Exception e) {
-                Log.e("Audio", "Exception" + e);
+                Log.e("AudioRawUtil", "Audio player stop Exception", e);
             }
         }
     }

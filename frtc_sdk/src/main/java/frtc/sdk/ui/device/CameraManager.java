@@ -70,8 +70,10 @@ public class CameraManager {
 
     public void stopRecord() {
         try {
-            handler.removeMessages(CameraMessageType.StartRecord.getCode());
-            handler.obtainMessage(CameraMessageType.StopRecord.getCode()).sendToTarget();
+            if(handler != null){
+                handler.removeMessages(CameraMessageType.StartRecord.getCode());
+                handler.obtainMessage(CameraMessageType.StopRecord.getCode()).sendToTarget();
+            }
         } catch (Exception e) {
             Log.e(TAG, "stopRecord: " + e.getMessage());
         }
