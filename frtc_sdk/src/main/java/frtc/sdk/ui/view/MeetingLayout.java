@@ -351,7 +351,7 @@ public class MeetingLayout extends RelativeLayout implements IMeetingMessageHand
             }
             MediaModule peopleBlock = matchOne(people_list, msid);
             if (peopleBlock != null) {
-                peopleBlock.setActiveSpeaker(true);
+                peopleBlock.setActiveSpeaker(showActive());
             }
         }
     }
@@ -630,7 +630,7 @@ public class MeetingLayout extends RelativeLayout implements IMeetingMessageHand
                     synchronized (active_lock) {
                         AddOrUpdateActiveSpeaker(people_list.get(0).getMsid());
                     }
-                    people_list.get(0).setActiveSpeaker(true);
+                    people_list.get(0).setActiveSpeaker(showActive());
                 }
                 triggerLayoutAnimation();
             }
@@ -871,6 +871,9 @@ public class MeetingLayout extends RelativeLayout implements IMeetingMessageHand
         mediaDataManager.stopPeopleVideo(msid);
     }
 
+    private boolean showActive(){
+        return this.people_list != null && this.people_list.size() > 1;
+    }
     @Override
     public void onLayoutInfoNotify(LayoutInfoData layoutInfoData) {
         List<LayoutData> newLayoutList = null;
