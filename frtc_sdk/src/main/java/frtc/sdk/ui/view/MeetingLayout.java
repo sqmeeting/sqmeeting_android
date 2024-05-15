@@ -142,6 +142,7 @@ public class MeetingLayout extends RelativeLayout implements IMeetingMessageHand
         @Override
         public void onCameraClosed(int cid){
             onCameraOpenResultChanged(false);
+            localcamera_callback.clearSurface();
         }
     };
 
