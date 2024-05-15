@@ -1,6 +1,7 @@
 package com.frtc.sqmeetingce.ui.component;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -24,6 +26,7 @@ import com.frtc.sqmeetingce.R;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import frtc.sdk.log.Log;
 import frtc.sdk.ui.component.BaseToast;
 import frtc.sdk.ui.dialog.IConfirmDlgListener;
 import frtc.sdk.ui.model.LocalStore;
@@ -201,6 +204,7 @@ public class JoinMeetingFragment extends BaseFragment implements MeetingNumberAd
                 if(mActivity.isInMeeeting()){
                     return;
                 }
+                hideSoftInput(v);
                 joinMeetingWithParam();
             }
         });
@@ -472,5 +476,16 @@ public class JoinMeetingFragment extends BaseFragment implements MeetingNumberAd
         inputMeetingId.setText(meetingId);
         inputDisplayName.setText(displayName);
 
+    }
+
+    private void hideSoftInput(View view){
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }catch (Exception exception){
+            Log.e(TAG,"hideSoftInput failed",exception);
+        }
     }
 }

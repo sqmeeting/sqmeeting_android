@@ -1,5 +1,6 @@
 package com.frtc.sqmeetingce.ui.component;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -72,6 +74,7 @@ public class SignInFragment extends BaseFragment {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideSoftInput(v);
                 String pw = inputPassword.getText().toString().trim();
                 if(pw.length() >= 6 && pw.length() <= 32){
                     mActivity.doSignIn(inputName.getText().toString().trim(), inputPassword.getText().toString().trim());
@@ -137,6 +140,17 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void onBack() {
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_HOME);
+    }
+
+    private void hideSoftInput(View view){
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputMethodManager != null) {
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }catch (Exception exception){
+            Log.e(TAG,"hideSoftInput failed",exception);
+        }
     }
 
 }
