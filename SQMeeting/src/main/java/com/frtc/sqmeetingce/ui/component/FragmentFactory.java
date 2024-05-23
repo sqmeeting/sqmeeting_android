@@ -41,7 +41,7 @@ public class FragmentFactory {
             case FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ_SETTING:
                 fragment = new ScheduleMeetingRepetitionFreqSettingFragment();
                 break;
-            case SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT:
+            case FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST:
                 fragment = new ScheduleRecurrenceMeetingListFragment();
                 break;
             case FRAGMENT_EDIT_SINGLE_RECURRENCE_MEETING:

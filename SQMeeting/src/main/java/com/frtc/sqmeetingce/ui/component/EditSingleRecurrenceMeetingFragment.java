@@ -109,7 +109,7 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"btnBack onClick");
-                mActivity.replaceFragmentWithTag(preFragment);
+                showPreviousFragment();
             }
         });
         RelativeLayout startTimeItem = view.findViewById(R.id.start_time_item);
@@ -142,7 +142,7 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
 
     @Override
     public void onBack() {
-        mActivity.replaceFragmentWithTag(preFragment);
+        showPreviousFragment();
     }
 
     public void setMeeting(ScheduledMeeting scheduledMeeting, ScheduledMeetingListResult scheduledMeetingListResult, int position, FragmentTagEnum preFragment) {
@@ -275,7 +275,11 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
     }
 
     public void saveMeetingSuccess() {
-        if(preFragment == FragmentTagEnum.SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT){
+        showPreviousFragment();
+    }
+
+    private void showPreviousFragment(){
+        if(preFragment == FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST){
             mActivity.getScheduledRecurrenceMeetingList(scheduledMeeting.getRecurrence_gid());
         }else {
             scheduledMeeting.setSchedule_start_time(String.valueOf(startTimeMill));

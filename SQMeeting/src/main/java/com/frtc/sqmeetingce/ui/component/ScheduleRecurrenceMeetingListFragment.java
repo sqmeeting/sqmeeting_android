@@ -85,19 +85,21 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
 
         tvMeetingName.setText(scheduledMeetings.get(0).getMeeting_name());
 
-        String recurrenceType = scheduledMeetingListResult.getRecurrenceType();
-        String recurrenceContent = MeetingUtil.formatRecurrenceContent(mActivity, recurrenceType, scheduledMeetingListResult.getRecurrenceInterval(), scheduledMeetingListResult.getRecurrenceDaysOfWeek(),
-                scheduledMeetingListResult.getRecurrenceDaysOfMonth());
-        String recurrenceTypeContent = MeetingUtil.formatRecurrenceTypeContent(mActivity, recurrenceType, scheduledMeetingListResult.getRecurrenceInterval());
-        long recurrenceEndDay = scheduledMeetingListResult.getRecurrenceEndDay();
-        int count = scheduledMeetingListResult.getTotal_size();
+        if(scheduledMeetingListResult != null){
+            String recurrenceType = scheduledMeetingListResult.getRecurrenceType();
+            String recurrenceContent = MeetingUtil.formatRecurrenceContent(mActivity, recurrenceType, scheduledMeetingListResult.getRecurrenceInterval(), scheduledMeetingListResult.getRecurrenceDaysOfWeek(),
+                    scheduledMeetingListResult.getRecurrenceDaysOfMonth());
+            String recurrenceTypeContent = MeetingUtil.formatRecurrenceTypeContent(mActivity, recurrenceType, scheduledMeetingListResult.getRecurrenceInterval());
+            long recurrenceEndDay = scheduledMeetingListResult.getRecurrenceEndDay();
+            int count = scheduledMeetingListResult.getTotal_size();
 
-        String endDay = MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd");
+            String endDay = MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd");
 
-        tvRecurrenceType.setText(recurrenceTypeContent);
-        tvRecurrenceContent.setText(String.format(mActivity.getString(R.string.recurrence_content), recurrenceContent));
-        String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), endDay, count+"");
-        tvRecurrenceEnd.setText(format);
+            tvRecurrenceType.setText(recurrenceTypeContent);
+            tvRecurrenceContent.setText(String.format(mActivity.getString(R.string.recurrence_content), recurrenceContent));
+            String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), endDay, count+"");
+            tvRecurrenceEnd.setText(format);
+        }
 
         setClickListener(view);
     }
@@ -191,7 +193,7 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
 
             @Override
             public void onEditMeeting() {
-                mActivity.showEditSingleRecurrenceMeeting(scheduledMeetings.get(selectPosition), scheduledMeetingListResult, selectPosition, FragmentTagEnum.SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT);
+                mActivity.showEditSingleRecurrenceMeeting(scheduledMeetings.get(selectPosition), scheduledMeetingListResult, selectPosition, FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
             }
 
             @Override
