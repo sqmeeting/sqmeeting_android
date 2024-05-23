@@ -1070,7 +1070,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             pageNum = 0;
             localStore.setScheduledRecurrenceMeetingFullList(true);
 
-            BaseFragment fragment = getFragmentByTag(FragmentTagEnum.SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT);
+            BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
             if(fragment instanceof ScheduleRecurrenceMeetingListFragment && fragment.isVisible()){
                 ((ScheduleRecurrenceMeetingListFragment)fragment).updateScheduledRecurrenceMeetingListview();
             }
@@ -2086,7 +2086,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 }else {
                     switch (resultType) {
                         case SUCCESS:
-                            BaseFragment fragment = getFragmentByTag(FragmentTagEnum.SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT);
+                            BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
                             if(fragment instanceof ScheduleRecurrenceMeetingListFragment && fragment.isVisible()){
                                 String gid = ((ScheduleRecurrenceMeetingListFragment)fragment).getMeetingRecurrenceGid();
                                 isGetScheduleMeetings = true;
@@ -2220,7 +2220,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                                 if(isGetDone) {
                                     isWillShowScheduledRecurrenceMeetingList = false;
                                 }
-                                BaseFragment fragment = getFragmentByTag(FragmentTagEnum.SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT);
+                                BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
                                 if(fragment instanceof ScheduleRecurrenceMeetingListFragment && fragment.isVisible()){
                                     ((ScheduleRecurrenceMeetingListFragment)fragment).setScheduledMeetingListResult(scheduledMeetingListResult, true);;
                                 }else{
@@ -2259,7 +2259,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
     public void showScheduleRecurrenceMeetingListFragment(ScheduledMeetingListResult scheduledMeetingListResult) {
         ScheduleRecurrenceMeetingListFragment fragment = new ScheduleRecurrenceMeetingListFragment();
         fragment.setScheduledMeetingListResult(scheduledMeetingListResult, false);
-        replaceFragmentWithInstance(fragment, FragmentTagEnum.SCHEDULE_RECURRENCE_MEETING_LIST_FRAGMENT);
+        replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
     }
 
     @Override
