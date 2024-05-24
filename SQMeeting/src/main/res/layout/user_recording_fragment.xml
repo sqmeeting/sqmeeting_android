@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context=".ui.component.UserRecordingFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            style="@style/TitleBarButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleBarTextStyle"
+            android:text="@string/setting_recording_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/separator"
+        style="@style/SeparatorStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar_layout" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/recording_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator">
+
+        <TextView
+            android:id="@+id/recording_label"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="@dimen/button_margin"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/text_size_1"
+            android:background="@drawable/menu_item_bg"
+            android:text="@string/setting_recording"
+            android:gravity="center_vertical|start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/website"/>
+
+        <TextView
+            android:id="@+id/website"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginHorizontal="@dimen/button_margin"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/menu_item_bg"
+            android:textColor="@color/text_color_blue"
+            android:textSize="@dimen/button_text_size_2"
+            android:text=""
+            android:saveEnabled="false"
+            android:singleLine="true"
+            android:gravity="start|center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recording_label"/>
+
+        <ImageView
+            android:id="@+id/copy_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/call_icon_copy"
+            app:layout_constraintTop_toTopOf="@+id/website"
+            app:layout_constraintBottom_toBottomOf="@+id/website"
+            app:layout_constraintEnd_toEndOf="@+id/website" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
