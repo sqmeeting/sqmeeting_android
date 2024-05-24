@@ -74,6 +74,9 @@ public class FragmentFactory {
             case FRAGMENT_UPLOAD_LOG:
                 fragment = new UploadLogFragment();
                 break;
+            case FRAGMENT_USER_RECORDING:
+                fragment = new UserRecordingFragment();
+                break;
             default:
                 break;
         }

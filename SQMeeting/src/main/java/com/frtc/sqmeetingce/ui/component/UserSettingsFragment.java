@@ -155,6 +155,13 @@ public class UserSettingsFragment extends BaseFragment {
             }
         });
 
+        recordingItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER_RECORDING);
+            }
+        });
+
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

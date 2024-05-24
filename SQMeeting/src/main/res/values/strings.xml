@@ -24,7 +24,8 @@
     <string name="btn_save">Save</string>
     <string name="setting_saved_notice">Saved successfully</string>
     <string name="setting_recording_title">My Recordings</string>
-    <string name="setting_recording">Log in to \"SQMeeting Web portal\" with a computer to view</string>
+    <string name="setting_recording">Access the following SQMeeting Web Portal with a computer browser to view:</string>
+    <string name="copy_website_notice">Website address has been copied to the clipboard</string>>
 
     <string name="btn_join_meeting">Join</string>
     <string name="join_meeting_audio_only" >Voice Meeting</string>

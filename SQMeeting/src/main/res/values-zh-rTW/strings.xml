@@ -25,7 +25,8 @@
     <string name="btn_save">保存</string>
     <string name="setting_saved_notice">已保存設置</string>
     <string name="setting_recording_title">我的錄製</string>
-    <string name="setting_recording">電腦登錄“神旗系統web管理系統”查看</string>
+    <string name="setting_recording">使用電腦瀏覽器，訪問下麵的神旗web管理介面查看:</string>
+    <string name="copy_website_notice">網址已複製到剪貼板</string>>
 
     <string name="btn_join_meeting">加入會議</string>
     <string name="join_meeting_audio_only">語音會議</string>
