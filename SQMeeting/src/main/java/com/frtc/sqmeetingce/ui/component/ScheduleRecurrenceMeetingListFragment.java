@@ -279,7 +279,7 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
                 scheduledMeetingListResult.getRecurrenceDaysOfMonth());
         meetingInfoTemplate = meetingInfoTemplate
                 + mContext.getResources().getString(frtc.sdk.R.string.repetition_period_title) + strStartTime[0] + " " +  "-" + " " + MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd")
-                + " " + strStartTime[1] + "-" + strEndTime[1] + "," + str + "\n";
+                + "," + str + "\n";
 
         meetingInfoTemplate = meetingInfoTemplate
                 + mContext.getResources().getString(R.string.meeting_number_title) + formatInfoString(scheduledMeetings.get(0).getMeeting_number()) + "\n";

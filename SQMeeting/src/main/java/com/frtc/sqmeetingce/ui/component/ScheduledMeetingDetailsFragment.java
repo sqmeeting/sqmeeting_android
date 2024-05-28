@@ -378,22 +378,21 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                     scheduledMeetingListResult.getRecurrenceDaysOfMonth());
             meetingInfoTemplate = meetingInfoTemplate
                     + mContext.getResources().getString(frtc.sdk.R.string.repetition_period_title) + strStartTime[0] + " " +  "-" + " " + MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd")
-                    + " " + strStartTime[1] + "-" + strEndTime[1] + "," + str + "\n";
+                    + "," + str + "\n";
         }
 
         meetingInfoTemplate = meetingInfoTemplate
-                + mContext.getResources().getString(R.string.meeting_number_title) + formatInfoString(meetingNumber) + "\n"
-                + mContext.getResources().getString(R.string.meeting_owner_label) + formatInfoString(ownerName) + "\n";
+                + mContext.getResources().getString(R.string.meeting_number_title) + formatInfoString(meetingNumber) + "\n";
 
         if(meetingPassword != null && !meetingPassword.isEmpty()){
             meetingInfoTemplate = meetingInfoTemplate
-                    + mContext.getResources().getString(R.string.meeting_password_title) + formatInfoString(meetingPassword) + "\n"
-                    + "\n"
-                    + mContext.getResources().getString(R.string.copy_invitation_notice_with_password) + "\n";
-        }else {
-            meetingInfoTemplate = meetingInfoTemplate + "\n"
-                    + mContext.getResources().getString(R.string.copy_invitation_notice_without_password) + "\n";
+                    + mContext.getResources().getString(R.string.meeting_password_title) + formatInfoString(meetingPassword) + "\n";
         }
+
+        meetingInfoTemplate = meetingInfoTemplate
+                + mContext.getResources().getString(R.string.meeting_owner_label) + formatInfoString(ownerName) + "\n"
+                + "\n"
+                + mContext.getResources().getString(R.string.copy_invitation_notice_without_password) + "\n";
 
         if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
             String groupMeetingUrl = scheduledMeeting.getGroupMeetingUrl();
