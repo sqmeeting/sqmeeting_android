@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.frtc.sqmeetingce.MainActivity;
 import com.frtc.sqmeetingce.R;
+import com.frtc.sqmeetingce.util.MeetingUtil;
 
 import frtc.sdk.internal.model.FrtcSDKMeetingType;
 import frtc.sdk.log.Log;
@@ -27,15 +28,13 @@ import frtc.sdk.ui.model.RecurrenceType;
 public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
 
     protected final String TAG = this.getClass().getSimpleName();
-    private LocalStore userSetting;
+    private LocalStore localStore;
     public MainActivity mActivity;
 
     private ImageView ivFreqNo;
     private TextView freqDay, freqWeek, freqMonth, freqEndDay, freqEndWeek, freqEndMonth;
 
-    private boolean isUpdateRecurrence = false;
-
-    private String freq;
+    private boolean isUpdate = false;
 
 
     @Nullable
@@ -47,14 +46,16 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.schedule_meeting_repetition_freq_fragment, container, false);
 
-        userSetting = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
+        localStore = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
         init(view);
         setClickListener(view);
-        if(isUpdateRecurrence){
+        /*
+        if(isUpdate){
             mActivity.previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
         }else {
             mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
         }
+         */
         return view;
     }
 
@@ -70,38 +71,39 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            isUpdateRecurrence = bundle.getBoolean("isUpdateRecurrence");
+            isUpdate = bundle.getBoolean("isUpdate");
         }
 
-        String meetingType = userSetting.getScheduledMeetingSetting().getMeetingType();
+        String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
         if(!TextUtils.isEmpty(meetingType) && meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
             ivFreqNo.setVisibility(View.GONE);
-            String repetitionFreq = "";
-            String repetitionEndDes = "";
-            if (bundle != null) {
-                repetitionFreq = bundle.getString("repetitionFreq");
-                repetitionEndDes = bundle.getString("repetitionEndDes");
-            }
-            String recurrrenceType = userSetting.getScheduledMeetingSetting().getRecurrence_type();
-            if(!TextUtils.isEmpty(recurrrenceType)) {
-                if (recurrrenceType.equals(RecurrenceType.DAILY.getTypeName())){
+
+            String repetitionFreq = MeetingUtil.formatRecurrenceTypeContent(mActivity, localStore.getScheduledMeetingSetting().getRecurrenceType(),
+                    localStore.getScheduledMeetingSetting().getRecurrenceInterval());
+
+            String recurrenceEndDay = MeetingUtil.timeFormat(localStore.getScheduledMeetingSetting().getRecurrenceEndDay(), "yyyy年MM月dd日");
+            int totalSize = localStore.getScheduledMeetingSetting().getRecurrenceCount();
+            String repetitionEndDes = String.format(mActivity.getResources().getString(R.string.recurrence_end), recurrenceEndDay, totalSize+"");
+
+            String recurrenceType = localStore.getScheduledMeetingSetting().getRecurrence_type();
+            if(!TextUtils.isEmpty(recurrenceType)) {
+                if (recurrenceType.equals(RecurrenceType.DAILY.getTypeName())){
                     freqDay.setText(repetitionFreq);
                     freqEndDay.setText(repetitionEndDes);
-                }else if (recurrrenceType.equals(RecurrenceType.WEEKLY.getTypeName())) {
+                }else if (recurrenceType.equals(RecurrenceType.WEEKLY.getTypeName())) {
                     freqWeek.setText(repetitionFreq);
                     freqEndWeek.setText(repetitionEndDes);
-                } else if (recurrrenceType.equals(RecurrenceType.MONTHLY.getTypeName())) {
+                } else if (recurrenceType.equals(RecurrenceType.MONTHLY.getTypeName())) {
                     freqMonth.setText(repetitionFreq);
                     freqEndMonth.setText(repetitionEndDes);
                 }
             }
         }
     }
-
     private void updateLocalStore(){
-        if(userSetting != null){
-            userSetting.getScheduledMeetingSetting().setRepetitionFreq(freq);
-            userSetting.getScheduledMeetingSetting().setMeetingType(FrtcSDKMeetingType.RESERVATION.getTypeName());
+        if(localStore != null){
+            localStore.getScheduledMeetingSetting().setRepetitionFreq("");
+            localStore.getScheduledMeetingSetting().setMeetingType(FrtcSDKMeetingType.RESERVATION.getTypeName());
         }
     }
 
@@ -110,21 +112,20 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.replaceFragmentWithTag(mActivity.previousTag);
+                mActivity.showScheduleMeetingFragment(isUpdate);
             }
         });
 
         TextView freqNo = view.findViewById(R.id.freq_no);
-        if(isUpdateRecurrence){
+        if(isUpdate){
             freqNo.setTextColor(mActivity.getResources().getColor(R.color.text_color_default_hint));
         }
         freqNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isUpdateRecurrence){
+                if(isUpdate){
                     return;
                 }
-                freq = getString(R.string.no_frequency);
                 if(ivFreqNo.getVisibility() != View.VISIBLE){
                     ivFreqNo.setVisibility(View.VISIBLE);
                 }
@@ -136,7 +137,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(RecurrenceType.DAILY.getTypeName(), isUpdateRecurrence);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(RecurrenceType.DAILY.getTypeName(), isUpdate);
             }
         });
 
@@ -144,7 +145,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(RecurrenceType.WEEKLY.getTypeName(), isUpdateRecurrence);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(RecurrenceType.WEEKLY.getTypeName(), isUpdate);
             }
         });
 
@@ -152,7 +153,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(RecurrenceType.MONTHLY.getTypeName(), isUpdateRecurrence);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(RecurrenceType.MONTHLY.getTypeName(), isUpdate);
             }
         });
 
@@ -160,7 +161,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
 
     @Override
     public void onBack() {
-        mActivity.replaceFragmentWithTag(mActivity.previousTag);
+        mActivity.showScheduleMeetingFragment(isUpdate);
     }
 
 

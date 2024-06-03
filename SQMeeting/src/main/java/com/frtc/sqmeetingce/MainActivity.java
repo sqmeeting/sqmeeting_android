@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.frtc.sqmeetingce.ui.component.BaseFragment;
 import com.frtc.sqmeetingce.ui.component.EditSingleRecurrenceMeetingFragment;
+
+import frtc.sdk.model.RecurrenceMeetingListResult;
 import frtc.sdk.ui.dialog.InformDlg;
 
 import com.frtc.sqmeetingce.ui.component.FragmentFactory;
@@ -38,12 +40,10 @@ import com.frtc.sqmeetingce.ui.component.FragmentTagEnum;
 import com.frtc.sqmeetingce.ui.component.InvitedUserFragment;
 import com.frtc.sqmeetingce.ui.component.ConnectingFragment;
 import com.frtc.sqmeetingce.ui.component.MeetingDetailsFragment;
-import com.frtc.sqmeetingce.ui.component.ScheduleMeetingFragment;
 import com.frtc.sqmeetingce.ui.component.ScheduleMeetingRepetitionFreqFragment;
 import com.frtc.sqmeetingce.ui.component.ScheduleMeetingRepetitionFreqSettingFragment;
 import com.frtc.sqmeetingce.ui.component.ScheduleRecurrenceMeetingListFragment;
 import com.frtc.sqmeetingce.ui.component.ScheduledMeetingDetailsFragment;
-import com.frtc.sqmeetingce.ui.component.UpdateScheduledMeetingFragment;
 import com.frtc.sqmeetingce.ui.component.UploadLogFragment;
 import com.frtc.sqmeetingce.ui.component.UserFragment;
 import com.frtc.sqmeetingce.util.MeetingUtil;
@@ -125,9 +125,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
     private PermissionManager mPermissionManager;
     public boolean isGetScheduleMeetings = false;
     private int mTractionId = -1;
-    public boolean isWillShowScheduledRecurrenceMeetingList = false;
-    public boolean isEditSingleRecurrence = false;
-
     public FragmentTagEnum currentTag = FragmentTagEnum.FRAGMENT_HOME;
     public FragmentTagEnum previousTag = FragmentTagEnum.FRAGMENT_HOME;
 
@@ -337,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 try{
                     obj = JSONUtil.transform(new String(bUrl), QRCodeResult.class);
                 }catch(Exception e){
-                    Log.e(TAG,"toObject QRCodeResult failed : "+e.toString());
+                    Log.e(TAG,"toObject QRCodeResult failed : "+e);
                 }
                 if(obj != null) {
                     String urlOperation = obj.getOperation();
@@ -432,6 +429,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
     }
 
     private void replaceFragmentWithInstance(BaseFragment fragment, FragmentTagEnum tag){
+        Log.d(TAG,"replaceFragmentWithInstance:"+tag);
         if (MeetingUtil.isRunningBackground(getApplicationContext())) {
             return;
         }
@@ -444,6 +442,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
     }
 
     public void replaceFragmentWithTag(FragmentTagEnum tag) {
+        Log.d(TAG,"replaceFragmentWithTag:"+tag);
 
         if (MeetingUtil.isRunningBackground(getApplicationContext())) {
             return;
@@ -467,7 +466,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);
             version = packInfo.versionName;
         }catch(PackageManager.NameNotFoundException e){
-            Log.w(TAG,"get Application version name fails:"+e.toString());
+            Log.w(TAG,"get Application version name fails:"+e);
         }
         return version;
     }
@@ -619,27 +618,75 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         frtcCall.joinMeetingWithParam(joinMeetingParam, option);
     }
 
-    public ScheduledMeeting scheduledMeetingShowing;
     public void showMeetingDetails(ScheduledMeeting scheduledMeetingCall){
+        if(scheduledMeetingCall == null){
+            return;
+        }
         if(scheduledMeetingCall.getMeeting_type().equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
-            isGetScheduleMeetings = true;
-            scheduledMeetingShowing = scheduledMeetingCall;
+            Log.d(TAG,"showMeetingDetails:"+scheduledMeetingCall.getRecurrence_gid()+","+scheduledMeetingCall.getReservation_id());
             queryScheduledRecurrenceMeetingList(1, 500, scheduledMeetingCall.getRecurrence_gid());
-        }else {
-            scheduledMeetingShowing = scheduledMeetingCall;
-            ScheduledMeetingDetailsFragment fragment = new ScheduledMeetingDetailsFragment();
-            fragment.setScheduledMeeting(scheduledMeetingCall);
-            replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
+            updateRecurrenceMeeting(scheduledMeetingCall.getReservation_id());
+        }
+        storeScheduledMeetingSetting(scheduledMeetingCall);
+        replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
+    }
+
+    private void storeScheduledMeetingSetting(ScheduledMeeting scheduledMeeting){
+        if(scheduledMeeting != null){
+            if(localStore == null){
+                localStore = LocalStoreBuilder.getInstance(this).getLocalStore();
+            }
+
+            String reservationId = localStore.getScheduledMeetingSetting().getReservationId();
+            if(!TextUtils.isEmpty(reservationId)
+                    && !scheduledMeeting.getReservation_id().equals(reservationId)){
+                localStore.resetScheduledMeetingSetting();
+            }
+            dumpScheduledMeetingSetting(scheduledMeeting,localStore.getScheduledMeetingSetting());
         }
     }
 
-    public void showMeetingDetails(ScheduledMeeting scheduledMeetingCall, int position, ScheduledMeetingListResult scheduledMeetingListResult) {
-        ScheduledMeetingDetailsFragment fragment = new ScheduledMeetingDetailsFragment();
-        fragment.setScheduledMeeting(scheduledMeetingCall);
-        if(scheduledMeetingCall.getMeeting_type().equals(FrtcSDKMeetingType.RECURRENCE.getTypeName()) && scheduledMeetingListResult != null) {
-            fragment.setScheduledMeetingListResult(scheduledMeetingListResult, position);
+    private void dumpScheduledMeetingSetting(ScheduledMeeting scheduledMeeting, ScheduledMeetingSetting scheduledMeetingSetting){
+        if(scheduledMeeting == null){
+            return;
         }
-        replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
+
+        if(scheduledMeetingSetting == null){
+            return;
+        }
+
+        scheduledMeetingSetting.setMeetingNumber(scheduledMeeting.getMeeting_number());
+        scheduledMeetingSetting.setMeetingName(scheduledMeeting.getMeeting_name());
+        scheduledMeetingSetting.setPassword(scheduledMeeting.getMeeting_password());
+        scheduledMeetingSetting.setMeetingType(scheduledMeeting.getMeeting_type());
+        scheduledMeetingSetting.setReservationId(scheduledMeeting.getReservation_id());
+
+        scheduledMeetingSetting.setStartTime(scheduledMeeting.getSchedule_start_time());
+        scheduledMeetingSetting.setEndTime(scheduledMeeting.getSchedule_end_time());
+        scheduledMeetingSetting.setOwnerId(scheduledMeeting.getOwner_id());
+        scheduledMeetingSetting.setOwnerName(scheduledMeeting.getOwner_name());
+        scheduledMeetingSetting.setMeeting_url(scheduledMeeting.getMeeting_url());
+        scheduledMeetingSetting.setParticipantUsers(scheduledMeeting.getParticipantUsers());
+        scheduledMeetingSetting.setGroupMeetingUrl(scheduledMeeting.getGroupMeetingUrl());
+        scheduledMeetingSetting.setReservationGid(scheduledMeeting.getRecurrence_gid());
+
+        if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(scheduledMeeting.getMeeting_type())){
+            scheduledMeetingSetting.setRecurrence_type(scheduledMeeting.getRecurrence_type());
+            scheduledMeetingSetting.setRecurrenceInterval(scheduledMeeting.getRecurrenceInterval());
+            scheduledMeetingSetting.setRecurrenceStartTime(scheduledMeeting.getRecurrenceStartTime());
+            scheduledMeetingSetting.setRecurrenceEndTime(scheduledMeeting.getRecurrenceEndTime());
+            scheduledMeetingSetting.setRecurrenceStartDay(scheduledMeeting.getRecurrenceStartDay());
+            scheduledMeetingSetting.setRecurrenceEndDay(scheduledMeeting.getRecurrenceEndDay());
+            scheduledMeetingSetting.setRecurrenceDaysOfWeek(scheduledMeeting.getRecurrenceDaysOfWeek());
+            scheduledMeetingSetting.setRecurrenceDaysOfMonth(scheduledMeeting.getRecurrenceDaysOfMonth());
+
+            scheduledMeetingSetting.clearRecurrenceMeetings();
+            scheduledMeetingSetting.getRecurrenceMeetings().addAll(scheduledMeeting.getRecurrenceReservationList());
+        }
+    }
+
+    public void showScheduledRecurrenceMeetingDetails(){
+        replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
     }
 
     private String getStrSpentTime(long startTime, long endTime){
@@ -678,8 +725,8 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_MEETING_DETAILS);
     }
 
-    public void updateScheduledMeeting(ScheduledMeeting scheduledMeeting){
-        getScheduledMeetingById(scheduledMeeting.getReservation_id());
+    public void updateRecurrenceMeeting(String reservationId){
+        getScheduledMeetingById(reservationId);
     }
 
 
@@ -797,20 +844,12 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         informDlg.show();
     }
 
-
-    public void showScheduleMeetingFragment(String str, int count, boolean isUpdateRecurrence){
+    public void showScheduleMeetingFragment(boolean isUpdate){
         previousTag = FragmentTagEnum.FRAGMENT_USER;
-        if(isUpdateRecurrence){
-            UpdateScheduledMeetingFragment fragment = new UpdateScheduledMeetingFragment();
-            fragment.setRecurrenceCount(count);
-            replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
+        if(isUpdate){
+            replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
         }else {
-            Bundle bundle = new Bundle();
-            bundle.putString("recurrenceEndDay", str);
-            bundle.putInt("count", count);
-            ScheduleMeetingFragment fragment = new ScheduleMeetingFragment();
-            fragment.setArguments(bundle);
-            replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING);
+            replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING);
         }
     }
 
@@ -876,8 +915,49 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
 
     }
 
-    public void updateScheduleMeeting(String reservationId, boolean isSingle){
-        Log.d(TAG,"updateScheduleMeeting:"+reservationId);
+
+    public void updateSingleScheduleMeeting(ScheduledMeeting scheduledMeeting){
+        if(scheduledMeeting == null){
+            return;
+        }
+
+        Log.d(TAG,"updateSingleScheduleMeeting:"+scheduledMeeting.getReservation_id());
+
+        if(localStore != null){
+            UpdateScheduledMeetingParam param = new UpdateScheduledMeetingParam();
+            param.setServerAddress(localStore.getServer());
+            param.setClientId(localStore.getClientId());
+            param.setToken(localStore.getUserToken());
+
+            param.setReservationId(scheduledMeeting.getReservation_id());
+            param.setMeeting_name(scheduledMeeting.getMeeting_name());
+            param.setSchedule_start_time(scheduledMeeting.getSchedule_start_time());
+            param.setSchedule_end_time(scheduledMeeting.getSchedule_end_time());
+            param.setMeeting_type(scheduledMeeting.getMeeting_type());
+
+            param.setMeeting_description("");
+            param.setMeeting_password(localStore.getScheduledMeetingSetting().getPassword());
+            param.setMeeting_room_id(localStore.getScheduledMeetingSetting().getMeetingRoomId());
+            param.setCall_rate_type(localStore.getScheduledMeetingSetting().getRate());
+            List<String> users = new ArrayList<>();
+            List<UserInfo> invitedUsers = localStore.getScheduledMeetingSetting().getInvitedUsers();
+            if (invitedUsers != null && !invitedUsers.isEmpty()) {
+                for (UserInfo invitedUser : invitedUsers) {
+                    users.add(invitedUser.getUser_id());
+                }
+            }
+            param.setInvited_users(users);
+            param.setMute_upon_entry(localStore.getScheduledMeetingSetting().isMute() ? MuteUponEntry.ENABLE.getValue() : MuteUponEntry.DISABLE.getValue());
+            param.setGuest_dial_in(localStore.getScheduledMeetingSetting().isGuestDialIn() ? "true" : "false");
+            param.setWatermark(localStore.getScheduledMeetingSetting().isWatermarkEnable()? "true" : "false");
+            param.setWatermark_type(localStore.getScheduledMeetingSetting().getWatermarkType());
+            param.setSingle(true);
+            frtcManagement.updateScheduledMeeting(param);
+        }
+    }
+
+    public void updateScheduleMeeting(String reservationId){
+        Log.d(TAG,"updateSingleScheduleMeeting:"+reservationId);
         if(localStore != null){
             UpdateScheduledMeetingParam param = new UpdateScheduledMeetingParam();
             param.setServerAddress(localStore.getServer());
@@ -905,20 +985,23 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             param.setGuest_dial_in(localStore.getScheduledMeetingSetting().isGuestDialIn() ? "true" : "false");
             param.setWatermark(localStore.getScheduledMeetingSetting().isWatermarkEnable()? "true" : "false");
             param.setWatermark_type(localStore.getScheduledMeetingSetting().getWatermarkType());
-            param.setMeeting_type(localStore.getScheduledMeetingSetting().getMeetingType());
-            param.setSingle(isSingle);
-            param.setRecurrenceType(localStore.getScheduledMeetingSetting().getRecurrenceType());
-            param.setRecurrenceInterval(localStore.getScheduledMeetingSetting().getRecurrenceInterval());
-            param.setRecurrenceStartTime(localStore.getScheduledMeetingSetting().getRecurrenceStartTime());
-            param.setRecurrenceEndTime(localStore.getScheduledMeetingSetting().getRecurrenceEndTime());
-            param.setRecurrenceStartDay(localStore.getScheduledMeetingSetting().getRecurrenceStartDay());
-            param.setRecurrenceEndDay(localStore.getScheduledMeetingSetting().getRecurrenceEndDay());
-            param.setRecurrenceDaysOfWeek(localStore.getScheduledMeetingSetting().getRecurrenceDaysOfWeek());
-            param.setRecurrenceDaysOfMonth(localStore.getScheduledMeetingSetting().getRecurrenceDaysOfMonth());
 
+            param.setMeeting_type(localStore.getScheduledMeetingSetting().getMeetingType());
+            param.setSingle(false);
+
+            if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(param.getMeeting_type())){
+                param.setRecurrenceType(localStore.getScheduledMeetingSetting().getRecurrenceType());
+                param.setRecurrenceInterval(localStore.getScheduledMeetingSetting().getRecurrenceInterval());
+                param.setRecurrenceStartTime(localStore.getScheduledMeetingSetting().getRecurrenceStartTime());
+                param.setRecurrenceEndTime(localStore.getScheduledMeetingSetting().getRecurrenceEndTime());
+                param.setRecurrenceStartDay(localStore.getScheduledMeetingSetting().getRecurrenceStartDay());
+                param.setRecurrenceEndDay(localStore.getScheduledMeetingSetting().getRecurrenceEndDay());
+                param.setRecurrenceDaysOfWeek(localStore.getScheduledMeetingSetting().getRecurrenceDaysOfWeek());
+                param.setRecurrenceDaysOfMonth(localStore.getScheduledMeetingSetting().getRecurrenceDaysOfMonth());
+            }
 
             frtcManagement.updateScheduledMeeting(param);
-            Log.d(TAG,"will resetScheduledMeetingSetting.");
+            Log.d(TAG,"resetScheduledMeetingSetting.");
             localStore.resetScheduledMeetingSetting();
             LocalStoreBuilder.getInstance(getApplicationContext()).setLocalStore(localStore);
         }
@@ -962,6 +1045,13 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         frtcManagement.getScheduledMeetingList(param);
     }
 
+    private void queryScheduledRecurrenceMeetingList() {
+        String recurrenceGid = localStore.getScheduledMeetingSetting().getReservationGid();
+        if(TextUtils.isEmpty(recurrenceGid)){
+            queryScheduledRecurrenceMeetingList(1, 500, recurrenceGid);
+        }
+    }
+
     public void queryScheduledRecurrenceMeetingList(int num, int size, String recurrenceGid) {
         Log.d(TAG,"queryScheduledRecurrenceMeetingList");
         GetScheduledMeetingListParam param = new GetScheduledMeetingListParam();
@@ -991,7 +1081,17 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         if(scheduledMeetingResult == null){
             return;
         }
-        ScheduledMeetingSetting setting = new ScheduledMeetingSetting();
+
+        String reservationId = localStore.getScheduledMeetingSetting().getReservationId();
+        Log.d(TAG,"handleGetScheduledMeetingResult: scheduledMeetingResult.reservationId = "+scheduledMeetingResult.getReservation_id()
+                + "," + "current reservationId:"+reservationId+","+scheduledMeetingResult.getReservation_id().equals(reservationId));
+
+        if(!scheduledMeetingResult.getReservation_id().equals(reservationId)) {
+            localStore.resetScheduledMeetingSetting();
+        }
+
+        ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
+        setting.setRecurrenceCount(setting.getRecurrenceMeetings().size());
         setting.setReservationId(scheduledMeetingResult.getReservation_id());
         setting.setMeetingName(scheduledMeetingResult.getMeeting_name());
         setting.setMeetingType(scheduledMeetingResult.getMeeting_type());
@@ -1018,10 +1118,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         setting.setRecurrenceEndDay(scheduledMeetingResult.getRecurrenceEndDay());
         setting.setRecurrenceDaysOfWeek(scheduledMeetingResult.getRecurrenceDaysOfWeek());
         setting.setRecurrenceDaysOfMonth(scheduledMeetingResult.getRecurrenceDaysOfMonth());
-        Log.d(TAG,"handleGetScheduledMeetingResult: scheduledMeetingResult.getMeeting_name() = "+scheduledMeetingResult.getMeeting_name());
-        localStore.setScheduledMeetingSetting(setting);
-        Log.d(TAG,"handleGetScheduledMeetingResult:"+setting.getInvitedUsers().size());
-
     }
 
     int pageNum = 0;
@@ -1043,43 +1139,61 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         }
     }
 
-    private boolean handleQueryScheduledRecurrenceMeetingList(List<ScheduledMeeting> scheduledMeetings, int totalPageNum, int totalSize){
-        if(scheduledMeetings != null){
-            pageNum ++;
-            Log.i(TAG, "handleQueryScheduledRecurrenceMeetingList:" + scheduledMeetings.size()
-                    + ", total page num: " +totalPageNum
-                    + ", total size:" + totalSize
-                    + ", pageNum:" + pageNum);
-            if(pageNum == totalPageNum){
-                if(pageNum == 1) {
-                    localStore.clearScheduledRecurrenceMeetings();
+    private boolean handleQueryScheduledRecurrenceMeetingList(RecurrenceMeetingListResult result){
+        if(result != null){
+            List<ScheduledMeeting> scheduledMeetings = result.getMeeting_schedules();
+            int totalPageNum = result.getTotal_page_num();
+            int totalSize = result.getTotal_size();
+
+            ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
+
+            if(scheduledMeetings != null && !scheduledMeetings.isEmpty() && scheduledMeetings.get(0) != null){
+                if(scheduledMeetings.get(0).getRecurrence_gid().equals(setting.getReservationGid())){
+                    pageNum ++;
+                    Log.i(TAG, "handleQueryScheduledRecurrenceMeetingList:" + scheduledMeetings.size()
+                            + ", total page num: " +totalPageNum
+                            + ", total size:" + totalSize
+                            + ", pageNum:" + pageNum);
+
+                    if(pageNum == totalPageNum){
+                        if(pageNum == 1) {
+                            setting.clearRecurrenceMeetings();
+                        }
+                        setting.getRecurrenceMeetings().addAll(scheduledMeetings);
+                    }else{
+                        if(setting.isRecurrenceMeetingFullList()){
+                            setting.clearRecurrenceMeetings();
+                            setting.setRecurrenceMeetingFullList(false);
+                        }
+                        setting.getRecurrenceMeetings().addAll(scheduledMeetings);
+                        if(pageNum < totalPageNum){
+                            setting.setRecurrenceMeetingFullList(false);
+                            queryScheduledRecurrenceMeetingList(pageNum + 1,50, setting.getReservationGid());
+                            return false;
+                        }
+                    }
+                    pageNum = 0;
+                    setting.setRecurrenceMeetingFullList(true);
+
+                    setting.setRecurrence_type(result.getRecurrenceType());
+                    setting.setRecurrenceInterval(result.getRecurrenceInterval());
+                    setting.setRecurrenceDaysOfWeek(result.getRecurrenceDaysOfWeek());
+                    setting.setRecurrenceDaysOfMonth(result.getRecurrenceDaysOfMonth());
+                    setting.setRecurrenceStartTime(result.getRecurrenceStartTime());
+                    setting.setRecurrenceEndTime(result.getRecurrenceEndTime());
+                    setting.setRecurrenceStartDay(result.getRecurrenceStartDay());
+                    setting.setRecurrenceEndDay(result.getRecurrenceEndDay());
+
+                    return true;
+                }else{
+                    Log.e(TAG,"handleQueryScheduledRecurrenceMeetingList: wrong ReservationGid");
                 }
-                localStore.getScheduledRecurrenceMeetings().addAll(scheduledMeetings);
             }else{
-                if(localStore.isScheduledRecurrenceMeetingFullList()){
-                    localStore.clearScheduledRecurrenceMeetings();
-                    localStore.setScheduledRecurrenceMeetingFullList(false);
-                }
-                localStore.getScheduledRecurrenceMeetings().addAll(scheduledMeetings);
-                if(pageNum < totalPageNum && isWillShowScheduledRecurrenceMeetingList){
-                    localStore.setScheduledRecurrenceMeetingFullList(false);
-                    queryScheduledRecurrenceMeetingList(pageNum + 1,50, scheduledMeetings.get(0).getRecurrence_gid());
-                    return false;
-                }
+                Log.w(TAG,"handleQueryScheduledRecurrenceMeetingList: empty recurrence meeting list");
             }
-            pageNum = 0;
-            localStore.setScheduledRecurrenceMeetingFullList(true);
-
-            BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
-            if(fragment instanceof ScheduleRecurrenceMeetingListFragment && fragment.isVisible()){
-                ((ScheduleRecurrenceMeetingListFragment)fragment).updateScheduledRecurrenceMeetingListview();
-            }
-
-            return true;
         }
         return false;
     }
-
 
     private void handleFindUserResult(List<UserInfo> users, int totalPageNum, int totalSize){
         if(users != null){
@@ -1170,7 +1284,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             LocalStoreBuilder.getInstance(getApplicationContext()).setLocalStore(localStore);
 
         } catch (Exception e) {
-            Log.e(TAG,"handleSignInResult error:"+e.toString());
+            Log.e(TAG,"handleSignInResult error:"+e);
         }
     }
 
@@ -2047,15 +2161,9 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 }else {
                     switch (resultType) {
                         case SUCCESS:
-                            if(isEditSingleRecurrence){
-                                BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_EDIT_SINGLE_RECURRENCE_MEETING);
-                                if(fragment instanceof EditSingleRecurrenceMeetingFragment){
-                                    ((EditSingleRecurrenceMeetingFragment)fragment).saveMeetingSuccess();
-                                }
-                            }else {
-                                queryScheduledMeetingList(1, 500);
-                                BaseToast.showToast(MainActivity.this, getString(R.string.scheduled_meeting_update_notice), Toast.LENGTH_SHORT);
-                            }
+                            queryScheduledMeetingList(1, 500);
+                            queryScheduledRecurrenceMeetingList();
+                            BaseToast.showToast(MainActivity.this, getString(R.string.scheduled_meeting_update_notice), Toast.LENGTH_SHORT);
                             break;
                         case UNAUTHORIZED:
                             handleSignInUnauthorized();
@@ -2071,7 +2179,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                         default:
                     }
                 }
-                isEditSingleRecurrence = false;
             }
         });
     }
@@ -2090,7 +2197,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                             if(fragment instanceof ScheduleRecurrenceMeetingListFragment && fragment.isVisible()){
                                 String gid = ((ScheduleRecurrenceMeetingListFragment)fragment).getMeetingRecurrenceGid();
                                 isGetScheduleMeetings = true;
-                                isWillShowScheduledRecurrenceMeetingList = true;
                                 queryScheduledRecurrenceMeetingList(1, 500, gid);
                             }else{
                                 queryScheduledMeetingList(1, 500);
@@ -2127,15 +2233,18 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                     switch (resultType) {
                         case SUCCESS:
                             handleGetScheduledMeetingResult(scheduledMeetingResult);
-                            if(isEditSingleRecurrence){
-                                BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_EDIT_SINGLE_RECURRENCE_MEETING);
-                                if(fragment instanceof EditSingleRecurrenceMeetingFragment){
-                                    ((EditSingleRecurrenceMeetingFragment)fragment).saveMeeting();
-                                }
-                            }else {
-                                previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
-                                replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
+
+                            BaseFragment detailsFragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
+                            if(detailsFragment instanceof ScheduledMeetingDetailsFragment
+                                    && detailsFragment.isVisible()){
+                                ((ScheduledMeetingDetailsFragment)detailsFragment).updateMeetingDetailsView();
                             }
+
+                            BaseFragment editFragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_EDIT_SINGLE_RECURRENCE_MEETING);
+                            if(editFragment instanceof EditSingleRecurrenceMeetingFragment && editFragment.isVisible()){
+                                ((EditSingleRecurrenceMeetingFragment)editFragment).updateRecurrenceText();
+                            }
+
                             break;
                         case UNAUTHORIZED:
                             handleSignInUnauthorized();
@@ -2197,7 +2306,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
     }
 
     @Override
-    public void onGetScheduledRecurrenceMeetingListResult(final ResultType resultType, final ScheduledMeetingListResult scheduledMeetingListResult){
+    public void onGetScheduledRecurrenceMeetingListResult(final ResultType resultType, final RecurrenceMeetingListResult recurrenceMeetingListResult){
         Log.i(TAG, "onGetScheduledRecurrenceMeetingListResult resultType = "+ resultType);
         runOnUiThread(new Runnable() {
             @Override
@@ -2207,35 +2316,51 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 }else {
                     switch (resultType) {
                         case SUCCESS:
-                            if(scheduledMeetingListResult == null){
-                                isWillShowScheduledRecurrenceMeetingList = false;
+
+                            if(recurrenceMeetingListResult == null || recurrenceMeetingListResult.getTotal_size() == 0){
+                                BaseToast.showToast(MainActivity.this,getString( R.string.get_recurrence_meetings_fail), Toast.LENGTH_SHORT);
                                 break;
                             }
-                            boolean isGetDone = handleQueryScheduledRecurrenceMeetingList(scheduledMeetingListResult.getMeeting_schedules(),
-                                    scheduledMeetingListResult.getTotal_page_num(),
-                                    scheduledMeetingListResult.getTotal_size());
 
+                            /*
                             BaseFragment scheduledMeetingDetailsFragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_MEETING_DETAILS);
                             if(isWillShowScheduledRecurrenceMeetingList) {
-                                if(isGetDone) {
-                                    isWillShowScheduledRecurrenceMeetingList = false;
-                                }
+
                                 BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
                                 if(fragment instanceof ScheduleRecurrenceMeetingListFragment && fragment.isVisible()){
-                                    ((ScheduleRecurrenceMeetingListFragment)fragment).setScheduledMeetingListResult(scheduledMeetingListResult, true);;
+                                    ((ScheduleRecurrenceMeetingListFragment)fragment).setScheduledMeetingListResult(recurrenceMeetingListResult, true);;
                                 }else{
-                                    if(scheduledMeetingListResult.getTotal_size() == 0){
+                                    if(recurrenceMeetingListResult.getTotal_size() == 0){
                                         BaseToast.showToast(MainActivity.this,getString( R.string.get_recurrence_meetings_fail), Toast.LENGTH_SHORT);
                                     }else {
-                                        showScheduleRecurrenceMeetingListFragment(scheduledMeetingListResult);
+                                        showScheduleRecurrenceMeetingListFragment(recurrenceMeetingListResult);
                                     }
                                 }
                             }else if(scheduledMeetingDetailsFragment instanceof ScheduledMeetingDetailsFragment && scheduledMeetingDetailsFragment.isVisible()){
-                                if(isGetDone && ((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).isAddCalendar()) {
+                                if(((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).isAddCalendar()) {
                                     ((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).saveRecurrenceCalendar();
                                 }
                             }else{
-                                showMeetingDetails(scheduledMeetingShowing, 0, scheduledMeetingListResult);
+                                showMeetingDetails(scheduledMeetingShowing, 0, recurrenceMeetingListResult);
+                            }
+                             */
+                            handleQueryScheduledRecurrenceMeetingList(recurrenceMeetingListResult);
+
+                            if(localStore.getScheduledMeetingSetting().isRecurrenceMeetingFullList()){
+                                BaseFragment scheduleRecurrenceMeetingListFragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
+                                if(scheduleRecurrenceMeetingListFragment instanceof ScheduleRecurrenceMeetingListFragment
+                                        && scheduleRecurrenceMeetingListFragment.isVisible()){
+                                    ((ScheduleRecurrenceMeetingListFragment)scheduleRecurrenceMeetingListFragment).updateScheduledRecurrenceMeetingListview();
+                                }
+
+                                BaseFragment scheduledMeetingDetailsFragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
+                                if(scheduledMeetingDetailsFragment instanceof ScheduledMeetingDetailsFragment
+                                        && scheduledMeetingDetailsFragment.isVisible()){
+                                    ((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).updateRecurrenceView();
+                                    if(((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).isAddCalendar()){
+                                        ((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).saveRecurrenceCalendar();
+                                    }
+                                }
                             }
                             break;
                         case UNAUTHORIZED:
@@ -2254,12 +2379,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 isGetScheduleMeetings = false;
             }
         });
-    }
-
-    public void showScheduleRecurrenceMeetingListFragment(ScheduledMeetingListResult scheduledMeetingListResult) {
-        ScheduleRecurrenceMeetingListFragment fragment = new ScheduleRecurrenceMeetingListFragment();
-        fragment.setScheduledMeetingListResult(scheduledMeetingListResult, false);
-        replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);
     }
 
     @Override
@@ -2437,7 +2556,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             String currPackageName = getPackageName();
             ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(10);
-            if (list.size() <= 0) {
+            if (list.isEmpty()) {
                 existing = false;
             }
             for (ActivityManager.RunningTaskInfo info : list) {
@@ -2458,8 +2577,8 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
     }
 
     private void showMeetingReminder(ArrayList<ScheduledMeeting> scheduledMeetingsReminders, boolean isLessFive) {
-        Log.d(TAG, "showMeetingReminder localStore.isMeetingRemider() = "+localStore.isMeetingRemider() + ",  isLessFive = "+isLessFive);
-        if(!localStore.isMeetingRemider()){
+        Log.d(TAG, "showMeetingReminder localStore.isMeetingReminder() = "+localStore.isMeetingReminder() + ",  isLessFive = "+isLessFive);
+        if(!localStore.isMeetingReminder()){
             return;
         }
         for(ScheduledMeeting meeting : scheduledMeetingsReminders) {
@@ -2481,7 +2600,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 @Override
                 public void onJoinMeetingCallback(ScheduledMeeting scheduledMeeting) {
                     Log.d(TAG, "onJoinMeetingCallback");
-                    if(isInMeeeting()){
+                    if(isInMeeting()){
                         return;
                     }
                     if (!isNetworkConnected()) {
@@ -2562,7 +2681,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 isFirst = false;
                 timePre = System.currentTimeMillis() / 1000 / 60 * 60 * 1000;
             }
-            long time = System.currentTimeMillis() / 1000 / 60 * 60 * 1000;;
+            long time = System.currentTimeMillis() / 1000 / 60 * 60 * 1000;
             Log.d(TAG, "onTimerEvent time = " + time + ", timePre = " + timePre);
             if (time - timePre >= 15 * 60 * 1000) {
                 timePre = time;
@@ -2662,7 +2781,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         BaseToast.showToast(this, getString(R.string.log_upload_canceled), Toast.LENGTH_SHORT);
     }
 
-    public boolean isInMeeeting(){
+    public boolean isInMeeting(){
         FrtcMeetingStatus meetingStatus = frtcCall.getMeetingStatus();
         if(meetingStatus != FrtcMeetingStatus.DISCONNECTED){
             BaseToast.showToast(this, getString(R.string.meeting_system_notification_click_prompt), Toast.LENGTH_LONG);
@@ -2685,28 +2804,18 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         invitationInformationDlg.show();
     }
 
-    public void showEditSingleRecurrenceMeeting(ScheduledMeeting scheduledMeeting, ScheduledMeetingListResult scheduledMeetingListResult, int position, FragmentTagEnum preFragment) {
+    public void showEditSingleRecurrenceMeeting(int position) {
         EditSingleRecurrenceMeetingFragment fragment = new EditSingleRecurrenceMeetingFragment();
-        fragment.setMeeting(scheduledMeeting, scheduledMeetingListResult, position, preFragment);
+        fragment.setPosition(position);
         replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_EDIT_SINGLE_RECURRENCE_MEETING);
     }
 
-    public void showScheduleMeetingRepetitionFreqFragment(String repetitionFreq, String repetitionEndDes, boolean updateRecurrence) {
+    public void showScheduleMeetingRepetitionFreqFragment(boolean updateRecurrence) {
         Bundle bundle = new Bundle();
-        bundle.putString("repetitionFreq", repetitionFreq);
-        bundle.putString("repetitionEndDes", repetitionEndDes);
         bundle.putBoolean("isUpdateRecurrence", updateRecurrence);
         ScheduleMeetingRepetitionFreqFragment fragment = new ScheduleMeetingRepetitionFreqFragment();
         fragment.setArguments(bundle);
         replaceFragmentWithInstance(fragment,FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ);
-    }
-
-
-    public void setRecurrenceCount(int totalSize) {
-        BaseFragment fragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
-        if(fragment instanceof UpdateScheduledMeetingFragment){
-            ((UpdateScheduledMeetingFragment)fragment).setRecurrenceCount(totalSize);
-        }
     }
 
     @Override
@@ -2791,12 +2900,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         param.setToken(localStore.getUserToken());
         param.setMeeting_identifier(meetingIdentifier);
         frtcManagement.removeMeetingFromMeetingList(param);
-    }
-
-    public void getScheduledRecurrenceMeetingList(String recurrenceGid) {
-        isGetScheduleMeetings = true;
-        isWillShowScheduledRecurrenceMeetingList = true;
-        queryScheduledRecurrenceMeetingList(1, 500, recurrenceGid);
     }
 
 

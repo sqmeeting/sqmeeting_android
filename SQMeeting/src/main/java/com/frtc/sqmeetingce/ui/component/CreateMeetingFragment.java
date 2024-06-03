@@ -132,7 +132,7 @@ public class CreateMeetingFragment extends BaseFragment implements MeetingRoomAd
         btnStartMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mActivity.isInMeeeting()){
+                if(mActivity.isInMeeting()){
                     return;
                 }
 

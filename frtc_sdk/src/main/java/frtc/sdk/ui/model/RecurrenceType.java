@@ -1,7 +1,7 @@
 package frtc.sdk.ui.model;
 
 public enum RecurrenceType {
-    NO("NO"),
+    NO("NONE"),
     DAILY("DAILY"),
     WEEKLY("WEEKLY"),
     MONTHLY("MONTHLY")

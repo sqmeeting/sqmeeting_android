@@ -1,6 +1,5 @@
 package com.frtc.sqmeetingce.ui.component;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -91,14 +90,14 @@ public class UserSettingsFragment extends BaseFragment {
         });
 
         Switch meetingReminderSwitch = view.findViewById(R.id.switch_meeting_reminder);
-        meetingReminderSwitch.setChecked(localStore.isMeetingRemider());
+        meetingReminderSwitch.setChecked(localStore.isMeetingReminder());
         meetingReminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     BaseToast.showToast(mActivity, getString(R.string.open_meeting_reminders_prompt), Toast.LENGTH_SHORT);
                 }
-                localStore.setMeetingRemider(isChecked);
+                localStore.setMeetingReminder(isChecked);
                 LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).setLocalStore(localStore);
             }
         });

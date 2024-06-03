@@ -162,6 +162,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
                     localStore.getScheduledMeetingSetting().getRecurrenceInterval());
             tvRepetitionFreq.setText(recurrenceType);
             String recurrenceEndDay = MeetingUtil.timeFormat(localStore.getScheduledMeetingSetting().getRecurrenceEndDay(), "yyyy年MM月dd日");
+            totalSize = localStore.getScheduledMeetingSetting().getRecurrenceCount();
             String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), recurrenceEndDay, totalSize+"");
             tvRepetitionEnd.setText(format);
             startTimeStr = localStore.getScheduledMeetingSetting().getRecurrenceStartTime() + "";
@@ -509,7 +510,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             public void onClick(View v) {
                 onSaveScheduleMeetingSettings();
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
-                mActivity.showScheduleMeetingRepetitionFreqFragment(tvRepetitionFreq.getText().toString(), tvRepetitionEnd.getText().toString(), true);
+                mActivity.showScheduleMeetingRepetitionFreqFragment(true);
             }
         });
 
@@ -658,7 +659,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         }
         progressView.setVisibility(View.VISIBLE);
         onSaveScheduleMeetingSettings();
-        mActivity.updateScheduleMeeting(reservationId, false);
+        mActivity.updateScheduleMeeting(reservationId);
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
     }
 

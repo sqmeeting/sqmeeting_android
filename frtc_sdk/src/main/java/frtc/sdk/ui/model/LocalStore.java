@@ -68,11 +68,8 @@ public class LocalStore {
     private ScheduledMeetingSetting scheduledMeetingSetting;
 
     private ArrayList<ScheduledMeeting> scheduledMeetings;
-    private ArrayList<ScheduledMeeting> scheduledRecurrenceMeetings;
-
     private boolean isScheduledMeetingFullList;
-    private boolean isScheduledRecurrenceMeetingFullList;
-
+    private int scheduledRecurrenceMeetingCount;
     private List<UserInfo> users;
 
     private String userFilter = "";
@@ -81,7 +78,7 @@ public class LocalStore {
     private String livePassword;
     private String liveMeetingUrl;
 
-    private boolean isMeetingRemider = true;
+    private boolean isMeetingReminder = true;
     private boolean noiseBlock = true;
 
     private boolean isShowCallFloat = false;
@@ -175,12 +172,12 @@ public class LocalStore {
         this.noiseBlock = noiseBlock;
     }
 
-    public boolean isMeetingRemider() {
-        return isMeetingRemider;
+    public boolean isMeetingReminder() {
+        return isMeetingReminder;
     }
 
-    public void setMeetingRemider(boolean meetingRemider) {
-        isMeetingRemider = meetingRemider;
+    public void setMeetingReminder(boolean meetingReminder) {
+        isMeetingReminder = meetingReminder;
     }
 
     public String getLivePassword() {
@@ -207,6 +204,7 @@ public class LocalStore {
     }
 
     public void resetScheduledMeetingSetting(){
+        Log.d("LocalStore","resetScheduledMeetingSetting");
         this.scheduledMeetingSetting = null;
     }
 
@@ -239,29 +237,12 @@ public class LocalStore {
         return scheduledMeetings;
     }
 
-    public void clearScheduledRecurrenceMeetings(){
-        if(scheduledRecurrenceMeetings != null){
-            scheduledRecurrenceMeetings.clear();
-        }
+    public int getScheduledRecurrenceMeetingCount() {
+        return scheduledRecurrenceMeetingCount;
     }
 
-    public boolean isScheduledRecurrenceMeetingFullList() {
-        return isScheduledRecurrenceMeetingFullList;
-    }
-
-    public void setScheduledRecurrenceMeetingFullList(boolean scheduledRecurrenceMeetingFullList) {
-        isScheduledRecurrenceMeetingFullList = scheduledRecurrenceMeetingFullList;
-    }
-
-    public void setScheduledRecurrenceMeetings(ArrayList<ScheduledMeeting> scheduledRecurrenceMeetings) {
-        this.scheduledRecurrenceMeetings = scheduledRecurrenceMeetings;
-    }
-
-    public ArrayList<ScheduledMeeting> getScheduledRecurrenceMeetings() {
-        if(scheduledRecurrenceMeetings == null){
-            scheduledRecurrenceMeetings = new ArrayList<ScheduledMeeting>();
-        }
-        return scheduledRecurrenceMeetings;
+    public void setScheduledRecurrenceMeetingCount(int scheduledRecurrenceMeetingCount) {
+        this.scheduledRecurrenceMeetingCount = scheduledRecurrenceMeetingCount;
     }
 
     public String getUserFilter() {

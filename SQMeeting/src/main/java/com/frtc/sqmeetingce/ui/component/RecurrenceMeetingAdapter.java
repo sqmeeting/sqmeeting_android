@@ -31,7 +31,7 @@ public class RecurrenceMeetingAdapter extends RecyclerView.Adapter<RecurrenceMee
     private ArrayList<ScheduledMeeting> mMeetingCalls;
 
     private OnItemClickListener mListener;
-    private LocalStore userSetting;
+    private LocalStore localStore;
 
     public interface OnItemClickListener{
         void onItemClicked(ScheduledMeeting selectedMeetingCall, int position);
@@ -65,7 +65,7 @@ public class RecurrenceMeetingAdapter extends RecyclerView.Adapter<RecurrenceMee
     public RecurrenceMeetingAdapter(Activity mActivity, ArrayList<ScheduledMeeting> meetingList) {
         this.mActivity = mActivity;
         mMeetingCalls = meetingList;
-        userSetting = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
+        localStore = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class RecurrenceMeetingAdapter extends RecyclerView.Adapter<RecurrenceMee
                 int position = holder.getAdapterPosition();
                 ScheduledMeeting meetingCall = mMeetingCalls.get(position);
                 String ownerId = meetingCall.getOwner_id();
-                boolean isOwner = userSetting.getUserId().equals(ownerId);
+                boolean isOwner = localStore.getUserId().equals(ownerId);
                 if(!isOwner){
                     return;
                 }
@@ -96,7 +96,7 @@ public class RecurrenceMeetingAdapter extends RecyclerView.Adapter<RecurrenceMee
 
         ScheduledMeeting meetingCall = mMeetingCalls.get(position);
         String ownerId = meetingCall.getOwner_id();
-        boolean isOwner = userSetting.getUserId().equals(ownerId);
+        boolean isOwner = localStore.getUserId().equals(ownerId);
         if(!isOwner){
             holder.itemMore.setVisibility(View.GONE);
         }
