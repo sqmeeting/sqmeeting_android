@@ -171,7 +171,7 @@ public class UserFragment extends BaseFragment implements HistoryMeetingAdapter.
         btnScheduleMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.showScheduleMeetingFragment("", 0, false);
+                mActivity.showScheduleMeetingFragment(false);
             }
         });
 

@@ -37,12 +37,14 @@ import java.util.List;
 
 import frtc.sdk.internal.model.FrtcSDKMeetingType;
 import frtc.sdk.log.Log;
+import frtc.sdk.model.RecurrenceMeetingListResult;
 import frtc.sdk.model.ScheduledMeeting;
 import frtc.sdk.model.ScheduledMeetingListResult;
 import frtc.sdk.ui.component.BaseToast;
 import frtc.sdk.ui.dialog.ConfirmDlg;
 import frtc.sdk.ui.dialog.IConfirmDlgListener;
 import frtc.sdk.ui.model.LocalStore;
+import frtc.sdk.ui.model.ScheduledMeetingSetting;
 import frtc.sdk.ui.store.LocalStoreBuilder;
 
 
@@ -67,18 +69,16 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
     private String ownerName = "";
     private List<String> participantUsers;
 
-    boolean isInvitedMeeting = false;
-    boolean isInstantMeeting;
-    boolean isOwner;
 
+    boolean isOwner;
+    private TextView tvMeetingName,tvMeetingTime,tvMeetingId,tvMeetingSpendTime,tvMeetingPassword,tvMeetingOwner,recurrenceType;
     private Button btnCancelMeeting, btnRemoveMeeting;
     private Button btnCopyMeeting;
     private Button btnEdit;
     private ConstraintLayout clAddCalendarEvent, clMeetingRecurrence;
 
     private ScheduledMeeting scheduledMeeting;
-    private ScheduledMeetingListResult scheduledMeetingListResult;
-    private int position;
+    private ScheduledMeetingSetting scheduledMeetingSetting;
     private boolean isAddCalendar;
     private LinearLayout progressView;
 
@@ -97,12 +97,13 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.scheduled_meeting_details_fragment, container, false);
 
-        TextView tvMeetingName = view.findViewById(R.id.meeting_name);
-        TextView tvMeetingTime = view.findViewById(R.id.meeting_time);
-        TextView tvMeetingId = view.findViewById(R.id.meeting_id);
-        TextView tvMeetingSpendTime = view.findViewById(R.id.meeting_spend_time);
-        TextView tvMeetingPassword = view.findViewById(R.id.meeting_password);
-        TextView tvMeetingOwner = view.findViewById(R.id.meeting_owner);
+        tvMeetingName = view.findViewById(R.id.meeting_name);
+        tvMeetingTime = view.findViewById(R.id.meeting_time);
+        tvMeetingId = view.findViewById(R.id.meeting_id);
+        tvMeetingSpendTime = view.findViewById(R.id.meeting_spend_time);
+        tvMeetingPassword = view.findViewById(R.id.meeting_password);
+        tvMeetingOwner = view.findViewById(R.id.meeting_owner);
+        recurrenceType = view.findViewById(R.id.recurrence_type);
 
         btnCancelMeeting = view.findViewById(R.id.cancel_meeting_btn);
         btnRemoveMeeting = view.findViewById(R.id.remove_meeting_btn);
@@ -110,49 +111,66 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         btnEdit =view.findViewById(R.id.button_edit);
         clAddCalendarEvent = view.findViewById(R.id.cl_add_calendar_event);
         clMeetingRecurrence = view.findViewById(R.id.cl_meeting_recurrence);
-        TextView recurrenceType = view.findViewById(R.id.recurrence_type);
         progressView = view.findViewById(R.id.progressView);
 
         localStore = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
+        scheduledMeetingSetting = localStore.getScheduledMeetingSetting();
 
-        if(scheduledMeeting != null){
+        if(scheduledMeetingSetting != null){
+            meetingType = scheduledMeetingSetting.getMeetingType();
+           if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)){
+               scheduledMeeting = localStore.getScheduledMeetingSetting().getRecurrenceMeetingByPosition(0);
+               if(scheduledMeeting != null){
+                   meetingName = scheduledMeeting.getMeeting_name();
+                   meetingNumber = scheduledMeeting.getMeeting_number();
+                   ownerName = scheduledMeeting.getOwner_name();
+                   meetingStartTime = scheduledMeeting.getSchedule_start_time();
+                   meetingEndTime = scheduledMeeting.getSchedule_end_time();
+                   meetingPassword = scheduledMeeting.getMeeting_password();
+                   tvMeetingName.setText(meetingName);
+                   tvMeetingId.setText(meetingNumber);
+                   tvMeetingPassword.setText(meetingPassword);
+                   tvMeetingTime.setText(formatMeetingTime(meetingStartTime));
+                   tvMeetingSpendTime.setText(formatDurationTime());
+                   tvMeetingOwner.setText(ownerName);
+                   reservationId = scheduledMeeting.getReservation_id();
+               }
+               clMeetingRecurrence.setVisibility(View.VISIBLE);
+               String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingSetting.getRecurrence_type(), scheduledMeetingSetting.getRecurrenceInterval())
+                       + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingSetting.getRecurrenceMeetings().size()+"");
+               recurrenceType.setText(str);
+           }else{
+               meetingName = scheduledMeetingSetting.getMeetingName();
+               meetingNumber = scheduledMeetingSetting.getMeetingNumber();
+               ownerName = scheduledMeetingSetting.getOwnerName();
+               meetingStartTime = scheduledMeetingSetting.getStartTime();
+               meetingEndTime = scheduledMeetingSetting.getEndTime();
+               meetingPassword = scheduledMeetingSetting.getPassword();
+               tvMeetingName.setText(meetingName);
+               tvMeetingId.setText(meetingNumber);
+               tvMeetingPassword.setText(meetingPassword);
+               tvMeetingTime.setText(formatMeetingTime(meetingStartTime));
+               tvMeetingSpendTime.setText(formatDurationTime());
+               tvMeetingOwner.setText(ownerName);
+               clMeetingRecurrence.setVisibility(View.GONE);
+               reservationId = scheduledMeetingSetting.getReservationId();
+           }
 
-            meetingName = scheduledMeeting.getMeeting_name();
-            meetingNumber = scheduledMeeting.getMeeting_number();
-            meetingType = scheduledMeeting.getMeeting_type();
-            meetingStartTime = scheduledMeeting.getSchedule_start_time();
-            meetingEndTime = scheduledMeeting.getSchedule_end_time();
-            meetingPassword = scheduledMeeting.getMeeting_password();
-            reservationId = scheduledMeeting.getReservation_id();
-            ownerId = scheduledMeeting.getOwner_id();
-            invitationURl = scheduledMeeting.getMeeting_url();
-            ownerName = scheduledMeeting.getOwner_name();
-            participantUsers = scheduledMeeting.getParticipantUsers();
+            invitationURl = scheduledMeetingSetting.getMeeting_url();
 
-            isOwner = localStore.getUserId().equals(ownerId);
+            boolean isInstantMeeting = FrtcSDKMeetingType.INSTANT.getTypeName().equals(meetingType);
+            isOwner = localStore.getUserId().equals(scheduledMeetingSetting.getOwnerId());
+            boolean isInvitedMeeting = false;
+            participantUsers = scheduledMeetingSetting.getParticipantUsers();
             if(participantUsers != null) {
                 isInvitedMeeting = participantUsers.contains(localStore.getUserId());
             }
-            isInstantMeeting  = "instant".equals(meetingType);
             btnCancelMeeting.setVisibility(isOwner ? View.VISIBLE : View.GONE);
             btnRemoveMeeting.setVisibility((isOwner||isInvitedMeeting||(isInstantMeeting && isOwner)) ? View.GONE : View.VISIBLE);
             btnEdit.setVisibility((!isOwner||isInstantMeeting) ? View.GONE : View.VISIBLE);
 
-            tvMeetingName.setText(meetingName);
-            tvMeetingId.setText(meetingNumber);
-            tvMeetingPassword.setText(meetingPassword);
-            tvMeetingTime.setText(formatMeetingTime(meetingStartTime));
-            tvMeetingSpendTime.setText(formatDurationTime());
-            tvMeetingOwner.setText(ownerName);
-            if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
-                clMeetingRecurrence.setVisibility(View.VISIBLE);
-                String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingListResult.getRecurrenceType(), scheduledMeetingListResult.getRecurrenceInterval())
-                        + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingListResult.getTotal_size()+"");
-                recurrenceType.setText(str);
-            }else {
-                clMeetingRecurrence.setVisibility(View.GONE);
-            }
         }
+
         setClickListener(view);
 
         if (ContextCompat.checkSelfPermission(mContext,
@@ -165,8 +183,72 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         return view;
     }
 
-    public void setScheduledMeeting(ScheduledMeeting scheduledMeeting){
-        this.scheduledMeeting = scheduledMeeting;
+    public void updateMeetingDetailsView(){
+        scheduledMeetingSetting = localStore.getScheduledMeetingSetting();
+        if(scheduledMeetingSetting != null){
+            meetingType = scheduledMeetingSetting.getMeetingType();
+            if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)){
+                scheduledMeeting = localStore.getScheduledMeetingSetting().getRecurrenceMeetingByPosition(0);
+                if(scheduledMeeting != null){
+                    meetingName = scheduledMeeting.getMeeting_name();
+                    meetingNumber = scheduledMeeting.getMeeting_number();
+                    ownerName = scheduledMeeting.getOwner_name();
+                    meetingStartTime = scheduledMeeting.getSchedule_start_time();
+                    meetingEndTime = scheduledMeeting.getSchedule_end_time();
+                    meetingPassword = scheduledMeeting.getMeeting_password();
+                    tvMeetingName.setText(meetingName);
+                    tvMeetingId.setText(meetingNumber);
+                    tvMeetingPassword.setText(meetingPassword);
+                    tvMeetingTime.setText(formatMeetingTime(meetingStartTime));
+                    tvMeetingSpendTime.setText(formatDurationTime());
+                    tvMeetingOwner.setText(ownerName);
+                    reservationId = scheduledMeeting.getReservation_id();
+                }
+                clMeetingRecurrence.setVisibility(View.VISIBLE);
+                String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingSetting.getRecurrence_type(), scheduledMeetingSetting.getRecurrenceInterval())
+                        + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingSetting.getRecurrenceMeetings().size()+"");
+                recurrenceType.setText(str);
+            }else{
+                meetingName = scheduledMeetingSetting.getMeetingName();
+                meetingNumber = scheduledMeetingSetting.getMeetingNumber();
+                ownerName = scheduledMeetingSetting.getOwnerName();
+                meetingStartTime = scheduledMeetingSetting.getStartTime();
+                meetingEndTime = scheduledMeetingSetting.getEndTime();
+                meetingPassword = scheduledMeetingSetting.getPassword();
+                tvMeetingName.setText(meetingName);
+                tvMeetingId.setText(meetingNumber);
+                tvMeetingPassword.setText(meetingPassword);
+                tvMeetingTime.setText(formatMeetingTime(meetingStartTime));
+                tvMeetingSpendTime.setText(formatDurationTime());
+                tvMeetingOwner.setText(ownerName);
+                clMeetingRecurrence.setVisibility(View.GONE);
+                reservationId = scheduledMeetingSetting.getReservationId();
+            }
+
+            invitationURl = scheduledMeetingSetting.getMeeting_url();
+
+            boolean isInstantMeeting = FrtcSDKMeetingType.INSTANT.getTypeName().equals(meetingType);
+            isOwner = localStore.getUserId().equals(scheduledMeetingSetting.getOwnerId());
+            boolean isInvitedMeeting = false;
+            participantUsers = scheduledMeetingSetting.getParticipantUsers();
+            if(participantUsers != null) {
+                isInvitedMeeting = participantUsers.contains(localStore.getUserId());
+            }
+            btnCancelMeeting.setVisibility(isOwner ? View.VISIBLE : View.GONE);
+            btnRemoveMeeting.setVisibility((isOwner||isInvitedMeeting||(isInstantMeeting && isOwner)) ? View.GONE : View.VISIBLE);
+            btnEdit.setVisibility((!isOwner||isInstantMeeting) ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    public void updateRecurrenceView(){
+        if(scheduledMeetingSetting != null){
+            meetingType = scheduledMeetingSetting.getMeetingType();
+            if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)){
+                String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingSetting.getRecurrence_type(), scheduledMeetingSetting.getRecurrenceInterval())
+                        + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingSetting.getRecurrenceMeetings().size()+"");
+                recurrenceType.setText(str);
+            }
+        }
     }
 
     private boolean isToday(long startTime){
@@ -241,7 +323,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.showUserFragment(true);
+                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
             }
         });
 
@@ -249,18 +331,17 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         btnJoinMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mActivity.isInMeeeting()){
+                if(mActivity.isInMeeting()){
                     return;
                 }
-                if(scheduledMeeting != null){
-                    if (!mActivity.isNetworkConnected()) {
-                        mActivity.showConnectionErrorNotice();
-                        return;
-                    }
-                    mActivity.joinMeeting(scheduledMeeting.getMeeting_number(),
-                            scheduledMeeting.getMeeting_password(), localStore.getDisplayName(),"", scheduledMeeting.getMeeting_type());
-                    launchMeeting();
+
+                if (!mActivity.isNetworkConnected()) {
+                    mActivity.showConnectionErrorNotice();
+                    return;
                 }
+                mActivity.joinMeeting(meetingNumber,
+                        meetingPassword, localStore.getDisplayName(),"", meetingType);
+                launchMeeting();
             }
         });
 
@@ -292,7 +373,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                 if (meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
                     showEditMeetingDlg();
                 }else {
-                    mActivity.updateScheduledMeeting(scheduledMeeting);
+                    mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
                 }
 
             }
@@ -332,7 +413,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         clMeetingRecurrence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.showScheduleRecurrenceMeetingListFragment(scheduledMeetingListResult);
+                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST);;
             }
         });
     }
@@ -344,13 +425,12 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
             @Override
             public void onEditMeeting() {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS;
-                mActivity.showEditSingleRecurrenceMeeting(scheduledMeeting, scheduledMeetingListResult, position, FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
+                mActivity.showEditSingleRecurrenceMeeting(0);
             }
 
             @Override
             public void onEditRecurrenceMeeting() {
-                mActivity.setRecurrenceCount(scheduledMeetingListResult.getTotal_size());
-                mActivity.updateScheduledMeeting(scheduledMeeting);
+                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
             }
         });
         confirmDlg.show();
@@ -366,16 +446,16 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                     + mContext.getResources().getString(R.string.start_time_title) + formatScheduleTime(meetingStartTime) + "\n"
                     + mContext.getResources().getString(R.string.end_time_title) + formatScheduleTime(meetingEndTime) + "\n";
         }
-        if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
-            long startTimeMill = scheduledMeetingListResult.getRecurrenceStartTime();
-            long endTimeMill = scheduledMeetingListResult.getRecurrenceEndTime();
+        if(scheduledMeeting != null && meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
+            long startTimeMill = scheduledMeeting.getRecurrenceStartTime();
+            long endTimeMill = scheduledMeeting.getRecurrenceEndTime();
             String[] strStartTime = MeetingUtil.timeFormat(startTimeMill, "yyyy-MM-dd HH:mm").split(" ");
             String[] strEndTime = MeetingUtil.timeFormat(endTimeMill,"yyyy-MM-dd HH:mm").split(" ");
-            long recurrenceEndDay = scheduledMeetingListResult.getRecurrenceEndDay();
-            String recurrenceType = scheduledMeetingListResult.getRecurrenceType();
-            int recurrenceInterval = scheduledMeetingListResult.getRecurrenceInterval();
-            String str = MeetingUtil.formatRecurrenceContent(mContext, recurrenceType, recurrenceInterval, scheduledMeetingListResult.getRecurrenceDaysOfWeek(),
-                    scheduledMeetingListResult.getRecurrenceDaysOfMonth());
+            long recurrenceEndDay = scheduledMeeting.getRecurrenceEndDay();
+            String recurrenceType = scheduledMeeting.getRecurrence_type();
+            int recurrenceInterval = scheduledMeeting.getRecurrenceInterval();
+            String str = MeetingUtil.formatRecurrenceContent(mContext, recurrenceType, recurrenceInterval, scheduledMeeting.getRecurrenceDaysOfWeek(),
+                    scheduledMeeting.getRecurrenceDaysOfMonth());
             meetingInfoTemplate = meetingInfoTemplate
                     + mContext.getResources().getString(frtc.sdk.R.string.repetition_period_title) + strStartTime[0] + " " +  "-" + " " + MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd")
                     + "," + str + "\n";
@@ -394,7 +474,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                 + "\n"
                 + mContext.getResources().getString(R.string.copy_invitation_notice_without_password) + "\n";
 
-        if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
+        if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName()) && scheduledMeeting != null){
             String groupMeetingUrl = scheduledMeeting.getGroupMeetingUrl();
             if(!TextUtils.isEmpty(groupMeetingUrl)){
                 meetingInfoTemplate = meetingInfoTemplate
@@ -480,7 +560,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                 if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
                     mActivity.removeMeetingFromMeetingList(scheduledMeeting.getGroupMeetingUrl());
                 }else {
-                    mActivity.removeMeetingFromMeetingList(scheduledMeeting.getMeeting_url());
+                    mActivity.removeMeetingFromMeetingList(scheduledMeetingSetting.getMeeting_url());
                 }
             }
             @Override
@@ -494,7 +574,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
 
     private void deleteScheduledMeeting(boolean isCheck) {
 
-        mActivity.deleteScheduledMeeting(scheduledMeeting.getReservation_id(), isCheck);
+        mActivity.deleteScheduledMeeting(reservationId, isCheck);
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
     }
 
@@ -507,15 +587,9 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
     }
 
-
-    public void setScheduledMeetingListResult(ScheduledMeetingListResult scheduledMeetingListResult, int position) {
-        this.scheduledMeetingListResult = scheduledMeetingListResult;
-        this.position = position;
-    }
-
     public void saveRecurrenceCalendar() {
         isAddCalendar = false;
-        List<ScheduledMeeting> recurrenceMeetings = localStore.getScheduledRecurrenceMeetings();
+        List<ScheduledMeeting> recurrenceMeetings = localStore.getScheduledMeetingSetting().getRecurrenceMeetings();
         int result = -1;
         Log.d(TAG, "saveRecurrenceCalendar recurrenceMeetings.size() = "+recurrenceMeetings.size());
         for(int i = 0; i < recurrenceMeetings.size(); i++){

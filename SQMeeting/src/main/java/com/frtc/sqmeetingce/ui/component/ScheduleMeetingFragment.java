@@ -152,6 +152,7 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
         rlRepetitionEnd = view.findViewById(R.id.rl_repetition_end);
         tvRepetitionEnd = view.findViewById(R.id.repetition_end_content);
 
+        /*
         Bundle bundle = getArguments();
         if(bundle != null){
             String recurrenceEndDay = bundle.getString("recurrenceEndDay");
@@ -162,6 +163,7 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
                 tvRepetitionEnd.setText(format);
             }
         }
+         */
 
         stMute = view.findViewById(R.id.switch_mute);
         stAllowDialIn = view.findViewById(R.id.switch_allow_visitors_to_dial_in);
@@ -227,6 +229,22 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
         }else{
             tvRepetitionFreq.setText(freq);
         }
+
+        long endDay = localStore.getScheduledMeetingSetting().getRecurrenceEndDay();
+        if(endDay != 0){
+            String recurrenceEndDay = MeetingUtil.timeFormat(endDay, "yyyy年MM月dd日");
+            int count = localStore.getScheduledMeetingSetting().getRecurrenceCount();
+            String format = String.format(mActivity.getResources().getString(R.string.repetition_end_content), recurrenceEndDay, count+"");
+            tvRepetitionEnd.setText(format);
+        }
+
+        String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
+        if(!TextUtils.isEmpty(meetingType) && FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)) {
+            rlRepetitionEnd.setVisibility(View.VISIBLE);
+        }else{
+            rlRepetitionEnd.setVisibility(View.GONE);
+        }
+
         mute = localStore.getScheduledMeetingSetting().isMute();
         stMute.setChecked(mute);
         allowDialIn = localStore.getScheduledMeetingSetting().isGuestDialIn();
@@ -552,7 +570,7 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             public void onClick(View v) {
                 onSaveScheduleMeetingSettings();
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
-                mActivity.showScheduleMeetingRepetitionFreqFragment(tvRepetitionFreq.getText().toString(), tvRepetitionEnd.getText().toString(), false);
+                mActivity.showScheduleMeetingRepetitionFreqFragment(false);
             }
         });
 

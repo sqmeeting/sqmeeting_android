@@ -201,7 +201,7 @@ public class JoinMeetingFragment extends BaseFragment implements MeetingNumberAd
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mActivity.isInMeeeting()){
+                if(mActivity.isInMeeting()){
                     return;
                 }
                 hideSoftInput(v);

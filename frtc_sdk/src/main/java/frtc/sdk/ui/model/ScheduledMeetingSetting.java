@@ -3,6 +3,7 @@ package frtc.sdk.ui.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import frtc.sdk.model.ScheduledMeeting;
 import frtc.sdk.model.UserInfo;
 
 public class ScheduledMeetingSetting {
@@ -34,8 +35,16 @@ public class ScheduledMeetingSetting {
     private List<Integer> recurrenceDaysOfWeek;
     private List<Integer> recurrenceDaysOfMonth;
 
+    private ArrayList<ScheduledMeeting> recurrenceMeetings;
+
+    private boolean isRecurrenceMeetingFullList;
+
+    private int recurrenceCount;
+
     private String meetingRoomId = null;
     private List<UserInfo> invitedUsers;
+
+    private List<String> participantUsers;
 
     private boolean mute = false;
     private boolean guestDialIn = true;
@@ -44,6 +53,7 @@ public class ScheduledMeetingSetting {
     private String joinTime = "30";
 
     private String meeting_url;
+    private String groupMeetingUrl;
     private String repetitionFreq;
     private boolean isPwdCheck = false;
 
@@ -148,6 +158,46 @@ public class ScheduledMeetingSetting {
         this.recurrenceDaysOfMonth = recurrenceDaysOfMonth;
     }
 
+    public boolean isRecurrenceMeetingFullList() {
+        return isRecurrenceMeetingFullList;
+    }
+
+    public void setRecurrenceMeetingFullList(boolean recurrenceMeetingFullList) {
+        isRecurrenceMeetingFullList = recurrenceMeetingFullList;
+    }
+
+    public void clearRecurrenceMeetings(){
+        if(recurrenceMeetings != null){
+            recurrenceMeetings.clear();
+        }
+    }
+
+    public void setRecurrenceMeetings(ArrayList<ScheduledMeeting> recurrenceMeetings) {
+        this.recurrenceMeetings = recurrenceMeetings;
+    }
+
+    public ArrayList<ScheduledMeeting> getRecurrenceMeetings() {
+        if(recurrenceMeetings == null){
+            recurrenceMeetings = new ArrayList<ScheduledMeeting>();
+        }
+        return recurrenceMeetings;
+    }
+
+    public ScheduledMeeting getRecurrenceMeetingByPosition(int position){
+        if(position >= 0 && recurrenceMeetings != null && recurrenceMeetings.size() > position){
+            return recurrenceMeetings.get(position);
+        }
+        return null;
+    }
+
+    public int getRecurrenceCount() {
+        return recurrenceCount;
+    }
+
+    public void setRecurrenceCount(int recurrenceCount) {
+        this.recurrenceCount = recurrenceCount;
+    }
+
     public String getRate() {
         return rate;
     }
@@ -170,6 +220,15 @@ public class ScheduledMeetingSetting {
 
     public void setMeetingRoomId(String meetingRoomId) {
         this.meetingRoomId = meetingRoomId;
+    }
+
+
+    public List<String> getParticipantUsers() {
+        return participantUsers;
+    }
+
+    public void setParticipantUsers(List<String> participantUsers) {
+        this.participantUsers = participantUsers;
     }
 
     public List<UserInfo> getInvitedUsers() {
@@ -325,5 +384,13 @@ public class ScheduledMeetingSetting {
 
     public void setMeeting_url(String meeting_url) {
         this.meeting_url = meeting_url;
+    }
+
+    public String getGroupMeetingUrl() {
+        return groupMeetingUrl;
+    }
+
+    public void setGroupMeetingUrl(String groupMeetingUrl) {
+        this.groupMeetingUrl = groupMeetingUrl;
     }
 }

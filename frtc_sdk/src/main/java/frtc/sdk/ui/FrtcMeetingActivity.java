@@ -65,6 +65,7 @@ import frtc.sdk.model.QueryMeetingInfoResult;
 import frtc.sdk.model.QueryMeetingRoomResult;
 import frtc.sdk.model.QueryUserInfoResult;
 import frtc.sdk.R;
+import frtc.sdk.model.RecurrenceMeetingListResult;
 import frtc.sdk.model.ScheduledMeeting;
 import frtc.sdk.model.ScheduledMeetingListResult;
 import frtc.sdk.model.ScheduledMeetingResult;
@@ -3019,7 +3020,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     }
 
     @Override
-    public void onGetScheduledRecurrenceMeetingListResult(ResultType resultType, ScheduledMeetingListResult scheduledMeetingListResult) {
+    public void onGetScheduledRecurrenceMeetingListResult(ResultType resultType, RecurrenceMeetingListResult scheduledMeetingListResult) {
     }
 
     @Override

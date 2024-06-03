@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.frtc.sqmeetingce.MainActivity;
 import com.frtc.sqmeetingce.R;
 
-import frtc.sdk.log.Log;
 import frtc.sdk.ui.dialog.IConfirmDlgListener;
 import frtc.sdk.ui.dialog.MessageDlg;
 import frtc.sdk.ui.model.LocalStore;
@@ -107,7 +106,7 @@ public class HomeFragment extends BaseFragment {
         joinMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mActivity.isInMeeeting()){
+                if(mActivity.isInMeeting()){
                     return;
                 }
                 if (localStore == null) {

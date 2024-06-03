@@ -98,7 +98,7 @@ public class MeetingDetailsFragment extends BaseFragment {
         btnStartMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mActivity.isInMeeeting()){
+                if(mActivity.isInMeeting()){
                     return;
                 }
                 if (!mActivity.isNetworkConnected()) {

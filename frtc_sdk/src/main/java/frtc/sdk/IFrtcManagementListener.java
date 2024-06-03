@@ -9,6 +9,7 @@ import frtc.sdk.model.CreateScheduledMeetingResult;
 import frtc.sdk.model.QueryMeetingInfoResult;
 import frtc.sdk.model.QueryMeetingRoomResult;
 import frtc.sdk.model.QueryUserInfoResult;
+import frtc.sdk.model.RecurrenceMeetingListResult;
 import frtc.sdk.model.ScheduledMeetingListResult;
 import frtc.sdk.model.ScheduledMeetingResult;
 import frtc.sdk.model.SignInResult;
@@ -37,7 +38,7 @@ public interface IFrtcManagementListener {
 
     void onGetScheduledMeetingResult(ResultType resultType, ScheduledMeetingResult scheduledMeetingResult);
     void onGetScheduledMeetingListResult(ResultType resultType, ScheduledMeetingListResult scheduledMeetingListResult);
-    void onGetScheduledRecurrenceMeetingListResult(ResultType resultType, ScheduledMeetingListResult scheduledMeetingListResult);
+    void onGetScheduledRecurrenceMeetingListResult(ResultType resultType, RecurrenceMeetingListResult scheduledMeetingListResult);
     void onFindUserResultResult(ResultType resultType, FindUserResult findUserResult);
 
     void onFrtcSdkLeaveMeetingNotify();

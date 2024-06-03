@@ -35,9 +35,9 @@ import java.util.Date;
 
 import frtc.sdk.log.Log;
 import frtc.sdk.model.ScheduledMeeting;
-import frtc.sdk.model.ScheduledMeetingListResult;
 import frtc.sdk.ui.component.BaseToast;
 import frtc.sdk.ui.model.LocalStore;
+import frtc.sdk.ui.model.ScheduledMeetingSetting;
 import frtc.sdk.ui.store.LocalStoreBuilder;
 
 
@@ -46,17 +46,19 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
     protected final String TAG = this.getClass().getSimpleName();
     private LocalStore localStore;
     public MainActivity mActivity;
-    private TextView tvMeetingName;
-    private TextView tvStartTime;
-    private TextView tvDuration;
-    private TextView tvTimeZone;
-
+    private TextView tvMeetingName,tvStartTime,tvDuration;
+    private TextView tvRecurrenceType,tvRecurrenceEnd;
     private ScheduledMeeting scheduledMeeting;
     private long startTimeMill;
     private long durationTime;
-    private ScheduledMeetingListResult scheduledMeetingListResult;
     private int position;
-    private FragmentTagEnum preFragment;
+    public EditSingleRecurrenceMeetingFragment(){
+
+    }
+
+    public void setPosition(int position){
+        this.position = position;
+    }
 
 
     @Nullable
@@ -77,29 +79,46 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
 
     private void init(View view) {
         tvMeetingName = view.findViewById(R.id.meeting_name);
-        TextView tvRecurrenceType = view.findViewById(R.id.recurrence_type);
-        TextView tvRecurrenceEnd = view.findViewById(R.id.recurrence_end);
+        tvRecurrenceType = view.findViewById(R.id.recurrence_type);
+        tvRecurrenceEnd = view.findViewById(R.id.recurrence_end);
         tvStartTime = view.findViewById(R.id.start_time);
         tvDuration = view.findViewById(R.id.meeting_duration);
-        tvTimeZone = view.findViewById(R.id.time_zone);
+        TextView tvTimeZone = view.findViewById(R.id.time_zone);
 
-        tvMeetingName.setText(scheduledMeeting.getMeeting_name());
-        String recurrenceTypeContent = frtc.sdk.util.MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingListResult.getRecurrenceType(), scheduledMeetingListResult.getRecurrenceInterval());
-        tvRecurrenceType.setText(recurrenceTypeContent);
+        ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
 
-        long recurrenceEndDay = scheduledMeetingListResult.getRecurrenceEndDay();
-        int count = scheduledMeetingListResult.getTotal_size();
-        String endDay = MeetingUtil.timeFormat(recurrenceEndDay, "yyyy年MM月dd日");
-        String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), endDay, count+"");
-        tvRecurrenceEnd.setText(format);
+        scheduledMeeting = setting.getRecurrenceMeetingByPosition(position);
 
-        startTimeMill = Long.parseLong(scheduledMeeting.getSchedule_start_time());
-        tvStartTime.setText(MeetingUtil.strTimeFormat(scheduledMeeting.getSchedule_start_time(), "yyyy-MM-dd HH:mm"));
-        durationTime = MeetingUtil.calcDurationTime(mActivity, scheduledMeeting.getSchedule_start_time(),scheduledMeeting.getSchedule_end_time());
-        tvDuration.setText(MeetingUtil.formatDurationTime(mActivity, durationTime));
+        if(scheduledMeeting != null){
+            tvMeetingName.setText(scheduledMeeting.getMeeting_name());
+            startTimeMill = Long.parseLong(scheduledMeeting.getSchedule_start_time());
+            tvStartTime.setText(MeetingUtil.strTimeFormat(scheduledMeeting.getSchedule_start_time(), "yyyy-MM-dd HH:mm"));
+            durationTime = MeetingUtil.calcDurationTime(mActivity, scheduledMeeting.getSchedule_start_time(),scheduledMeeting.getSchedule_end_time());
+            tvDuration.setText(MeetingUtil.formatDurationTime(mActivity, durationTime));
+        }
+
         TimeZone tz = TimeZone.getDefault();
         String timezone = "("+ tz.getDisplayName(false,TimeZone.LONG_GMT) + ")"+tz.getDisplayName();
         tvTimeZone.setText(timezone);
+
+        String recurrenceTypeContent = frtc.sdk.util.MeetingUtil.formatRecurrenceTypeContent(mActivity, setting.getRecurrenceType(), setting.getRecurrenceInterval());
+        tvRecurrenceType.setText(recurrenceTypeContent);
+        long recurrenceEndDay = setting.getRecurrenceEndDay();
+        int count = setting.getRecurrenceMeetings().size();
+        String endDay = MeetingUtil.timeFormat(recurrenceEndDay, "yyyy年MM月dd日");
+        String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), endDay, count+"");
+        tvRecurrenceEnd.setText(format);
+    }
+
+    public void updateRecurrenceText(){
+        ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
+        String recurrenceTypeContent = frtc.sdk.util.MeetingUtil.formatRecurrenceTypeContent(mActivity, setting.getRecurrenceType(), setting.getRecurrenceInterval());
+        tvRecurrenceType.setText(recurrenceTypeContent);
+        long recurrenceEndDay = setting.getRecurrenceEndDay();
+        int count = setting.getRecurrenceMeetings().size();
+        String endDay = MeetingUtil.timeFormat(recurrenceEndDay, "yyyy年MM月dd日");
+        String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), endDay, count+"");
+        tvRecurrenceEnd.setText(format);
     }
 
 
@@ -133,24 +152,16 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"btnSaveMeeting");
-                onScheduleMeeting();
+                onSaveMeeting();
             }
         });
     }
-
-
 
     @Override
     public void onBack() {
         showPreviousFragment();
     }
 
-    public void setMeeting(ScheduledMeeting scheduledMeeting, ScheduledMeetingListResult scheduledMeetingListResult, int position, FragmentTagEnum preFragment) {
-        this.scheduledMeeting = scheduledMeeting;
-        this.scheduledMeetingListResult = scheduledMeetingListResult;
-        this.position = position;
-        this.preFragment = preFragment;
-    }
 
     DatimePicker datimePicker;
     TimePicker timePicker;
@@ -221,7 +232,9 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
     }
 
 
-    private void onScheduleMeeting(){
+    private void onSaveMeeting(){
+
+        ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
         if(tvMeetingName.getText().toString().trim().isEmpty()){
             BaseToast.showToast(mActivity, getString(R.string.meeting_name_valid_notice), Toast.LENGTH_SHORT);
             return;
@@ -235,58 +248,37 @@ public class EditSingleRecurrenceMeetingFragment extends BaseFragment{
             BaseToast.showToast(mActivity, getString(R.string.start_time_valid_notice), Toast.LENGTH_SHORT);
             return;
         }
-        if(startTimeMill < scheduledMeetingListResult.getRecurrenceStartDay()){
+        if(startTimeMill < setting.getRecurrenceStartDay()){
             BaseToast.showToast(mActivity, getString(R.string.start_time_later_than_recurrence_start_time), Toast.LENGTH_SHORT);
             return;
         }
-        if(position >= 1 && startTimeMill < Long.parseLong(scheduledMeetingListResult.getMeeting_schedules().get(position - 1).getSchedule_end_time())){
+        if(position >= 1 && startTimeMill < Long.parseLong(setting.getRecurrenceMeetings().get(position - 1).getSchedule_end_time())){
             BaseToast.showToast(mActivity, getString(R.string.start_time_later_than_previous_single_meeting_end_time), Toast.LENGTH_SHORT);
             return;
         }
-        if((position + 1) < scheduledMeetingListResult.getMeeting_schedules().size() && (startTimeMill + durationTime) > Long.parseLong(scheduledMeetingListResult.getMeeting_schedules().get(position + 1).getSchedule_start_time())){
+        if((position + 1) < setting.getRecurrenceMeetings().size() && (startTimeMill + durationTime) > Long.parseLong(setting.getRecurrenceMeetings().get(position + 1).getSchedule_start_time())){
             BaseToast.showToast(mActivity, getString(R.string.end_time_earlier_than_latter_single_meeting_start_time), Toast.LENGTH_SHORT);
             return;
         }
-        if(startTimeMill > scheduledMeetingListResult.getRecurrenceEndDay()){
+        if(startTimeMill > setting.getRecurrenceEndDay()){
             BaseToast.showToast(mActivity, getString(R.string.start_time_earlier_than_recurrence_end_time), Toast.LENGTH_SHORT);
             return;
         }
 
-        mActivity.isEditSingleRecurrence = true;
-        mActivity.updateScheduledMeeting(scheduledMeeting);
-    }
-
-    private void onSaveScheduleMeetingSettings() {
-        Log.i(TAG, "onSaveScheduleMeetingSettings");
-        if(localStore != null){
-            String meetingName = tvMeetingName.getText().toString().trim();
-            Log.i(TAG, "onSaveScheduleMeetingSettings meetingName = "+meetingName);
-            localStore.getScheduledMeetingSetting().setMeetingName(meetingName);
-            localStore.getScheduledMeetingSetting().setStartTime(String.valueOf(startTimeMill));
-            localStore.getScheduledMeetingSetting().setEndTime(String.valueOf(startTimeMill+durationTime));
-            localStore.getScheduledMeetingSetting().setMeetingType(scheduledMeeting.getMeeting_type());
-        }
-    }
-
-
-    public void saveMeeting() {
-        onSaveScheduleMeetingSettings();
-        mActivity.updateScheduleMeeting(scheduledMeeting.getReservation_id(), true);
-    }
-
-    public void saveMeetingSuccess() {
+        saveSingleRecurrenceMeetingSettings();
+        mActivity.updateSingleScheduleMeeting(scheduledMeeting);
         showPreviousFragment();
     }
 
-    private void showPreviousFragment(){
-        if(preFragment == FragmentTagEnum.FRAGMENT_SCHEDULE_RECURRENCE_MEETING_LIST){
-            mActivity.getScheduledRecurrenceMeetingList(scheduledMeeting.getRecurrence_gid());
-        }else {
+    private void saveSingleRecurrenceMeetingSettings() {
+        Log.i(TAG, "saveSingleRecurrenceMeetingSettings");
+        if(scheduledMeeting != null){
             scheduledMeeting.setSchedule_start_time(String.valueOf(startTimeMill));
-            scheduledMeeting.setSchedule_end_time(String.valueOf(startTimeMill + durationTime));
-            scheduledMeetingListResult.getMeeting_schedules().get(position).setSchedule_start_time(String.valueOf(startTimeMill));
-            scheduledMeetingListResult.getMeeting_schedules().get(position).setSchedule_end_time(String.valueOf(startTimeMill + durationTime));
-            mActivity.showMeetingDetails(scheduledMeeting, position, scheduledMeetingListResult);
+            scheduledMeeting.setSchedule_end_time(String.valueOf(startTimeMill+durationTime));
         }
+    }
+
+    private void showPreviousFragment(){
+        mActivity.replaceFragmentWithTag(mActivity.previousTag);
     }
 }
