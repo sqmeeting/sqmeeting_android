@@ -2,7 +2,7 @@
 
     <string name="web_portal_label">神旗官網:</string>
     <string name="opensource_website_label">開源地址:</string>
-    <string name="web_portal">https://shenqi.isgo.com</string>
+    <string name="web_portal">https://shenqi.internetware.cn</string>
     <string name="opensource_website">https://github.com/sqmeeting</string>
 
     <string name="app_name">神旗CE</string>

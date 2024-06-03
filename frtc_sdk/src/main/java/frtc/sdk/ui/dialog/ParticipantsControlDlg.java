@@ -48,7 +48,7 @@ public class ParticipantsControlDlg extends BaseDialog {
         name.setText(participantInfo.getDisplayName());
 
         TextView tvMute = findViewById(R.id.mute_tv);
-        if("true".equals(participantInfo.getMuteAudio())) {
+        if(participantInfo.getMuteAudio()) {
             tvMute.setText(R.string.participant_dialog_unmute_btn);
         }else{
             tvMute.setText(R.string.participant_dialog_mute_btn);
@@ -62,7 +62,7 @@ public class ParticipantsControlDlg extends BaseDialog {
                     }else {
                         List<String> participants = new ArrayList<>();
                         participants.add(participantInfo.getUuid());
-                        if ("true".equals(participantInfo.getMuteAudio())) {
+                        if (participantInfo.getMuteAudio()) {
                             mListener.onClickConfirmUnMute(participants);
                         } else {
                             mListener.onClickConfirmMute(participants);

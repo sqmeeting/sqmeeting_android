@@ -2,7 +2,7 @@
 
     <string name="web_portal_label">Website:</string>
     <string name="opensource_website_label">Github:</string>
-    <string name="web_portal">https://shenqi.isgo.com</string>
+    <string name="web_portal">https://shenqi.internetware.cn</string>
     <string name="opensource_website">https://github.com/sqmeeting</string>
 
     <string name="app_name">SQMeetingCE</string>
