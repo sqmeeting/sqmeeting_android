@@ -513,7 +513,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             public void onClick(View v) {
                 onSaveScheduleMeetingSettings();
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(localStore.getScheduledMeetingSetting().getRecurrenceType(), true);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(true);
             }
         });
 

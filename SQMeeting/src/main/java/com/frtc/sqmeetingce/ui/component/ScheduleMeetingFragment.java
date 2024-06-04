@@ -46,6 +46,7 @@ import frtc.sdk.log.Log;
 import frtc.sdk.model.MeetingRoom;
 import frtc.sdk.ui.component.BaseToast;
 import frtc.sdk.ui.model.LocalStore;
+import frtc.sdk.ui.model.ScheduledMeetingSetting;
 import frtc.sdk.ui.store.LocalStoreBuilder;
 
 
@@ -164,13 +165,15 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
 
         meetingRoomsLayout = view.findViewById(R.id.meeting_rooms_layout);
 
-        meetingName = localStore.getScheduledMeetingSetting().getMeetingName();
+        ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
+
+        meetingName = setting.getMeetingName();
         if(meetingName == null || meetingName.isEmpty()){
             meetingName = localStore.getRealName() + mActivity.getResources().getString(R.string.schedule_meeting_postfix);
         }
         etMeetingName.setText(meetingName);
 
-        String startTimeStr = localStore.getScheduledMeetingSetting().getStartTime();
+        String startTimeStr = setting.getStartTime();
         if(startTimeStr == null || startTimeStr.isEmpty()){
             initialStartTime();
             durationTime = 30*60*1000;
@@ -181,11 +184,11 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             }else{
                 initialStartTime();
             }
-            tvDuration.setText(formatDurationTime(localStore.getScheduledMeetingSetting().getStartTime(),
-                    localStore.getScheduledMeetingSetting().getEndTime()));
+            tvDuration.setText(formatDurationTime(setting.getStartTime(),
+                    setting.getEndTime()));
         }
 
-        String roomId = localStore.getScheduledMeetingSetting().getMeetingRoomId();
+        String roomId = setting.getMeetingRoomId();
         if(roomId == null){
             meetingRoomId = null;
             stMeetingRoomUsed.setChecked(false);
@@ -200,45 +203,42 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             showMeetingRoomLayout();
         }
 
-        if(localStore.getScheduledMeetingSetting().getInvitedUsers() == null){
+        if(setting.getInvitedUsers() == null){
             tvInvitedUsers.setText("无");
         }else{
-            tvInvitedUsers.setText(String.valueOf(localStore.getScheduledMeetingSetting().getInvitedUsers().size()));
+            tvInvitedUsers.setText(String.valueOf(setting.getInvitedUsers().size()));
         }
 
-        tvRate.setText(localStore.getScheduledMeetingSetting().getRate());
-        String joinTime = localStore.getScheduledMeetingSetting().getJoinTime();
+        tvRate.setText(setting.getRate());
+        String joinTime = setting.getJoinTime();
         tvJoinTime.setText("30".equals(joinTime)?getString(R.string.join_time_30_minutes):getString(R.string.join_time_any_time));
 
-        String freq = localStore.getScheduledMeetingSetting().getRepetitionFreq();
-        if(TextUtils.isEmpty(freq)) {
-            tvRepetitionFreq.setText(getString(R.string.no_frequency));
-        }else{
-            tvRepetitionFreq.setText(freq);
-        }
 
-        long endDay = localStore.getScheduledMeetingSetting().getRecurrenceEndDay();
-        if(endDay != 0){
-            String recurrenceEndDay = MeetingUtil.timeFormat(endDay, "yyyy年MM月dd日");
-            int count = localStore.getScheduledMeetingSetting().getRecurrenceCount();
-            String format = String.format(mActivity.getResources().getString(R.string.repetition_end_content), recurrenceEndDay, count+"");
-            tvRepetitionEnd.setText(format);
-        }
-
-        String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
+        String meetingType = setting.getMeetingType();
         if(!TextUtils.isEmpty(meetingType) && FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)) {
             rlRepetitionEnd.setVisibility(View.VISIBLE);
+            String freq = MeetingUtil.formatRecurrenceTypeContent(mActivity,setting.getRecurrenceType(),setting.getRecurrenceInterval());
+            tvRepetitionFreq.setText(freq);
+            long endDay = setting.getRecurrenceEndDay();
+            if(endDay != 0){
+                String recurrenceEndDay = MeetingUtil.timeFormat(endDay, "yyyy年MM月dd日");
+                int count = setting.getRecurrenceCount();
+                String format = String.format(mActivity.getResources().getString(R.string.repetition_end_content), recurrenceEndDay, count+"");
+                tvRepetitionEnd.setText(format);
+            }
+
         }else{
             rlRepetitionEnd.setVisibility(View.GONE);
+            tvRepetitionFreq.setText(getString(R.string.no_frequency));
         }
 
-        mute = localStore.getScheduledMeetingSetting().isMute();
+        mute = setting.isMute();
         stMute.setChecked(mute);
-        allowDialIn = localStore.getScheduledMeetingSetting().isGuestDialIn();
+        allowDialIn = setting.isGuestDialIn();
         stAllowDialIn.setChecked(allowDialIn);
-        watermarkEnable = localStore.getScheduledMeetingSetting().isWatermarkEnable();
+        watermarkEnable = setting.isWatermarkEnable();
         stWatermark.setChecked(watermarkEnable);
-        isPwdCheck = localStore.getScheduledMeetingSetting().isPwdCheck();
+        isPwdCheck = setting.isPwdCheck();
         stPassword.setChecked(isPwdCheck);
 
         TimeZone tz = TimeZone.getDefault();
@@ -308,11 +308,11 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             long minutes = durationSeconds % 3600 / 60;
             if(hour > 0){
                 if(minutes == 0){
-                    return String.valueOf(hour) + getString(R.string.time_hours);
+                    return hour + getString(R.string.time_hours);
                 }
-                return String.valueOf(hour) + getString(R.string.time_hours) + String.valueOf(minutes) + getString(R.string.time_minutes) ;
+                return hour + getString(R.string.time_hours) + minutes + getString(R.string.time_minutes) ;
             }else{
-                return String.valueOf(minutes) + getString(R.string.time_minutes) ;
+                return minutes + getString(R.string.time_minutes) ;
             }
         }
         return "";
@@ -321,16 +321,17 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
     private void onSaveScheduleMeetingSettings() {
         Log.i(TAG, "onSaveScheduleMeetingSettings");
         if(localStore != null){
+            ScheduledMeetingSetting setting = localStore.getScheduledMeetingSetting();
             meetingName = etMeetingName.getText().toString().trim();
             if(meetingRoomUsed){
-                localStore.getScheduledMeetingSetting().setMeetingRoomId(meetingRoomId);
-                localStore.getScheduledMeetingSetting().setPassword(null);
+                setting.setMeetingRoomId(meetingRoomId);
+                setting.setPassword(null);
             }else{
-                localStore.getScheduledMeetingSetting().setMeetingRoomId(null);
+                setting.setMeetingRoomId(null);
                 if(stPassword.isChecked()){
-                    localStore.getScheduledMeetingSetting().setPassword(null);
+                    setting.setPassword(null);
                 }else{
-                    localStore.getScheduledMeetingSetting().setPassword("");
+                    setting.setPassword("");
                 }
 
             }
@@ -339,23 +340,23 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             watermarkEnable = stWatermark.isChecked();
             isPwdCheck = stPassword.isChecked();
             Log.i(TAG, "onSaveScheduleMeetingSettings meetingName = "+meetingName);
-            localStore.getScheduledMeetingSetting().setMeetingName(meetingName);
-            localStore.getScheduledMeetingSetting().setStartTime(String.valueOf(startTimeMill));
-            localStore.getScheduledMeetingSetting().setEndTime(String.valueOf(startTimeMill+durationTime));
-            localStore.getScheduledMeetingSetting().setMute(mute);
-            localStore.getScheduledMeetingSetting().setGuestDialIn(allowDialIn);
-            localStore.getScheduledMeetingSetting().setWatermarkEnable(watermarkEnable);
-            localStore.getScheduledMeetingSetting().setPwdCheck(isPwdCheck);
-            String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
+            setting.setMeetingName(meetingName);
+            setting.setStartTime(String.valueOf(startTimeMill));
+            setting.setEndTime(String.valueOf(startTimeMill+durationTime));
+            setting.setMute(mute);
+            setting.setGuestDialIn(allowDialIn);
+            setting.setWatermarkEnable(watermarkEnable);
+            setting.setPwdCheck(isPwdCheck);
+            String meetingType = setting.getMeetingType();
             if(TextUtils.isEmpty(meetingType)) {
-                localStore.getScheduledMeetingSetting().setMeetingType(FrtcSDKMeetingType.RESERVATION.getTypeName());
+                setting.setMeetingType(FrtcSDKMeetingType.RESERVATION.getTypeName());
                 meetingType = FrtcSDKMeetingType.RESERVATION.getTypeName();
             }
             if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
                 String strDateDay = MeetingUtil.timeFormat(startTimeMill, "yyyy-MM-dd");
-                localStore.getScheduledMeetingSetting().setRecurrenceStartDay(MeetingUtil.timeFormatToLong(strDateDay, "yyyy-MM-dd"));
-                localStore.getScheduledMeetingSetting().setRecurrenceStartTime(startTimeMill);
-                localStore.getScheduledMeetingSetting().setRecurrenceEndTime(startTimeMill+durationTime);
+                setting.setRecurrenceStartDay(MeetingUtil.timeFormatToLong(strDateDay, "yyyy-MM-dd"));
+                setting.setRecurrenceStartTime(startTimeMill);
+                setting.setRecurrenceEndTime(startTimeMill+durationTime);
             }
         }
     }
@@ -566,7 +567,7 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             public void onClick(View v) {
                 onSaveScheduleMeetingSettings();
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(localStore.getScheduledMeetingSetting().getRecurrenceType(), false);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(false);
             }
         });
 

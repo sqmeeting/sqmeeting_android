@@ -54,7 +54,6 @@ public class ScheduledMeetingSetting {
 
     private String meeting_url;
     private String groupMeetingUrl;
-    private String repetitionFreq;
     private boolean isPwdCheck = false;
 
     public ScheduledMeetingSetting(){
@@ -79,14 +78,6 @@ public class ScheduledMeetingSetting {
 
 
     private String qrcode;
-
-    public String getRepetitionFreq() {
-        return repetitionFreq;
-    }
-
-    public void setRepetitionFreq(String repetitionFreq) {
-        this.repetitionFreq = repetitionFreq;
-    }
 
     public int getRecurrenceInterval() {
         return recurrenceInterval;
