@@ -69,7 +69,6 @@ public class LocalStore {
 
     private ArrayList<ScheduledMeeting> scheduledMeetings;
     private boolean isScheduledMeetingFullList;
-    private int scheduledRecurrenceMeetingCount;
     private List<UserInfo> users;
 
     private String userFilter = "";
@@ -237,14 +236,6 @@ public class LocalStore {
         return scheduledMeetings;
     }
 
-    public int getScheduledRecurrenceMeetingCount() {
-        return scheduledRecurrenceMeetingCount;
-    }
-
-    public void setScheduledRecurrenceMeetingCount(int scheduledRecurrenceMeetingCount) {
-        this.scheduledRecurrenceMeetingCount = scheduledRecurrenceMeetingCount;
-    }
-
     public String getUserFilter() {
         return userFilter;
     }
@@ -338,9 +329,7 @@ public class LocalStore {
     public void setMeetingOwnerId(String meetingOwnerId) {
         this.meetingOwnerId = meetingOwnerId;
         Set<String> roles = getRole();
-        if (roles.contains(RoleConstant.MEETING_OWNER)) {
-            roles.remove(RoleConstant.MEETING_OWNER);
-        }
+        roles.remove(RoleConstant.MEETING_OWNER);
         if(meetingOwnerId.equals(userId)){
             roles.add(RoleConstant.MEETING_OWNER);
         }
@@ -470,20 +459,20 @@ public class LocalStore {
     }
 
     public ArrayList<MeetingCall> getHistoryMeetings() {
-        ArrayList<MeetingCall> historyMeetings = null;
+        ArrayList<MeetingCall> historyMeetings;
         if (StringUtils.isNotBlank(this.userName) && StringUtils.isNotBlank(this.server)){
             String key = getHistoryMeetingKey(this.userName,this.server);
             if(!historyMeetingMap.containsKey(key)){
-                return new ArrayList<MeetingCall>();
+                return new ArrayList<>();
             }
             historyMeetings = historyMeetingMap.get(key);
             if (historyMeetings == null) {
-                historyMeetings = new ArrayList<MeetingCall>();
+                historyMeetings = new ArrayList<>();
                 historyMeetingMap.put(key, historyMeetings);
             }
             return historyMeetings;
         }else{
-            return new ArrayList<MeetingCall>();
+            return new ArrayList<>();
         }
     }
 

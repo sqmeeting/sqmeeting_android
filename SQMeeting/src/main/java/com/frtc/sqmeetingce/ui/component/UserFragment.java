@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.frtc.sqmeetingce.MainActivity;
 import com.frtc.sqmeetingce.R;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import frtc.sdk.log.Log;
 import frtc.sdk.model.ScheduledMeeting;
+import frtc.sdk.ui.component.BaseToast;
 import frtc.sdk.ui.dialog.ConfirmDlg;
 import frtc.sdk.ui.dialog.IConfirmDlgListener;
 import frtc.sdk.ui.model.LocalStore;
@@ -55,6 +57,8 @@ public class UserFragment extends BaseFragment implements HistoryMeetingAdapter.
     private ScheduledMeetingAdapter scheduledMeetingAdapter;
 
     public static final String KEY_TAB_SCHEDULE = "ScheduleMeeting";
+
+    private boolean onRefresh = false;
 
     public static UserFragment newInstance(Boolean param) {
         UserFragment fragment = new UserFragment();
@@ -133,7 +137,7 @@ public class UserFragment extends BaseFragment implements HistoryMeetingAdapter.
         ImageView btnScan = view.findViewById(R.id.menu_scan);
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { ;
+            public void onClick(View v) {
                 onCheckPermissionAndScan();
             }
         });
@@ -200,10 +204,8 @@ public class UserFragment extends BaseFragment implements HistoryMeetingAdapter.
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mActivity.isGetScheduleMeetings) {
-                    mActivity.isGetScheduleMeetings = true;
-                    mActivity.queryScheduledMeetingList(1, 500);
-                }
+                onRefresh = true;
+                mActivity.queryScheduledMeetingList(1, 500);
             }
         });
     }
@@ -212,6 +214,13 @@ public class UserFragment extends BaseFragment implements HistoryMeetingAdapter.
         scheduledMeetingAdapter.notifyDataSetChanged();
         if(tabScheduledMeeting.isSelected()){
             updateNoScheduledMeetingVisible();
+        }
+    }
+
+    public void onRefreshScheduledMeetingList(){
+        if(onRefresh){
+            BaseToast.showToast(mActivity,getString( R.string.text_scheduled_meeting_refresh_success), Toast.LENGTH_SHORT);
+            onRefresh = false;
         }
     }
 
@@ -331,15 +340,12 @@ public class UserFragment extends BaseFragment implements HistoryMeetingAdapter.
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case MainActivity.CAMERA_PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mActivity.startCaptureActivity();
-                } else {
-                    mActivity.showOpenCameraInformDlg();
-                }
-                break;
-            default:
+        if (requestCode == MainActivity.CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mActivity.startCaptureActivity();
+            } else {
+                mActivity.showOpenCameraInformDlg();
+            }
         }
     }
 

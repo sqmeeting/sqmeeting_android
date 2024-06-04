@@ -49,13 +49,6 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
         localStore = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
         init(view);
         setClickListener(view);
-        /*
-        if(isUpdate){
-            mActivity.previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
-        }else {
-            mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
-        }
-         */
         return view;
     }
 
@@ -85,7 +78,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             int totalSize = localStore.getScheduledMeetingSetting().getRecurrenceCount();
             String repetitionEndDes = String.format(mActivity.getResources().getString(R.string.recurrence_end), recurrenceEndDay, totalSize+"");
 
-            String recurrenceType = localStore.getScheduledMeetingSetting().getRecurrence_type();
+            String recurrenceType = localStore.getScheduledMeetingSetting().getRecurrenceType();
             if(!TextUtils.isEmpty(recurrenceType)) {
                 if (recurrenceType.equals(RecurrenceType.DAILY.getTypeName())){
                     freqDay.setText(repetitionFreq);
