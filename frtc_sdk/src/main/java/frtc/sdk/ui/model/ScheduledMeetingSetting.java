@@ -26,7 +26,7 @@ public class ScheduledMeetingSetting {
     private String ownerName;
 
     private String rate = MeetingCallRate.RATE_2048K.getRateValue();
-    private String recurrence_type;
+    private String recurrenceType = RecurrenceType.NO.getTypeName();
     private int recurrenceInterval;
     private long recurrenceStartTime;
     private long recurrenceEndTime;
@@ -86,14 +86,6 @@ public class ScheduledMeetingSetting {
 
     public void setRepetitionFreq(String repetitionFreq) {
         this.repetitionFreq = repetitionFreq;
-    }
-
-    public String getRecurrence_type() {
-        return recurrence_type;
-    }
-
-    public void setRecurrence_type(String recurrence_type) {
-        this.recurrence_type = recurrence_type;
     }
 
     public int getRecurrenceInterval() {
@@ -207,11 +199,11 @@ public class ScheduledMeetingSetting {
     }
 
     public String getRecurrenceType() {
-        return recurrence_type;
+        return recurrenceType;
     }
 
     public void setRecurrenceType(String recurrenceType) {
-        this.recurrence_type = recurrenceType;
+        this.recurrenceType = recurrenceType;
     }
 
     public String getMeetingRoomId() {

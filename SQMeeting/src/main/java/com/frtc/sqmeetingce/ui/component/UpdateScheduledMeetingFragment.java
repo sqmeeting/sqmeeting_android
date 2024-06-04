@@ -102,9 +102,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
 
     private long startTimeMill;
     private long durationTime;
-
     private String reservationId;
-    private int totalSize;
     private LinearLayout progressView;
 
     public UpdateScheduledMeetingFragment() {
@@ -154,15 +152,16 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         rlRepetitionEnd = view.findViewById(R.id.rl_repetition_end);
         tvRepetitionEnd = view.findViewById(R.id.repetition_end_content);
         String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
-        String startTimeStr = "";
+        String startTimeStr;
         if(!TextUtils.isEmpty(meetingType) && meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())) {
             repetitionFreqItem.setVisibility(View.VISIBLE);
             rlRepetitionEnd.setVisibility(View.VISIBLE);
             String recurrenceType = MeetingUtil.formatRecurrenceTypeContent(mActivity, localStore.getScheduledMeetingSetting().getRecurrenceType(),
                     localStore.getScheduledMeetingSetting().getRecurrenceInterval());
+            Log.d(TAG,"tvRepetitionFreq:"+localStore.getScheduledMeetingSetting().getRecurrenceType()+","+localStore.getScheduledMeetingSetting().getRecurrenceInterval());
             tvRepetitionFreq.setText(recurrenceType);
             String recurrenceEndDay = MeetingUtil.timeFormat(localStore.getScheduledMeetingSetting().getRecurrenceEndDay(), "yyyy年MM月dd日");
-            totalSize = localStore.getScheduledMeetingSetting().getRecurrenceCount();
+            int totalSize = localStore.getScheduledMeetingSetting().getRecurrenceCount();
             String format = String.format(mActivity.getResources().getString(R.string.recurrence_end), recurrenceEndDay, totalSize+"");
             tvRepetitionEnd.setText(format);
             startTimeStr = localStore.getScheduledMeetingSetting().getRecurrenceStartTime() + "";
@@ -207,11 +206,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             meetingRoomUsed = false;
             hideMeetingRoomLayout();
             String pwd = localStore.getScheduledMeetingSetting().getPassword();
-            if((pwd == null) || pwd.equals("")){
-                stPassword.setChecked(false);
-            }else {
-                stPassword.setChecked(true);
-            }
+            stPassword.setChecked((pwd != null) && !pwd.isEmpty());
 
         }else{
             stMeetingRoomUsed.setChecked(true);
@@ -278,11 +273,11 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             long minutes = durationSeconds % 3600 / 60;
             if(hour > 0){
                 if(minutes == 0){
-                    return String.valueOf(hour) + getString(R.string.time_hours) ;
+                    return hour + getString(R.string.time_hours) ;
                 }
-                return String.valueOf(hour) + getString(R.string.time_hours) + String.valueOf(minutes) + getString(R.string.time_minutes) ;
+                return hour + getString(R.string.time_hours) + minutes + getString(R.string.time_minutes) ;
             }else{
-                return String.valueOf(minutes) + getString(R.string.time_minutes) ;
+                return minutes + getString(R.string.time_minutes) ;
             }
         }
         return "";
@@ -411,8 +406,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         etMeetingName.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                }
+
             }
         });
 
@@ -657,7 +651,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             BaseToast.showToast(mActivity, getString(R.string.start_time_valid_notice), Toast.LENGTH_SHORT);
             return;
         }
-        progressView.setVisibility(View.VISIBLE);
+
         onSaveScheduleMeetingSettings();
         mActivity.updateScheduleMeeting(reservationId);
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
@@ -689,11 +683,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         etMeetingRoomId.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
 
-                } else {
-
-                }
             }
         });
 
@@ -712,14 +702,5 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             public void afterTextChanged(Editable s) {
             }
         });
-    }
-
-
-    public void setRecurrenceCount(int totalSize) {
-        this.totalSize = totalSize;
-    }
-
-    public void upDateDone() {
-        progressView.setVisibility(View.GONE);
     }
 }

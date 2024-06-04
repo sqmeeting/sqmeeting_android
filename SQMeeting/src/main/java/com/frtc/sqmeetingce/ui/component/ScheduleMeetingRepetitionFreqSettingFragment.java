@@ -277,9 +277,9 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
         if(localStore != null){
             localStore.getScheduledMeetingSetting().setMeetingType(FrtcSDKMeetingType.RECURRENCE.getTypeName());
             if(firstValue.equals(getString(R.string.repetition_type_day))){
-                localStore.getScheduledMeetingSetting().setRecurrence_type(RecurrenceType.DAILY.getTypeName());
+                localStore.getScheduledMeetingSetting().setRecurrenceType(RecurrenceType.DAILY.getTypeName());
             }else if(firstValue.equals(getString(R.string.repetition_type_week))){
-                localStore.getScheduledMeetingSetting().setRecurrence_type(RecurrenceType.WEEKLY.getTypeName());
+                localStore.getScheduledMeetingSetting().setRecurrenceType(RecurrenceType.WEEKLY.getTypeName());
                 List<Integer> saveList = new ArrayList<>();
                 for(int i=0; i < dataWeek.length; i++){
                     if(!TextUtils.isEmpty(dataWeek[i])){
@@ -288,7 +288,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
                 }
                 localStore.getScheduledMeetingSetting().setRecurrenceDaysOfWeek(saveList);
             }else if(firstValue.equals(getString(R.string.repetition_type_month))){
-                localStore.getScheduledMeetingSetting().setRecurrence_type(RecurrenceType.MONTHLY.getTypeName());
+                localStore.getScheduledMeetingSetting().setRecurrenceType(RecurrenceType.MONTHLY.getTypeName());
                 List<Integer> saveList = new ArrayList<>();
                 for(int i=0; i < dataMonth.length; i++){
                     if(!TextUtils.isEmpty(dataMonth[i])){

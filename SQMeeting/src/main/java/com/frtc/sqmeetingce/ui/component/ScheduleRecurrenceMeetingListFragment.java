@@ -166,7 +166,7 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
 
             @Override
             public void onEditRecurrenceMeeting() {
-                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING);
+                mActivity.showUpdateRecurrenceMeetingFragment();
             }
 
             @Override
@@ -329,10 +329,6 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
             return "";
         }
         return str;
-    }
-
-    public String getMeetingRecurrenceGid(){
-        return scheduledMeetings.get(0).getRecurrence_gid();
     }
 
     @Override

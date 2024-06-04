@@ -152,19 +152,6 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
         rlRepetitionEnd = view.findViewById(R.id.rl_repetition_end);
         tvRepetitionEnd = view.findViewById(R.id.repetition_end_content);
 
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            String recurrenceEndDay = bundle.getString("recurrenceEndDay");
-            int count = bundle.getInt("count");
-            if(!TextUtils.isEmpty(recurrenceEndDay)) {
-                rlRepetitionEnd.setVisibility(View.VISIBLE);
-                String format = String.format(mActivity.getResources().getString(R.string.repetition_end_content), recurrenceEndDay, count+"");
-                tvRepetitionEnd.setText(format);
-            }
-        }
-         */
-
         stMute = view.findViewById(R.id.switch_mute);
         stAllowDialIn = view.findViewById(R.id.switch_allow_visitors_to_dial_in);
         stWatermark = view.findViewById(R.id.switch_watermark);
