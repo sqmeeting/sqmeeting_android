@@ -81,6 +81,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
     private String startTimeFormat;
     private boolean isUpdate = false;
 
+    public static final String BUNDLE_KEY = "isUpdate";
 
     @Nullable
     @Override
@@ -114,13 +115,12 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
         startTimeFormat = MeetingUtil.strTimeFormat(startTime, "yyyy-MM-dd");
         startWeekDayPosition = MeetingUtil.dateToWeekPosition(mActivity, startTimeFormat);
         weekAdapter = new WeekAdapter(mActivity);
-        String freqType = "";
         Bundle bundle = getArguments();
         if (bundle != null) {
-            freqType = getArguments().getString("freqType");
-            isUpdate = bundle.getBoolean("isUpdate");
+            isUpdate = bundle.getBoolean(BUNDLE_KEY);
         }
         String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
+        String freqType = localStore.getScheduledMeetingSetting().getRecurrenceType();
         initData(freqType, meetingType);
         weekAdapter.setStartWeekDay(startWeekDayPosition);
         weekAdapter.setDataWeek(dataWeek);
@@ -307,7 +307,6 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
                 return;
             }
             localStore.getScheduledMeetingSetting().setRecurrenceEndDay(date.getTime() + 24 * 60 * 60 * 1000L - 1000L);
-            localStore.getScheduledMeetingSetting().setRepetitionFreq(freqContent.getText().toString());
             localStore.getScheduledMeetingSetting().setRecurrenceCount(calcCount());
         }
     }
@@ -319,7 +318,6 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
             public void onClick(View v) {
                 Arrays.fill(dataWeek, "");
                 Arrays.fill(dataMonth, "");
-                //mActivity.replaceFragmentWithTag(mActivity.previousTag);
                 if(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ.equals(mActivity.previousTag)){
                     mActivity.showScheduleMeetingRepetitionFreqFragment(isUpdate);
                 }else{
@@ -333,10 +331,8 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
             @Override
             public void onClick(View v) {
                 updateLocalStore();
-                //int count = calcCount();
                 Arrays.fill(dataWeek, "");
                 Arrays.fill(dataMonth, "");
-                //mActivity.showScheduleMeetingFragment(meetingEndDate.getText().toString(), count, isUpdate);
                 mActivity.showScheduleMeetingFragment(isUpdate);
             }
         });

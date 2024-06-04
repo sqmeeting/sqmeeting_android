@@ -475,7 +475,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"create instant meeting:"+result);
                             CreateInstantMeetingResponse response = JSONUtil.transform(result, CreateInstantMeetingResponse.class);
                             CreateInstantMeetingResult createInstantMeetingResult = new CreateInstantMeetingResult();
                             createInstantMeetingResult.setMeetingName(response.getMeeting_name());
@@ -517,7 +516,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"createScheduledMeeting:"+result);
                             CreateScheduledMeetingResult createScheduledMeetingResult = JSONUtil.transform(result, CreateScheduledMeetingResult.class);
                             broadcastCreateScheduledMeetingResult(resultType, createScheduledMeetingResult);
                         }
@@ -548,12 +546,10 @@ public class ManagementService implements IManagementService {
                 }else {
                     url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(updateScheduledMeetingParam), CONTEXT_MEETING_SCHEDULE_RESERVATION, updateScheduledMeetingParam.getReservationId(), params);
                 }
-                Log.d(TAG,"updateScheduledMeeting url: "+url);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"updateScheduledMeeting:"+result);
                             broadcastUpdateScheduledMeetingResult(resultType);
                         }
                     });
@@ -604,7 +600,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncGet(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"getScheduledMeeting:"+result);
                             ScheduledMeetingResult scheduledMeetingResult = JSONUtil.transform(result, ScheduledMeetingResult.class);
                             broadcastGetScheduledMeetingResult(resultType,scheduledMeetingResult);
                         }
@@ -633,7 +628,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncGet(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"getScheduledMeetingList:"+result);
                             ScheduledMeetingListResult scheduledMeetingListResult = JSONUtil.transform(result, ScheduledMeetingListResult.class);
                             broadcastGetScheduledMeetingListResult(resultType,scheduledMeetingListResult);
                         }
@@ -663,7 +657,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncGet(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"getScheduledRecurrenceMeetingList:"+result);
                             RecurrenceMeetingListResult recurrenceMeetingListResult = JSONUtil.transform(result, RecurrenceMeetingListResult.class);
                             broadcastGetScheduledRecurrenceMeetingListResult(resultType,recurrenceMeetingListResult);
                         }
@@ -714,7 +707,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_TOKEN, commonMeetingParam.getToken());
                 String data = JSONUtil.toJSONString(commonMeetingParam);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getMeetingServerAddress(commonMeetingParam), CONTEXT_SELF_UNMUTE, commonMeetingParam.getMeetingNumber(), params);
-                Log.d(TAG, "unMuteSelf() url = "+ url);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
@@ -902,12 +894,10 @@ public class ManagementService implements IManagementService {
                 }
                 String data = JSONUtil.toJSONString(changeDisplayNameParam);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getMeetingServerAddress(changeDisplayNameParam), CONTEXT_CHANGE_DISPLAYNAME, changeDisplayNameParam.getMeetingNumber(), params);
-                Log.d(TAG, "changeNameParticipant url = "+url);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG, "changeNameParticipant "+ resultType.toString() + "   name = "+ changeDisplayNameParam.getDisplay_name());
                             broadcastChangeDisplayNameResult(resultType, changeDisplayNameParam.getDisplay_name(), changeDisplayNameParam.getClientId().equals(changeDisplayNameParam.getClient_id()));
                         }
                     });
@@ -1017,7 +1007,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, startOverlayParam.getClientId());
                 params.put(KEY_TOKEN, startOverlayParam.getToken());
                 String data = JSONUtil.toJSONString(startOverlayParam);
-                Log.d(TAG,"startOverlay"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(startOverlayParam), CONTEXT_OVERLAY, startOverlayParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1067,7 +1056,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, disconnectParticipantParam.getClientId());
                 params.put(KEY_TOKEN, disconnectParticipantParam.getToken());
                 String data = JSONUtil.toJSONString(disconnectParticipantParam);
-                Log.d(TAG,"disconnectParticipant"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(disconnectParticipantParam), CONTEXT_DISCONNECT_PARTICIPANT, disconnectParticipantParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncDelete(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1117,7 +1105,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, startRecordingParam.getClientId());
                 params.put(KEY_TOKEN, startRecordingParam.getToken());
                 String data = JSONUtil.toJSONString(startRecordingParam);
-                Log.d(TAG,"startRecord:"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(startRecordingParam), CONTEXT_RECORDING, startRecordingParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1144,7 +1131,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, stopRecordingParam.getClientId());
                 params.put(KEY_TOKEN, stopRecordingParam.getToken());
                 String data = JSONUtil.toJSONString(stopRecordingParam);
-                Log.d(TAG,"stopRecord"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(stopRecordingParam), CONTEXT_RECORDING, stopRecordingParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncDelete(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1170,7 +1156,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, startLiveParam.getClientId());
                 params.put(KEY_TOKEN, startLiveParam.getToken());
                 String data = JSONUtil.toJSONString(startLiveParam);
-                Log.d(TAG,"startLive:"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(startLiveParam), CONTEXT_LIVE, startLiveParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1196,7 +1181,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, stopLiveParam.getClientId());
                 params.put(KEY_TOKEN, stopLiveParam.getToken());
                 String data = JSONUtil.toJSONString(stopLiveParam);
-                Log.d(TAG,"stopLive"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(stopLiveParam), CONTEXT_LIVE, stopLiveParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncDelete(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1222,7 +1206,6 @@ public class ManagementService implements IManagementService {
                 params.put(KEY_CLIENT_ID, pinParam.getClientId());
                 params.put(KEY_TOKEN, pinParam.getToken());
                 String data = JSONUtil.toJSONString(pinParam);
-                Log.d(TAG,"pinForMeeting:"+data);
                 String url = FrtcHttpClient.getInstance(context).buildUrl(getServerAddress(pinParam), CONTEXT_PIN, pinParam.getMeetingNumber(), params);
                 try {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
@@ -1277,7 +1260,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"addMeetingIntoMeetingList:"+result);
                             broadcastAddMeetingIntoMeetingListResult(resultType);
                         }
                     });
@@ -1304,7 +1286,6 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncDelete(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
-                            Log.d(TAG,"removeMeetingFromMeetingList:"+result);
                             broadcastRemoveMeetingFromMeetingList(resultType);
                         }
                     });

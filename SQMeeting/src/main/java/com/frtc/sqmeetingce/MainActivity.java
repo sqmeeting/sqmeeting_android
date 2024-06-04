@@ -2750,10 +2750,9 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         return false;
     }
 
-    public void showScheduleMeetingRepetitionFreqSetting(String freqType, boolean isUpdateRecurrence){
+    public void showScheduleMeetingRepetitionFreqSetting(boolean isUpdateRecurrence){
         Bundle bundle = new Bundle();
-        bundle.putString("freqType",freqType);
-        bundle.putBoolean("isUpdateRecurrence", isUpdateRecurrence);
+        bundle.putBoolean(ScheduleMeetingRepetitionFreqSettingFragment.BUNDLE_KEY, isUpdateRecurrence);
         ScheduleMeetingRepetitionFreqSettingFragment fragment = new ScheduleMeetingRepetitionFreqSettingFragment();
         fragment.setArguments(bundle);
         replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ_SETTING);
@@ -2772,7 +2771,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
 
     public void showScheduleMeetingRepetitionFreqFragment(boolean updateRecurrence) {
         Bundle bundle = new Bundle();
-        bundle.putBoolean("isUpdateRecurrence", updateRecurrence);
+        bundle.putBoolean(ScheduleMeetingRepetitionFreqFragment.BUNDLE_KEY, updateRecurrence);
         ScheduleMeetingRepetitionFreqFragment fragment = new ScheduleMeetingRepetitionFreqFragment();
         fragment.setArguments(bundle);
         replaceFragmentWithInstance(fragment,FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ);
