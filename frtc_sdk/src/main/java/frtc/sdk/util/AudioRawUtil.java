@@ -24,14 +24,18 @@ public class AudioRawUtil {
         return instance;
     }
 
-    //
+    public static void release(){
+        instance = null;
+    }
+
     public void stop(){
         if (player != null) {
             try {
-                if (player.isPlaying()) {
+                if(player.isPlaying()){
                     player.stop();
                 }
                 player.release();
+                player = null;
             } catch (Exception e) {
                 Log.e("AudioRawUtil", "Audio player stop Exception", e);
             }
@@ -43,6 +47,7 @@ public class AudioRawUtil {
                 player.setLooping(true);
                 player.start();
             } catch (Exception e) {
+                Log.e("AudioRawUtil","playback error",e);
                 stop();
             }
         }
