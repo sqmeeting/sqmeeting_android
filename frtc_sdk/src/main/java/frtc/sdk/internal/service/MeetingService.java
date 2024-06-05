@@ -709,7 +709,10 @@ public class MeetingService implements IMeetingService {
         }
         return null;
     }
-
+    @Override
+    public boolean isCrossServer(){
+        return getMeetingStatusInfo().isCrossServer();
+    }
     @Override
     public void startMeetingReminderTimer(int timerID, int duration, boolean periodic) {
         try {
