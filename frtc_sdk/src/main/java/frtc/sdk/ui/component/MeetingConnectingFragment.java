@@ -27,6 +27,7 @@ public class MeetingConnectingFragment extends Fragment {
     @Override
     public void onDestroyView() {
         AudioRawUtil.getInstance(getContext()).stop();
+        AudioRawUtil.release();
         handler.removeCallbacks(runnable);
         super.onDestroyView();
     }
