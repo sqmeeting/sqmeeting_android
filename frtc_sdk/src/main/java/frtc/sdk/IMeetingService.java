@@ -52,6 +52,7 @@ public interface IMeetingService {
     void stopSendContent();
 
     String getMeetingServerAddress();
+    boolean isCrossServer();
 
     void startMeetingReminderTimer(int timerID, int duration, boolean periodic);
     void stopTimer(int timerID);

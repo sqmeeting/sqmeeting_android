@@ -218,6 +218,10 @@ public final class FrtcCall implements IFrtcCallAPI {
     }
 
     @Override
+    public boolean isCrossServer(){
+        return meetingManager.isCrossServer();
+    }
+    @Override
     public void startMeetingReminderTimer(int timerID, int duration, boolean periodic) {
         meetingManager.startMeetingReminderTimer(timerID, duration, periodic);
     }

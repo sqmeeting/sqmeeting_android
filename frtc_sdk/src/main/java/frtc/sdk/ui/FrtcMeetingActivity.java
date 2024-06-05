@@ -299,6 +299,8 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
 
     private void meetingResume() {
         entered_first = false;
+        isCrossServer = frtcCall.isCrossServer();
+        crossServerAddr = isCrossServer ? frtcCall.getMeetingServerAddress() : "";
         if(isLocalParticipantInfoAvailable()){
             meetingControlBar.setToolbarParticipantCount(Integer.toString(participantInfos.size()));
         }else{
