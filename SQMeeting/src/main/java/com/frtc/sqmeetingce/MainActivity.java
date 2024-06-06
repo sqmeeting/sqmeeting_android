@@ -1438,7 +1438,11 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             Log.d(TAG, "qrcode result is " + result);
             if(result.startsWith("https://") && result.contains("/j/")){
                 Log.d(TAG, "enhance qrcode result is " + result);
-                queryMeetingInfo(result);
+                if(isNetworkConnected()){
+                    queryMeetingInfo(result);
+                }else{
+                    showConnectionErrorNotice();
+                }
             } else {
                 BaseToast.showToast(this, getString(R.string.msg_qrscan_result_error), Toast.LENGTH_SHORT);
             }
