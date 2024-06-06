@@ -256,6 +256,12 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_USER);
     }
 
+    public void showUserFragment(){
+        localStore.resetScheduledMeetingSetting();
+        LocalStoreBuilder.getInstance(getApplicationContext()).setLocalStore(localStore);
+        replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -680,7 +686,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             scheduledMeetingSetting.setRecurrenceDaysOfMonth(scheduledMeeting.getRecurrenceDaysOfMonth());
 
             scheduledMeetingSetting.clearRecurrenceMeetings();
-            scheduledMeetingSetting.getRecurrenceMeetings().addAll(scheduledMeeting.getRecurrenceReservationList());
         }
     }
 
@@ -1021,9 +1026,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         param.setReservationId(reservationId);
         param.setDeleteGroup(isCheck ? "true" : "false");
         frtcManagement.deleteScheduledMeeting(param);
-        if(isCheck){
-            localStore.resetScheduledMeetingSetting();
-        }
     }
 
     public void getScheduledMeetingById(String reservationId){
@@ -2322,7 +2324,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                                 BaseFragment scheduledMeetingDetailsFragment = getFragmentByTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
                                 if(scheduledMeetingDetailsFragment instanceof ScheduledMeetingDetailsFragment
                                         && scheduledMeetingDetailsFragment.isVisible()){
-                                    ((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).updateRecurrenceView();
+                                    ((ScheduledMeetingDetailsFragment)scheduledMeetingDetailsFragment).updateMeetingDetailsView();
                                 }
                             }
                             break;

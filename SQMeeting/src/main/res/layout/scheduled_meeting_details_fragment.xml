@@ -398,7 +398,8 @@
             android:text="@string/saving_calendar"
             android:textSize="18sp"
             android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

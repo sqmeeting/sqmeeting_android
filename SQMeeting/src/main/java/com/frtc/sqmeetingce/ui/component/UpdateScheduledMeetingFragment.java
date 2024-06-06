@@ -371,9 +371,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
 
     @Override
     public void onBack() {
-        localStore.resetScheduledMeetingSetting();
-        LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).setLocalStore(localStore);
-        mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+        mActivity.showUserFragment();
     }
 
     private void setClickListener(View view) {
@@ -382,9 +380,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                localStore.resetScheduledMeetingSetting();
-                LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).setLocalStore(localStore);
-                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+                mActivity.showUserFragment();
             }
         });
 

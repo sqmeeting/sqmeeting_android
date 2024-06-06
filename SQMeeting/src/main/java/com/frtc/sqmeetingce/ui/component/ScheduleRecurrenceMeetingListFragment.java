@@ -238,7 +238,7 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
     private void deleteScheduledMeeting(boolean isCheck) {
 
         mActivity.deleteScheduledMeeting(scheduledMeetings.get(0).getReservation_id(), isCheck);
-        mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+        mActivity.showUserFragment();
     }
 
     private void showCancelMeetingConfirmDlg() {

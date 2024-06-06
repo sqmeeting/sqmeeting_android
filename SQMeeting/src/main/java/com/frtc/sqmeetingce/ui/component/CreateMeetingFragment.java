@@ -102,10 +102,6 @@ public class CreateMeetingFragment extends BaseFragment implements MeetingRoomAd
 
     }
 
-    private void saveMeetingSettings() {
-        Log.i(TAG, "saveMeetingSettings()");
-    }
-
     public void onItemClicked(MeetingRoom selectedMeetingRoom){
         String meetingNumber = selectedMeetingRoom.getMeetingNumber();
         etMeetingRoomId.setText(meetingNumber);
@@ -114,7 +110,6 @@ public class CreateMeetingFragment extends BaseFragment implements MeetingRoomAd
 
     @Override
     public void onBack() {
-        saveMeetingSettings();
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
     }
 
@@ -247,7 +242,7 @@ public class CreateMeetingFragment extends BaseFragment implements MeetingRoomAd
             localStore = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
         }
 
-        String meetingName = localStore.getDisplayName() + mActivity.getResources().getString(R.string.meeting_name_postfix);
+        String meetingName = localStore.getDisplayName() + mActivity.getResources().getString(R.string.instant_meeting_name_postfix);
 
         videoOn = stVideo.isChecked();
         localStore.setCameraOn(videoOn);
@@ -285,7 +280,6 @@ public class CreateMeetingFragment extends BaseFragment implements MeetingRoomAd
     }
     
     private void onClickSave() {
-        saveMeetingSettings();
         mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
     }
 }
