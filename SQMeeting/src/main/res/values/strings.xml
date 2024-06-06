@@ -65,6 +65,7 @@
 
     <string name="meeting_id_label">Meeting ID: </string>
     <string name="meeting_name_postfix">\'s meeting</string>
+    <string name="instant_meeting_name_postfix">\'s instant meeting</string>
     <string name="schedule_meeting_postfix">\'s meeting</string>
 
     <string name="meeting_details_title">Meeting Detail</string>

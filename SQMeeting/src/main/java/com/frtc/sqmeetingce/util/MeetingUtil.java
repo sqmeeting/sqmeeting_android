@@ -191,7 +191,7 @@ public class MeetingUtil {
             recurrenceDaysOfWeek.sort(new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
-                    return Math.min(o1,o2);
+                    return o1.compareTo(o2);
                 }
             });
 
@@ -213,7 +213,7 @@ public class MeetingUtil {
             recurrenceDaysOfMonth.sort(new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
-                    return Math.min(o1,o2);
+                    return o1.compareTo(o2);
                 }
             });
 

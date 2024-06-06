@@ -66,6 +66,7 @@
 
     <string name="meeting_id_label">会议号：</string>
     <string name="meeting_name_postfix">的会议</string>
+    <string name="instant_meeting_name_postfix">的即时会议</string>
     <string name="schedule_meeting_postfix">的预约会议</string>
 
     <string name="meeting_details_title">会议详情</string>

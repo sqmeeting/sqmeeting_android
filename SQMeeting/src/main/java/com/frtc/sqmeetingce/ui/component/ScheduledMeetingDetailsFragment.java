@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,8 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
     private Button btnEdit;
     private ConstraintLayout clAddCalendarEvent, clMeetingRecurrence;
 
+    private LinearLayout progressView;
+
     private ScheduledMeeting scheduledMeeting;
     private ScheduledMeetingSetting scheduledMeetingSetting;
     public ScheduledMeetingDetailsFragment() {
@@ -101,6 +104,8 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         clAddCalendarEvent = view.findViewById(R.id.cl_add_calendar_event);
         clMeetingRecurrence = view.findViewById(R.id.cl_meeting_recurrence);
 
+        progressView = view.findViewById(R.id.progressView);
+
 
         updateMeetingDetailsView();
 
@@ -117,11 +122,17 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
     }
 
     public void updateMeetingDetailsView(){
+        Log.d(TAG,"updateMeetingDetailsView:");
         scheduledMeetingSetting = localStore.getScheduledMeetingSetting();
         if(scheduledMeetingSetting != null){
             meetingType = scheduledMeetingSetting.getMeetingType();
             if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)){
+                clMeetingRecurrence.setVisibility(View.VISIBLE);
+                String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingSetting.getRecurrenceType(), scheduledMeetingSetting.getRecurrenceInterval())
+                        + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingSetting.getRecurrenceMeetings().size()+"");
+                recurrenceType.setText(str);
                 scheduledMeeting = localStore.getScheduledMeetingSetting().getRecurrenceMeetingByPosition(0);
+                Log.d(TAG,"updateMeetingDetailsView:"+scheduledMeeting);
                 if(scheduledMeeting != null){
                     meetingName = scheduledMeeting.getMeeting_name();
                     meetingNumber = scheduledMeeting.getMeeting_number();
@@ -136,11 +147,10 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                     tvMeetingSpendTime.setText(formatDurationTime());
                     tvMeetingOwner.setText(ownerName);
                     reservationId = scheduledMeeting.getReservation_id();
+                    hideLoadingView();
+                }else{
+                    showLoadingView();
                 }
-                clMeetingRecurrence.setVisibility(View.VISIBLE);
-                String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingSetting.getRecurrenceType(), scheduledMeetingSetting.getRecurrenceInterval())
-                        + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingSetting.getRecurrenceMeetings().size()+"");
-                recurrenceType.setText(str);
             }else{
                 meetingName = scheduledMeetingSetting.getMeetingName();
                 meetingNumber = scheduledMeetingSetting.getMeetingNumber();
@@ -172,15 +182,20 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         }
     }
 
-    public void updateRecurrenceView(){
-        if(scheduledMeetingSetting != null){
-            meetingType = scheduledMeetingSetting.getMeetingType();
-            if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType)){
-                String str = MeetingUtil.formatRecurrenceTypeContent(mActivity, scheduledMeetingSetting.getRecurrenceType(), scheduledMeetingSetting.getRecurrenceInterval())
-                        + " " + String.format(getString(R.string.recurrence_remain), scheduledMeetingSetting.getRecurrenceMeetings().size()+"");
-                recurrenceType.setText(str);
-            }
+    private Runnable loadingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            progressView.setVisibility(View.VISIBLE);
         }
+    };
+
+    private void showLoadingView(){
+        progressView.postDelayed(loadingRunnable,100);
+    }
+
+    private void hideLoadingView(){
+        progressView.removeCallbacks(loadingRunnable);
+        progressView.setVisibility(View.GONE);
     }
 
     private boolean isToday(long startTime){
@@ -255,7 +270,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+                mActivity.showUserFragment();
             }
         });
 
@@ -503,7 +518,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
     private void deleteScheduledMeeting(boolean isCheck) {
 
         mActivity.deleteScheduledMeeting(reservationId, isCheck);
-        mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+        mActivity.showUserFragment();
     }
 
     private void launchMeeting() {
@@ -512,7 +527,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
 
     @Override
     public void onBack() {
-        mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_USER);
+        mActivity.showUserFragment();
     }
 
     @Override
