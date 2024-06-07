@@ -174,6 +174,9 @@ public class MeetingUtil {
 
     public static String formatRecurrenceContent(Context context, String recurrenceType, int recurrenceInterval,
                                                  List<Integer> recurrenceDaysOfWeek, List<Integer> recurrenceDaysOfMonth) {
+        if(TextUtils.isEmpty(recurrenceType)){
+            return "";
+        }
         String str = "";
         String str1 = context.getString(frtc.sdk.R.string.repetition_frequency_content);
         if(recurrenceType.equals(RecurrenceType.DAILY.getTypeName())){
@@ -184,47 +187,57 @@ public class MeetingUtil {
             }
         }else if(recurrenceType.equals(RecurrenceType.WEEKLY.getTypeName())){
             if(recurrenceInterval == 1){
-                str = String.format(str1, context.getResources().getString(frtc.sdk.R.string.repetition_type_one_week)) + "(";
+                str = String.format(str1, context.getResources().getString(frtc.sdk.R.string.repetition_type_one_week));
             }else {
-                str = String.format(str1, recurrenceInterval + context.getResources().getString(frtc.sdk.R.string.repetition_type_week)) + "(";
+                str = String.format(str1, recurrenceInterval + context.getResources().getString(frtc.sdk.R.string.repetition_type_week));
             }
-            recurrenceDaysOfWeek.sort(new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o1.compareTo(o2);
-                }
-            });
 
-            for(int i = 0; i < recurrenceDaysOfWeek.size(); i++){
-                if(i == 0){
-                    str += formatWeekDay(context, recurrenceDaysOfWeek.get(i));
-                }else {
-                    str += "、" + formatWeekDay(context, recurrenceDaysOfWeek.get(i));
+            if(recurrenceDaysOfWeek != null && !recurrenceDaysOfWeek.isEmpty()){
+                recurrenceDaysOfWeek.sort(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
+
+                str += "(";
+
+                for(int i = 0; i < recurrenceDaysOfWeek.size(); i++){
+                    if(i == 0){
+                        str += formatWeekDay(context, recurrenceDaysOfWeek.get(i));
+                    }else {
+                        str += "、" + formatWeekDay(context, recurrenceDaysOfWeek.get(i));
+                    }
                 }
+
+                str += ")";
             }
-            str += ")";
         }else if(recurrenceType.equals(RecurrenceType.MONTHLY.getTypeName())){
             if(recurrenceInterval == 1){
-                str = String.format(str1, context.getResources().getString(frtc.sdk.R.string.repetition_type_one_month)) + "(";
+                str = String.format(str1, context.getResources().getString(frtc.sdk.R.string.repetition_type_one_month));
             }else {
-                str = String.format(str1, recurrenceInterval + context.getResources().getString(frtc.sdk.R.string.repetition_type_month)) + "(";
+                str = String.format(str1, recurrenceInterval + context.getResources().getString(frtc.sdk.R.string.repetition_type_month));
             }
 
-            recurrenceDaysOfMonth.sort(new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o1.compareTo(o2);
-                }
-            });
+            if(recurrenceDaysOfMonth != null && !recurrenceDaysOfMonth.isEmpty()){
+                recurrenceDaysOfMonth.sort(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
 
-            for(int i = 0; i < recurrenceDaysOfMonth.size(); i++){
-                if(i == 0){
-                    str += recurrenceDaysOfMonth.get(i) + "";
-                }else {
-                    str += "、" + recurrenceDaysOfMonth.get(i) + "";
+                str += "(";
+
+                for(int i = 0; i < recurrenceDaysOfMonth.size(); i++){
+                    if(i == 0){
+                        str += recurrenceDaysOfMonth.get(i) + "";
+                    }else {
+                        str += "、" + recurrenceDaysOfMonth.get(i) + "";
+                    }
                 }
+                str += context.getResources().getString(frtc.sdk.R.string.repetition_type_day_th) + ")";
             }
-            str += context.getResources().getString(frtc.sdk.R.string.repetition_type_day_th) + ")";
         }
         return str;
     }

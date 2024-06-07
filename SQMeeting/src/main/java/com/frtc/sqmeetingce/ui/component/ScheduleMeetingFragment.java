@@ -561,7 +561,7 @@ public class ScheduleMeetingFragment extends BaseFragment implements MeetingRoom
             public void onClick(View v) {
                 onSaveScheduleMeetingSettings();
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(false);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(false, localStore.getScheduledMeetingSetting().getRecurrenceType());
             }
         });
 

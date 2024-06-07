@@ -393,19 +393,21 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                     + mContext.getResources().getString(R.string.start_time_title) + formatScheduleTime(meetingStartTime) + "\n"
                     + mContext.getResources().getString(R.string.end_time_title) + formatScheduleTime(meetingEndTime) + "\n";
         }
-        if(scheduledMeeting != null && meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
-            long startTimeMill = scheduledMeeting.getRecurrenceStartTime();
-            long endTimeMill = scheduledMeeting.getRecurrenceEndTime();
-            String[] strStartTime = MeetingUtil.timeFormat(startTimeMill, "yyyy-MM-dd HH:mm").split(" ");
-            String[] strEndTime = MeetingUtil.timeFormat(endTimeMill,"yyyy-MM-dd HH:mm").split(" ");
-            long recurrenceEndDay = scheduledMeeting.getRecurrenceEndDay();
-            String recurrenceType = scheduledMeeting.getRecurrence_type();
-            int recurrenceInterval = scheduledMeeting.getRecurrenceInterval();
-            String str = MeetingUtil.formatRecurrenceContent(mContext, recurrenceType, recurrenceInterval, scheduledMeeting.getRecurrenceDaysOfWeek(),
-                    scheduledMeeting.getRecurrenceDaysOfMonth());
-            meetingInfoTemplate = meetingInfoTemplate
-                    + mContext.getResources().getString(frtc.sdk.R.string.repetition_period_title) + strStartTime[0] + " " +  "-" + " " + MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd")
-                    + "," + str + "\n";
+        if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
+            if(scheduledMeetingSetting != null){
+                long startTimeMill = scheduledMeetingSetting.getRecurrenceStartTime();
+                long endTimeMill = scheduledMeetingSetting.getRecurrenceEndTime();
+                String[] strStartTime = MeetingUtil.timeFormat(startTimeMill, "yyyy-MM-dd HH:mm").split(" ");
+                String[] strEndTime = MeetingUtil.timeFormat(endTimeMill,"yyyy-MM-dd HH:mm").split(" ");
+                long recurrenceEndDay = scheduledMeetingSetting.getRecurrenceEndDay();
+                String recurrenceType = scheduledMeetingSetting.getRecurrenceType();
+                int recurrenceInterval = scheduledMeetingSetting.getRecurrenceInterval();
+                String str = MeetingUtil.formatRecurrenceContent(mContext, recurrenceType, recurrenceInterval, scheduledMeetingSetting.getRecurrenceDaysOfWeek(),
+                        scheduledMeetingSetting.getRecurrenceDaysOfMonth());
+                meetingInfoTemplate = meetingInfoTemplate
+                        + mContext.getResources().getString(frtc.sdk.R.string.repetition_period_title) + strStartTime[0] + " " +  "-" + " " + MeetingUtil.timeFormat(recurrenceEndDay, "yyyy-MM-dd")
+                        + "," + str + "\n";
+            }
         }
 
         meetingInfoTemplate = meetingInfoTemplate
@@ -421,12 +423,14 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                 + "\n"
                 + mContext.getResources().getString(R.string.copy_invitation_notice_without_password) + "\n";
 
-        if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName()) && scheduledMeeting != null){
-            String groupMeetingUrl = scheduledMeeting.getGroupMeetingUrl();
-            if(!TextUtils.isEmpty(groupMeetingUrl)){
-                meetingInfoTemplate = meetingInfoTemplate
-                        + mContext.getResources().getString(R.string.invitation_url_title) + "\n"
-                        + formatInfoString(groupMeetingUrl) + "\n";
+        if(meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
+            if(scheduledMeetingSetting != null){
+                String groupMeetingUrl = scheduledMeetingSetting.getGroupMeetingUrl();
+                if(!TextUtils.isEmpty(groupMeetingUrl)){
+                    meetingInfoTemplate = meetingInfoTemplate
+                            + mContext.getResources().getString(R.string.invitation_url_title) + "\n"
+                            + formatInfoString(groupMeetingUrl) + "\n";
+                }
             }
         }else {
             if (invitationURl != null && !invitationURl.isEmpty()) {

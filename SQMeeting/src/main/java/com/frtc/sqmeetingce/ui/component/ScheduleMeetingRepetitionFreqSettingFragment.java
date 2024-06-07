@@ -81,7 +81,8 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
     private String startTimeFormat;
     private boolean isUpdate = false;
 
-    public static final String BUNDLE_KEY = "isUpdate";
+    public static final String BUNDLE_KEY_UPDATE = "isUpdate";
+    public static final String BUNDLE_KEY_FREQUENCY = "frequency";
 
     @Nullable
     @Override
@@ -115,12 +116,13 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
         startTimeFormat = MeetingUtil.strTimeFormat(startTime, "yyyy-MM-dd");
         startWeekDayPosition = MeetingUtil.dateToWeekPosition(mActivity, startTimeFormat);
         weekAdapter = new WeekAdapter(mActivity);
+        String freqType = "";
         Bundle bundle = getArguments();
         if (bundle != null) {
-            isUpdate = bundle.getBoolean(BUNDLE_KEY);
+            isUpdate = bundle.getBoolean(BUNDLE_KEY_UPDATE);
+            freqType = bundle.getString(BUNDLE_KEY_FREQUENCY);
         }
         String meetingType = localStore.getScheduledMeetingSetting().getMeetingType();
-        String freqType = localStore.getScheduledMeetingSetting().getRecurrenceType();
         initData(freqType, meetingType);
         weekAdapter.setStartWeekDay(startWeekDayPosition);
         weekAdapter.setDataWeek(dataWeek);
@@ -249,6 +251,9 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
     }
 
     private void setClCalendarVisible(String freqType, String second) {
+        if(TextUtils.isEmpty(freqType)){
+            return;
+        }
         if(freqType.equals(RecurrenceType.WEEKLY.getTypeName())){
             freqDateTitle.setText(R.string.repetition_week_day);
             if(clCalendar.getVisibility() != View.VISIBLE){
@@ -303,11 +308,15 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
             try {
                 date = sdf.parse(meetingEndDate.getText().toString());
             } catch (ParseException e) {
-                Log.e(TAG,"ParseException:"+e.toString());
+                Log.e(TAG,"ParseException:"+ e);
                 return;
             }
-            localStore.getScheduledMeetingSetting().setRecurrenceEndDay(date.getTime() + 24 * 60 * 60 * 1000L - 1000L);
-            localStore.getScheduledMeetingSetting().setRecurrenceCount(calcCount());
+            if(date == null){
+                Log.e(TAG,"updateLocalStore failed: invalid RecurrenceEndDay");
+            }else{
+                localStore.getScheduledMeetingSetting().setRecurrenceEndDay(date.getTime() + 24 * 60 * 60 * 1000L - 1000L);
+                localStore.getScheduledMeetingSetting().setRecurrenceCount(calcCount());
+            }
         }
     }
 
@@ -418,7 +427,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
             for (int i = 0, n = dataWeek.length; i < n; i++) {
                 String week = dataWeek[i];
                 if (!TextUtils.isEmpty(week)) {
-                    if(datatmp.equals("")){
+                    if(datatmp.isEmpty()){
                         datatmp = getString(R.string.repetition_adj) + week;
                     }else{
                         datatmp += "、" + week;
@@ -431,7 +440,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
             for (int i = 0, n = dataMonth.length; i < n; i++) {
                 String monthDay = dataMonth[i];
                 if (!TextUtils.isEmpty(monthDay)) {
-                    if(datatmp.equals("")){
+                    if(datatmp.isEmpty()){
                         datatmp = getString(R.string.repetition_adj) + " " + monthDay + getString(R.string.repetition_type_day_th);
                     }else{
                         datatmp += "、" + monthDay + getString(R.string.repetition_type_day_th);
@@ -442,7 +451,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
         }
         
         String str = mActivity.getString(R.string.repetition_frequency_desc);
-        String str1 = "";
+        String str1;
         if(secondValue.equals("1")){
             str1 = String.format(str, firstValue + datatmp);
         }else {
@@ -459,7 +468,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
             meetingEndDate.setText(MeetingUtil.timeFormat(endDay, "yyyy年MM月dd日"));
             return;
         }
-        ChronoUnit chronoUnit = null;
+        ChronoUnit chronoUnit;
         if(firstValue.equals(getResources().getString(R.string.repetition_type_day))){
             chronoUnit = ChronoUnit.DAYS;
         }else if(firstValue.equals(getResources().getString(R.string.repetition_type_week))){
@@ -476,7 +485,7 @@ public class ScheduleMeetingRepetitionFreqSettingFragment extends BaseFragment i
         String datePlusStr = nowLocalDatePlus.plusDays(-1).format(fmt);
         long datePlus = MeetingUtil.timeFormatToLong(datePlusStr, "yyyy年MM月dd日");
 
-        LocalDate nowLocalDatePlus1Year = nowLocalDate.plus(1, ChronoUnit.YEARS);
+        LocalDate nowLocalDatePlus1Year = nowLocalDate.plusYears(1);
         String nowLocalDatePlus1YearStr = nowLocalDatePlus1Year.plusDays(-1).format(fmt);
         long datePlus1Year = MeetingUtil.timeFormatToLong(nowLocalDatePlus1YearStr, "yyyy年MM月dd日");
         if((datePlus - datePlus1Year) > 0){
