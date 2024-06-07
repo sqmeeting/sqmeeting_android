@@ -132,7 +132,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(isUpdate);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(isUpdate, RecurrenceType.DAILY.getTypeName());
             }
         });
 
@@ -140,7 +140,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(isUpdate);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(isUpdate,RecurrenceType.WEEKLY.getTypeName());
             }
         });
 
@@ -148,7 +148,7 @@ public class ScheduleMeetingRepetitionFreqFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_REPETITION_FREQ;
-                mActivity.showScheduleMeetingRepetitionFreqSetting(isUpdate);
+                mActivity.showScheduleMeetingRepetitionFreqSetting(isUpdate,RecurrenceType.MONTHLY.getTypeName());
             }
         });
 
