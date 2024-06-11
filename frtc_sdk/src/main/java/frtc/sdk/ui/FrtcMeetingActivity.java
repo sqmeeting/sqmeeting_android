@@ -539,6 +539,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     }
 
     private void leaveMeeting(){
+        Log.d(TAG,"leaveMeeting:");
         if (meetingControlBar != null) {
             meetingControlBar.stopChronometer();
         }
@@ -3546,8 +3547,8 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
         }
 
         newMeetingCall.setDisplayName(localStore.getDisplayName());
-        newMeetingCall.setServerAddress(crossServerAddr);
-        crossServerAddr = "";
+        newMeetingCall.setServerAddress(frtcCall.getMeetingServerAddress());
+        Log.d(TAG,"addMeetingCallToHistoryList:setServerAddress:"+newMeetingCall.getServerAddress());
         newMeetingCall.setCreateTime(joinTimeMs);
         newMeetingCall.setLeaveTime(leaveTime);
         newMeetingCall.setMeetingType(localStore.getMeetingType());
