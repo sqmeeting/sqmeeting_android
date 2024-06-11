@@ -84,7 +84,7 @@ public class HistoryMeetingAdapter extends RecyclerView.Adapter<HistoryMeetingAd
             holder.meetingNumber.setText(meetingCall.getMeetingNumber());
             holder.meetingTime.setText(meetingCall.getTime());
             String meetingType = meetingCall.getMeetingType();
-            holder.recurrenceSign.setVisibility((!TextUtils.isEmpty(meetingType) && meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName()))? View.VISIBLE : View.GONE);
+            holder.recurrenceSign.setVisibility((FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType))? View.VISIBLE : View.GONE);
         }
 
         @Override

@@ -554,6 +554,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         localStore.setAudioOn(!muteAudio);
         localStore.setCameraOn(!muteVideo);
         localStore.setAudioCall(audioOnly);
+        localStore.setMeetingType("");
 
         frtcCall.joinMeetingWithParam(joinMeetingParam, option);
 
@@ -981,6 +982,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
             param.setSchedule_end_time(localStore.getScheduledMeetingSetting().getEndTime());
             param.setMeeting_room_id(localStore.getScheduledMeetingSetting().getMeetingRoomId());
             param.setCall_rate_type(localStore.getScheduledMeetingSetting().getRate());
+            param.setTime_to_join(localStore.getScheduledMeetingSetting().getJoinTime());
             List<String> users = new ArrayList<>();
             List<UserInfo> invitedUsers = localStore.getScheduledMeetingSetting().getInvitedUsers();
             if (invitedUsers != null && !invitedUsers.isEmpty()) {

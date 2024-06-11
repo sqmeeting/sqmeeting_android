@@ -1770,6 +1770,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
         if(localStore.isLogged()){
             addMeetingCallToHistoryList();
         }
+        localStore.clearMeetingInfo();
         LocalStoreBuilder.getInstance(this).setLocalStore(localStore);
         isLocalAction = true;
     }
@@ -3517,6 +3518,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     }
 
     private void addMeetingCallToHistoryList(){
+        Log.d(TAG,"addMeetingCallToHistoryList:");
         long leaveTime = System.currentTimeMillis();
 
         if(joinTimeMs == 0 || joinTimeMs >= leaveTime){

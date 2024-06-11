@@ -91,7 +91,7 @@
     <string name="time_zone">Time Zone</string>
     <string name="invited_users">Invited Users</string>
     <string name="meeting_rate">Call Rate</string>
-    <string name="join_time">Join Time Ahead</string>
+    <string name="join_time">Early Joining Time</string>
     <string name="join_time_30_minutes">30 minutes</string>
     <string name="join_time_any_time">Any time</string>
     <string name="mute_in_meeting">Mute When Join</string>

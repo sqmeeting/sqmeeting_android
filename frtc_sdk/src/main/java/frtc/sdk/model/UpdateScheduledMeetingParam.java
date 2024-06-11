@@ -12,6 +12,7 @@ public class UpdateScheduledMeetingParam extends CommonParam {
     private String schedule_end_time;
     private String meeting_room_id;
     private String call_rate_type;
+    private String time_to_join;
     private String meeting_password;
     private List<String> invited_users;
 
@@ -165,6 +166,14 @@ public class UpdateScheduledMeetingParam extends CommonParam {
 
     public void setCall_rate_type(String call_rate_type) {
         this.call_rate_type = call_rate_type;
+    }
+
+    public String getTime_to_join() {
+        return time_to_join;
+    }
+
+    public void setTime_to_join(String time_to_join) {
+        this.time_to_join = time_to_join;
     }
 
     public String getMeeting_password() {
