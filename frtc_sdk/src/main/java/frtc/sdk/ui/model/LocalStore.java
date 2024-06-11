@@ -398,6 +398,7 @@ public class LocalStore {
         this.scheduleStartTime = 0;
         this.scheduleEndTime = 0;
         this.meetingURl = "";
+        this.meetingType = "";
     }
 
     public boolean isHost(){
@@ -491,6 +492,7 @@ public class LocalStore {
                 historyMeetingMap.put(key, meetingCallsTemp);
             }
             meetingCallsTemp.add(0,meetingCall);
+            Log.d("LocalStore","addHistoryMeeting:"+meetingCall.getMeetingNumber()+","+meetingCall.getServerAddress());
         }
     }
 

@@ -475,6 +475,7 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
+                            Log.d(TAG,"createInstantMeeting:"+resultType);
                             CreateInstantMeetingResponse response = JSONUtil.transform(result, CreateInstantMeetingResponse.class);
                             CreateInstantMeetingResult createInstantMeetingResult = new CreateInstantMeetingResult();
                             createInstantMeetingResult.setMeetingName(response.getMeeting_name());
@@ -516,6 +517,7 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncPost(new FrtcHttpClient.RequestWrapper(url, data), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
+                            Log.d(TAG,"createScheduledMeeting:"+resultType);
                             CreateScheduledMeetingResult createScheduledMeetingResult = JSONUtil.transform(result, CreateScheduledMeetingResult.class);
                             broadcastCreateScheduledMeetingResult(resultType, createScheduledMeetingResult);
                         }
@@ -600,6 +602,7 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncGet(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
+                            Log.d(TAG,"getScheduledMeeting:"+result);
                             ScheduledMeetingResult scheduledMeetingResult = JSONUtil.transform(result, ScheduledMeetingResult.class);
                             broadcastGetScheduledMeetingResult(resultType,scheduledMeetingResult);
                         }
@@ -628,6 +631,7 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncGet(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
+                            Log.d(TAG,"getScheduledMeetingList:"+result);
                             ScheduledMeetingListResult scheduledMeetingListResult = JSONUtil.transform(result, ScheduledMeetingListResult.class);
                             broadcastGetScheduledMeetingListResult(resultType,scheduledMeetingListResult);
                         }
@@ -657,6 +661,7 @@ public class ManagementService implements IManagementService {
                     FrtcHttpClient.getInstance(context).asyncGet(new FrtcHttpClient.RequestWrapper(url, ""), new FrtcHttpClient.IResultCallback() {
                         @Override
                         public void onResult(ResultType resultType, String result) {
+                            Log.d(TAG,"getScheduledRecurrenceMeetingList:"+result);
                             RecurrenceMeetingListResult recurrenceMeetingListResult = JSONUtil.transform(result, RecurrenceMeetingListResult.class);
                             broadcastGetScheduledRecurrenceMeetingListResult(resultType,recurrenceMeetingListResult);
                         }

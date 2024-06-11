@@ -77,8 +77,8 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
     private MeetingRoomAdapter meetingRoomAdapter;
 
     private TextView tvInvitedUsers;
-    private RelativeLayout rateItem, repetitionFreqItem, rlRepetitionEnd;
-    private TextView tvRate, tvRepetitionFreq, tvRepetitionEnd;
+    private RelativeLayout rateItem, joinTimeItem, repetitionFreqItem, rlRepetitionEnd;
+    private TextView tvRate, tvJoinTime, tvRepetitionFreq, tvRepetitionEnd;
     private Switch stMute;
     private Switch stAllowDialIn;
     private Switch stWatermark;
@@ -147,6 +147,10 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         tvInvitedUsers = view.findViewById(R.id.invited_users);
         rateItem = view.findViewById(R.id.meeting_rate_item);
         tvRate = view.findViewById(R.id.meeting_rate);
+        joinTimeItem = view.findViewById(R.id.join_time_item);
+        joinTimeItem.setVisibility(View.VISIBLE);
+        tvJoinTime = view.findViewById(R.id.join_time);
+
         repetitionFreqItem = view.findViewById(R.id.repetition_frequency_item);
         tvRepetitionFreq = view.findViewById(R.id.repetition_frequency);
         rlRepetitionEnd = view.findViewById(R.id.rl_repetition_end);
@@ -224,6 +228,9 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         }
 
         tvRate.setText(localStore.getScheduledMeetingSetting().getRate());
+        String joinTime = localStore.getScheduledMeetingSetting().getJoinTime();
+        tvJoinTime.setText("30".equals(joinTime)?getString(R.string.join_time_30_minutes):getString(R.string.join_time_any_time));
+
         mute = localStore.getScheduledMeetingSetting().isMute();
         stMute.setChecked(mute);
         allowDialIn = localStore.getScheduledMeetingSetting().isGuestDialIn();
@@ -340,6 +347,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         meetingRoomIdLayout.setVisibility(View.VISIBLE);
 
         rateItem.setVisibility(View.GONE);
+        joinTimeItem.setVisibility(View.GONE);
         stAllowDialIn.setVisibility(View.GONE);
         stWatermark.setVisibility(View.GONE);
         rateSplitView.setVisibility(View.GONE);
@@ -353,6 +361,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
         meetingRoomIdLayout.setVisibility(View.GONE);
 
         rateItem.setVisibility(View.VISIBLE);
+        joinTimeItem.setVisibility(View.VISIBLE);
         stAllowDialIn.setVisibility(View.VISIBLE);
         stWatermark.setVisibility(View.VISIBLE);
         rateSplitView.setVisibility(View.VISIBLE);
@@ -492,6 +501,15 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
                 onSaveScheduleMeetingSettings();
                 mActivity.previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
                 mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_RATE);
+            }
+        });
+
+        joinTimeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSaveScheduleMeetingSettings();
+                mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
+                mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_JOIN_TIME);
             }
         });
 
