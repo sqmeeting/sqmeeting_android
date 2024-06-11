@@ -36,7 +36,8 @@
         android:singleLine="true"
         android:layout_marginTop="@dimen/listview_item_margin_top"
         app:layout_constraintStart_toEndOf="@+id/meeting_name"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/meeting_number_label"

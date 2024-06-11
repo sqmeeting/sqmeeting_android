@@ -463,9 +463,6 @@ public class LocalStore {
         ArrayList<MeetingCall> historyMeetings;
         if (StringUtils.isNotBlank(this.userName) && StringUtils.isNotBlank(this.server)){
             String key = getHistoryMeetingKey(this.userName,this.server);
-            if(!historyMeetingMap.containsKey(key)){
-                return new ArrayList<>();
-            }
             historyMeetings = historyMeetingMap.get(key);
             if (historyMeetings == null) {
                 historyMeetings = new ArrayList<>();

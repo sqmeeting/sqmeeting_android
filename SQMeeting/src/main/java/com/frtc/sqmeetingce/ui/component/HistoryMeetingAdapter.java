@@ -38,7 +38,6 @@ public class HistoryMeetingAdapter extends RecyclerView.Adapter<HistoryMeetingAd
         TextView meetingName;
         TextView meetingNumber;
         TextView meetingTime;
-        TextView recurrenceSign;
 
         public ViewHolder(View view) {
             super(view);
@@ -46,7 +45,6 @@ public class HistoryMeetingAdapter extends RecyclerView.Adapter<HistoryMeetingAd
             meetingName = view.findViewById(R.id.meeting_name);
             meetingNumber = view.findViewById(R.id.meeting_number);
             meetingTime = view.findViewById(R.id.meeting_time);
-            recurrenceSign = view.findViewById(R.id.recurrence_sign);
         }
     }
 
@@ -83,8 +81,6 @@ public class HistoryMeetingAdapter extends RecyclerView.Adapter<HistoryMeetingAd
             holder.meetingName.setText(meetingCall.getMeetingName());
             holder.meetingNumber.setText(meetingCall.getMeetingNumber());
             holder.meetingTime.setText(meetingCall.getTime());
-            String meetingType = meetingCall.getMeetingType();
-            holder.recurrenceSign.setVisibility((FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(meetingType))? View.VISIBLE : View.GONE);
         }
 
         @Override
