@@ -508,7 +508,7 @@ public class UpdateScheduledMeetingFragment extends BaseFragment implements Meet
             @Override
             public void onClick(View v) {
                 onSaveScheduleMeetingSettings();
-                mActivity.previousTag = FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING;
+                mActivity.previousTag = FragmentTagEnum.FRAGMENT_UPDATE_SCHEDULED_MEETING;
                 mActivity.replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_JOIN_TIME);
             }
         });
