@@ -171,7 +171,6 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     private int volumeLevel = 0;
     private int cur_rotation = -1;
     private String lecturerUuid;
-    private long joinTimeMs = 0;
     private volatile boolean clean_mode;
 
     private MeetingDetailsDlg meetingDetailsDlg;
@@ -307,7 +306,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
             frtcCall.requestParticipants();
         }
         meetingControlBar.setMeetingName(localStore.getMeetingName());
-        meetingControlBar.resumeChronometer(localStore.getElapsedRealtime());
+        meetingControlBar.resumeChronometer(localStore.getElapsedJoinTime());
         meetingControlBar.updateHostPermission(isHost(), isOperatorOrAdmin());
         onHeadsetEnableSpeakerNotify(frtcCall.isHeadsetEnableSpeaker());
         remote_video_muted = localStore.isRemoteVideoMuted();
@@ -462,7 +461,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     protected void showMeetingView() {
         frtcFragmentManager.switchToConnectedFragment();
         meetingControlBar.startChronometer();
-        localStore.setElapsedRealtime(SystemClock.elapsedRealtime());
+        localStore.setElapsedJoinTime(SystemClock.elapsedRealtime());
         resetCleanMode();
     }
 
@@ -2557,7 +2556,6 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
                 showMeetingView();
                 entered_first = false;
                 checkPermission();
-                joinTimeMs = System.currentTimeMillis();
                 if(isScreenShare){
                     startShareContent();
                     isScreenShare = false;
@@ -3527,10 +3525,12 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     }
 
     private void addMeetingCallToHistoryList(){
-        Log.d(TAG,"addMeetingCallToHistoryList:");
-        long leaveTime = System.currentTimeMillis();
 
-        if(joinTimeMs == 0 || joinTimeMs >= leaveTime){
+        long currentTime = SystemClock.elapsedRealtime();
+        long joinTime = localStore.getElapsedJoinTime();
+        Log.d(TAG,"addMeetingCallToHistoryList:"+joinTime+"-"+currentTime);
+
+        if(joinTime == 0 || joinTime >= currentTime){
             return;
         }
 
@@ -3554,9 +3554,10 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
             newMeetingCall.setPassword(meetingPassword);
         }
 
+        long leaveTime = System.currentTimeMillis();
         newMeetingCall.setDisplayName(localStore.getDisplayName());
         newMeetingCall.setServerAddress(frtcCall.getMeetingServerAddress());
-        newMeetingCall.setCreateTime(joinTimeMs);
+        newMeetingCall.setCreateTime(leaveTime - currentTime + joinTime);
         newMeetingCall.setLeaveTime(leaveTime);
         newMeetingCall.setMeetingType(localStore.getMeetingType());
 
@@ -3724,6 +3725,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
 
 
     private void showCallFloatView(){
+        Log.d(TAG,"showCallFloatView");
         floatView = new FloatView(this.getApplicationContext(), isSharingContent);
         floatView.registerCallFloatListener(this);
         floatView.show();
@@ -3744,6 +3746,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
     }
 
     private void dismissCallFloatView(){
+        Log.d(TAG,"dismissCallFloatView:");
         if(floatView != null){
             floatView.unregisterCallFloatListener();
             floatView.dismiss();

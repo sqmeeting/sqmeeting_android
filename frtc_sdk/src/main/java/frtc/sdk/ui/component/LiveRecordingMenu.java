@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import frtc.sdk.R;
+import frtc.sdk.log.Log;
 import frtc.sdk.ui.FrtcMeetingActivity;
 
 public class LiveRecordingMenu {
@@ -39,6 +40,11 @@ public class LiveRecordingMenu {
         this.liveEnable = liveEnable;
         this.recordingEnable = recordingEnable;
 
+        init();
+        setClickListener();
+    }
+
+    private void init(){
         liveMenu = MenuView.findViewById(R.id.live_menu);
         recordingMenu = MenuView.findViewById(R.id.recording_menu);
 
@@ -52,26 +58,22 @@ public class LiveRecordingMenu {
         stopLiveBtn = MenuView.findViewById(R.id.live_stop_btn);
         recordControl = MenuView.findViewById(R.id.recording_control);
         StopRecordingBtn = MenuView.findViewById(R.id.recording_stop_btn);
+    }
 
+    private void setClickListener(){
         liveStatus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(liveEnable) {
-                    if (liveControl.getVisibility() == View.VISIBLE) {
-                        liveControl.setVisibility(View.GONE);
-                    } else {
-                        liveControl.setVisibility(View.VISIBLE);
-                    }
-                }
+                updateLiveControlVisibility();
             }
         });
 
         shareLiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(listener != null){
-                   listener.onShareLive();
-               }
+                if(listener != null){
+                    listener.onShareLive();
+                }
             }
         });
 
@@ -87,13 +89,7 @@ public class LiveRecordingMenu {
         recordingStatus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(recordingEnable) {
-                    if (recordControl.getVisibility() == View.VISIBLE) {
-                        recordControl.setVisibility(View.GONE);
-                    } else {
-                        recordControl.setVisibility(View.VISIBLE);
-                    }
-                }
+                updateRecordControlVisibility();
             }
         });
 
@@ -105,7 +101,26 @@ public class LiveRecordingMenu {
                 }
             }
         });
+    }
 
+    private void updateRecordControlVisibility(){
+        if(recordingEnable) {
+            if (recordControl.getVisibility() == View.VISIBLE) {
+                recordControl.setVisibility(View.GONE);
+            } else {
+                recordControl.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private void updateLiveControlVisibility(){
+        if(liveEnable) {
+            if (liveControl.getVisibility() == View.VISIBLE) {
+                liveControl.setVisibility(View.GONE);
+            } else {
+                liveControl.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     public void setLivaRecordingMenuListener(LiveRecordingMenuListener listener){
@@ -135,6 +150,7 @@ public class LiveRecordingMenu {
     public void updateHostPermission(boolean recordingEnable, boolean liveEnable){
         this.liveEnable = liveEnable;
         this.recordingEnable = recordingEnable;
+        Log.d("LiveRecordingMenu","updateHostPermission:"+liveEnable+","+recordingEnable);
     }
 
     public interface LiveRecordingMenuListener{
