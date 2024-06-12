@@ -312,6 +312,10 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
         onHeadsetEnableSpeakerNotify(frtcCall.isHeadsetEnableSpeaker());
         remote_video_muted = localStore.isRemoteVideoMuted();
         meetingControlBar.setRemoteVideoMute(remote_video_muted);
+
+        if(liveRecordingMenu != null){
+            liveRecordingMenu.updateHostPermission(isHost(),isOperatorOrAdmin());
+        }
         isLiveStarted = frtcCall.isLiveStarted();
         setLiveMenuVisibility(isLiveStarted);
         if(isLiveStarted){
@@ -320,6 +324,7 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
         }
         isRecordingStarted = frtcCall.isRecordingStarted();
         setRecordingMenuVisibility(isRecordingStarted);
+
         if(isSharingContent){
             meetingControlBar.setShareContentState(isSharingContent);
             setVideoMuteDisabled();
@@ -2175,6 +2180,9 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
         localStore.setMeetingURl(meetingURL);
 
         meetingControlBar.updateHostPermission(isHost(), isOperatorOrAdmin());
+        if(liveRecordingMenu != null){
+            liveRecordingMenu.updateHostPermission(isHost(),isOperatorOrAdmin());
+        }
         if(meetingMediaStatsDlg != null){
             meetingMediaStatsDlg.setMeetingId(meetingNumber);
             meetingMediaStatsDlg.setMeetingName(meetingName);
@@ -3548,7 +3556,6 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
 
         newMeetingCall.setDisplayName(localStore.getDisplayName());
         newMeetingCall.setServerAddress(frtcCall.getMeetingServerAddress());
-        Log.d(TAG,"addMeetingCallToHistoryList:setServerAddress:"+newMeetingCall.getServerAddress());
         newMeetingCall.setCreateTime(joinTimeMs);
         newMeetingCall.setLeaveTime(leaveTime);
         newMeetingCall.setMeetingType(localStore.getMeetingType());

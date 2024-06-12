@@ -631,8 +631,8 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         if(scheduledMeetingCall.getMeeting_type().equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())){
             Log.d(TAG,"showMeetingDetails:"+scheduledMeetingCall.getRecurrence_gid()+","+scheduledMeetingCall.getReservation_id());
             queryScheduledRecurrenceMeetingList(1, 500, scheduledMeetingCall.getRecurrence_gid());
-            updateRecurrenceMeeting(scheduledMeetingCall.getReservation_id());
         }
+        getScheduledMeetingById(scheduledMeetingCall.getReservation_id());
         storeScheduledMeetingSetting(scheduledMeetingCall);
         replaceFragmentWithTag(FragmentTagEnum.FRAGMENT_SCHEDULE_MEETING_DETAILS);
     }
@@ -673,10 +673,11 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         scheduledMeetingSetting.setOwnerName(scheduledMeeting.getOwner_name());
         scheduledMeetingSetting.setMeeting_url(scheduledMeeting.getMeeting_url());
         scheduledMeetingSetting.setParticipantUsers(scheduledMeeting.getParticipantUsers());
-        scheduledMeetingSetting.setGroupMeetingUrl(scheduledMeeting.getGroupMeetingUrl());
-        scheduledMeetingSetting.setReservationGid(scheduledMeeting.getRecurrence_gid());
+        scheduledMeetingSetting.setJoinTime(scheduledMeeting.getTime_to_join());
 
         if(FrtcSDKMeetingType.RECURRENCE.getTypeName().equals(scheduledMeeting.getMeeting_type())){
+            scheduledMeetingSetting.setReservationGid(scheduledMeeting.getRecurrence_gid());
+            scheduledMeetingSetting.setGroupMeetingUrl(scheduledMeeting.getGroupMeetingUrl());
             scheduledMeetingSetting.setRecurrenceType(scheduledMeeting.getRecurrence_type());
             scheduledMeetingSetting.setRecurrenceInterval(scheduledMeeting.getRecurrenceInterval());
             scheduledMeetingSetting.setRecurrenceStartTime(scheduledMeeting.getRecurrenceStartTime());
@@ -728,10 +729,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         MeetingDetailsFragment fragment = new MeetingDetailsFragment();
         fragment.setArguments(bundle);
         replaceFragmentWithInstance(fragment, FragmentTagEnum.FRAGMENT_MEETING_DETAILS);
-    }
-
-    public void updateRecurrenceMeeting(String reservationId){
-        getScheduledMeetingById(reservationId);
     }
 
 
@@ -1102,6 +1099,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         setting.setMeetingName(scheduledMeetingResult.getMeeting_name());
         setting.setMeetingType(scheduledMeetingResult.getMeeting_type());
         setting.setRate(scheduledMeetingResult.getCall_rate_type());
+        setting.setJoinTime(scheduledMeetingResult.getTime_to_join());
         setting.setReservationGid(scheduledMeetingResult.getRecurrence_gid());
         setting.setStartTime(scheduledMeetingResult.getSchedule_start_time());
         setting.setEndTime(scheduledMeetingResult.getSchedule_end_time());
@@ -1116,6 +1114,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         setting.setOwnerName(scheduledMeetingResult.getOwner_name());
         setting.setQrcode(scheduledMeetingResult.getQrcode_string());
         setting.setMeeting_url(scheduledMeetingResult.getMeeting_url());
+        setting.setGroupMeetingUrl(scheduledMeetingResult.getGroupMeetingUrl());
         setting.setRecurrenceType(scheduledMeetingResult.getRecurrence_type());
         setting.setRecurrenceInterval(scheduledMeetingResult.getRecurrenceInterval());
         setting.setRecurrenceStartTime(scheduledMeetingResult.getRecurrenceStartTime());

@@ -17,6 +17,7 @@ public class ScheduledMeetingResult implements IResult {
     private String recurrence_type;
     private String meeting_room_id;
     private String meeting_password;
+    private String time_to_join;
     private List<UserInfo> invited_users_details;
 
     private String mute_upon_entry;
@@ -27,7 +28,7 @@ public class ScheduledMeetingResult implements IResult {
     private String owner_name;
     private String qrcode_string;
     private String meeting_url;
-
+    private String groupMeetingUrl;
     private int recurrenceInterval;
     private long recurrenceStartTime;
     private long recurrenceEndTime;
@@ -172,6 +173,14 @@ public class ScheduledMeetingResult implements IResult {
         this.meeting_password = meeting_password;
     }
 
+    public String getTime_to_join() {
+        return time_to_join;
+    }
+
+    public void setTime_to_join(String time_to_join) {
+        this.time_to_join = time_to_join;
+    }
+
     public List<UserInfo> getInvited_users_details() {
         return invited_users_details;
     }
@@ -242,5 +251,13 @@ public class ScheduledMeetingResult implements IResult {
 
     public void setMeeting_url(String meeting_url) {
         this.meeting_url = meeting_url;
+    }
+
+    public String getGroupMeetingUrl() {
+        return groupMeetingUrl;
+    }
+
+    public void setGroupMeetingUrl(String groupMeetingUrl) {
+        this.groupMeetingUrl = groupMeetingUrl;
     }
 }

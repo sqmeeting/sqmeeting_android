@@ -132,6 +132,11 @@ public class LiveRecordingMenu {
         }
     }
 
+    public void updateHostPermission(boolean recordingEnable, boolean liveEnable){
+        this.liveEnable = liveEnable;
+        this.recordingEnable = recordingEnable;
+    }
+
     public interface LiveRecordingMenuListener{
         void onShareLive();
         void onLiveStop();

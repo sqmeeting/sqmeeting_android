@@ -18,7 +18,7 @@ public class ScheduledMeeting {
     private String owner_name;
     private String meeting_url;
     private String groupMeetingUrl;
-
+    private String time_to_join;
     private int recurrenceInterval;
     private long recurrenceStartDay;
     private long recurrenceEndDay;
@@ -28,6 +28,14 @@ public class ScheduledMeeting {
     private List<Integer> recurrenceDaysOfMonth;
     private List<ScheduledMeeting> recurrenceReservationList;
     private List<String> participantUsers;
+
+    public String getTime_to_join() {
+        return time_to_join;
+    }
+
+    public void setTime_to_join(String time_to_join) {
+        this.time_to_join = time_to_join;
+    }
 
     public String getGroupMeetingUrl() {
         return groupMeetingUrl;
