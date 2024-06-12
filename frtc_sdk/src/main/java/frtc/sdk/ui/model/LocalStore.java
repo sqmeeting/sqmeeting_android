@@ -87,7 +87,7 @@ public class LocalStore {
     private Constants.SdkType sdkType = Constants.SdkType.SDK_TYPE_SQ;
 
     private String meetingType;
-    private long elapsedRealtime;
+    private long elapsedJoinTime;
     private boolean isSharingContent = false;
 
     private boolean isRemoteVideoMuted = false;
@@ -108,12 +108,12 @@ public class LocalStore {
         isSharingContent = sharingContent;
     }
 
-    public long getElapsedRealtime() {
-        return elapsedRealtime;
+    public long getElapsedJoinTime() {
+        return elapsedJoinTime;
     }
 
-    public void setElapsedRealtime(long elapsedRealtime) {
-        this.elapsedRealtime = elapsedRealtime;
+    public void setElapsedJoinTime(long elapsedJoinTime) {
+        this.elapsedJoinTime = elapsedJoinTime;
     }
 
     public String getMeetingType() {
