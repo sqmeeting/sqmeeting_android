@@ -554,13 +554,12 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         localStore.setAudioOn(!muteAudio);
         localStore.setCameraOn(!muteVideo);
         localStore.setAudioCall(audioOnly);
-        localStore.setMeetingType("");
 
         frtcCall.joinMeetingWithParam(joinMeetingParam, option);
 
     }
 
-    public void joinMeeting(String number, String password, String displayName, boolean muteVideo, String meetingType) {
+    public void joinMeeting(String number, String password, String displayName, boolean muteVideo) {
         if(localStore == null){
             localStore = LocalStoreBuilder.getInstance(this).getLocalStore();
         }
@@ -587,11 +586,10 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         localStore.setAudioOn(false);
         localStore.setCameraOn(!muteVideo);
         localStore.setAudioCall(false);
-        localStore.setMeetingType(meetingType);
         frtcCall.joinMeetingWithParam(joinMeetingParam, option);
     }
 
-    public void joinMeeting(String number, String password, String displayName, String serverAddr, String meetingType) {
+    public void joinMeeting(String number, String password, String displayName, String serverAddr) {
         if(localStore == null){
             localStore = LocalStoreBuilder.getInstance(this).getLocalStore();
         }
@@ -617,7 +615,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         option.setAudioOnly(false);
 
         localStore.setMeetingPassword(password);
-        localStore.setMeetingType(meetingType);
         localStore.setAudioOn(false);
         localStore.setCameraOn(false);
         localStore.setAudioCall(false);
@@ -724,7 +721,6 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
         bundle.putString("DisplayName",meetingCall.getDisplayName());
         bundle.putString("SpentTime",getStrSpentTime(meetingCall.getCreateTime(),meetingCall.getLeaveTime()));
         bundle.putString("ServerAddress",meetingCall.getServerAddress());
-        bundle.putString("MeetingType",meetingCall.getMeetingType());
 
         MeetingDetailsFragment fragment = new MeetingDetailsFragment();
         fragment.setArguments(bundle);
@@ -1381,7 +1377,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                 showConnectionErrorNotice();
                 return;
             }
-            joinMeeting(meetingId,meetingPassword,localStore.getDisplayName(), !localStore.isCameraOn(), createInstantMeetingResult.getMeeting_type());
+            joinMeeting(meetingId,meetingPassword,localStore.getDisplayName(), !localStore.isCameraOn());
             StartMeetingActivity();
         }
     }
@@ -2577,7 +2573,7 @@ public class MainActivity extends AppCompatActivity implements IFrtcManagementLi
                         return;
                     }
                     joinMeeting(scheduledMeeting.getMeeting_number(),
-                            scheduledMeeting.getMeeting_password(), localStore.getDisplayName(), "",scheduledMeeting.getMeeting_type());
+                            scheduledMeeting.getMeeting_password(), localStore.getDisplayName(), "");
                     StartMeetingActivity();
                 }
 

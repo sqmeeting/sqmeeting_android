@@ -3559,7 +3559,6 @@ public class FrtcMeetingActivity extends AppCompatActivity implements JoinMeetin
         newMeetingCall.setServerAddress(frtcCall.getMeetingServerAddress());
         newMeetingCall.setCreateTime(leaveTime - currentTime + joinTime);
         newMeetingCall.setLeaveTime(leaveTime);
-        newMeetingCall.setMeetingType(localStore.getMeetingType());
 
         localStore.addHistoryMeeting(newMeetingCall);
     }

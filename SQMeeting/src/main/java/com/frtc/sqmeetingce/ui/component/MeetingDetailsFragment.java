@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.frtc.sqmeetingce.MainActivity;
 import com.frtc.sqmeetingce.R;
 
-import frtc.sdk.internal.model.FrtcSDKMeetingType;
 import frtc.sdk.ui.dialog.ConfirmDlg;
 import frtc.sdk.ui.dialog.IConfirmDlgListener;
 import frtc.sdk.ui.model.LocalStore;
@@ -36,7 +35,6 @@ public class MeetingDetailsFragment extends BaseFragment {
     String displayName="";
     String spentTime = "";
     String serverAddress = "";
-    String meetingType = "";
 
     public MeetingDetailsFragment(){
 
@@ -54,7 +52,6 @@ public class MeetingDetailsFragment extends BaseFragment {
             displayName = getArguments().getString("DisplayName");
             spentTime = getArguments().getString("SpentTime");
             serverAddress = getArguments().getString("ServerAddress");
-            meetingType = getArguments().getString("MeetingType");
         }
 
         mActivity = (MainActivity) getActivity();
@@ -68,8 +65,6 @@ public class MeetingDetailsFragment extends BaseFragment {
         TextView tvMeetingId = view.findViewById(R.id.meeting_id);
         TextView tvMeetingSpendTime = view.findViewById(R.id.meeting_spend_time);
         TextView tvMeetingPassword = view.findViewById(R.id.meeting_password);
-        TextView tvRecurrenceSign = view.findViewById(R.id.recurrence_sign);
-        tvRecurrenceSign.setVisibility((!TextUtils.isEmpty(meetingType) && meetingType.equals(FrtcSDKMeetingType.RECURRENCE.getTypeName())) ? View.VISIBLE : View.GONE);
 
         localStore = LocalStoreBuilder.getInstance(mActivity.getApplicationContext()).getLocalStore();
 
@@ -105,7 +100,7 @@ public class MeetingDetailsFragment extends BaseFragment {
                     mActivity.showConnectionErrorNotice();
                     return;
                 }
-                mActivity.joinMeeting(meetingNumber,meetingPassword,displayName,serverAddress, meetingType);
+                mActivity.joinMeeting(meetingNumber,meetingPassword,displayName,serverAddress);
                 joinMeeting();
             }
         });

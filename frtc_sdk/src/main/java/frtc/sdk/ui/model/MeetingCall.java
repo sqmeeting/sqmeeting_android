@@ -28,15 +28,6 @@ public class MeetingCall {
     private String creatorId;
 
     private String spendTime;
-    private String meetingType;
-
-    public String getMeetingType() {
-        return meetingType;
-    }
-
-    public void setMeetingType(String meetingType) {
-        this.meetingType = meetingType;
-    }
 
     public String getDisplayName() {
         return displayName;

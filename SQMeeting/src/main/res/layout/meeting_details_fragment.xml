@@ -52,7 +52,8 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/meeting_name"

@@ -287,7 +287,7 @@ public class ScheduledMeetingDetailsFragment extends BaseFragment {
                     return;
                 }
                 mActivity.joinMeeting(meetingNumber,
-                        meetingPassword, localStore.getDisplayName(),"", meetingType);
+                        meetingPassword, localStore.getDisplayName(),"");
                 launchMeeting();
             }
         });

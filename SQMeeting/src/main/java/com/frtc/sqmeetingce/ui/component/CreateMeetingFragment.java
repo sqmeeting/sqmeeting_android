@@ -266,7 +266,7 @@ public class CreateMeetingFragment extends BaseFragment implements MeetingRoomAd
                 for (MeetingRoom meetingRoom:meetingRooms) {
                     if(meetingRoom.getMeetingNumber().equals(meetingNumber)){
                         String password = meetingRoom.getPassword();
-                        mActivity.joinMeeting(meetingNumber,password,meetingName,!videoOn, FrtcSDKMeetingType.INSTANT.getTypeName());
+                        mActivity.joinMeeting(meetingNumber,password,meetingName,!videoOn);
                         launchMeeting();
                         break;
                     }

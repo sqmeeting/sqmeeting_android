@@ -140,7 +140,7 @@ public class ScheduleRecurrenceMeetingListFragment extends BaseFragment implemen
                         return;
                     }
                     mActivity.joinMeeting(scheduledMeetings.get(0).getMeeting_number(),
-                            scheduledMeetings.get(0).getMeeting_password(), localStore.getDisplayName(),"",scheduledMeetings.get(0).getMeeting_type() );
+                            scheduledMeetings.get(0).getMeeting_password(), localStore.getDisplayName(),"");
                     mActivity.StartMeetingActivity();
                 }
             }

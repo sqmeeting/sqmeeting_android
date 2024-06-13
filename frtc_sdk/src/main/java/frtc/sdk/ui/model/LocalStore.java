@@ -23,8 +23,6 @@ public class LocalStore {
 
     private String server = "";
 
-    private UserIdentity userIdentify = UserIdentity.GUEST;
-
     private String userId = "";
     private String userName = "";
     private String clientId = "";
@@ -57,12 +55,7 @@ public class LocalStore {
 
     private String displayName = "";
 
-    private boolean rememberSignInfo = false;
-    private boolean rememberName = true;
-    private boolean rememberPwd = false;
-
     private boolean autoSignIn = true;
-    private String passwordEnc;
     private HashMap<String, String> userPwdMap = new HashMap<>();
 
     private ScheduledMeetingSetting scheduledMeetingSetting;
@@ -85,9 +78,7 @@ public class LocalStore {
     private Map<String, Long> mapMeetingReminder = new HashMap<>();
 
     private Constants.SdkType sdkType = Constants.SdkType.SDK_TYPE_SQ;
-
-    private String meetingType;
-    private long elapsedJoinTime;
+    private long elapsedJoinTime = 0;
     private boolean isSharingContent = false;
 
     private boolean isRemoteVideoMuted = false;
@@ -114,14 +105,6 @@ public class LocalStore {
 
     public void setElapsedJoinTime(long elapsedJoinTime) {
         this.elapsedJoinTime = elapsedJoinTime;
-    }
-
-    public String getMeetingType() {
-        return meetingType;
-    }
-
-    public void setMeetingType(String meetingType) {
-        this.meetingType = meetingType;
     }
 
     public Constants.SdkType getSdkType() {
@@ -277,19 +260,6 @@ public class LocalStore {
         this.autoSignIn = autoSignIn;
     }
 
-    enum UserIdentity {
-        USER,
-        GUEST
-    }
-
-    public UserIdentity getUserIdentify() {
-        return userIdentify;
-    }
-
-    public void setUserIdentify(UserIdentity userIdentify) {
-        this.userIdentify = userIdentify;
-    }
-
     public long getScheduleStartTime() {
         return scheduleStartTime;
     }
@@ -398,7 +368,7 @@ public class LocalStore {
         this.scheduleStartTime = 0;
         this.scheduleEndTime = 0;
         this.meetingURl = "";
-        this.meetingType = "";
+        this.elapsedJoinTime = 0;
     }
 
     public boolean isHost(){
@@ -475,6 +445,7 @@ public class LocalStore {
     }
 
     public void clearHistoryMeetings(){
+        Log.d("LocalStore","clearHistoryMeetings");
         if (StringUtils.isNotBlank(this.userName) && StringUtils.isNotBlank(this.server)) {
             historyMeetingMap.remove(getHistoryMeetingKey(this.userName,this.server));
         }
@@ -565,14 +536,6 @@ public class LocalStore {
         this.callRate = callRate;
     }
 
-    public boolean isRememberName() {
-        return rememberName;
-    }
-
-    public void setRememberName(boolean remember) {
-        this.rememberName = remember;
-    }
-
     public boolean isAudioOn() {
         return audioOn;
     }
@@ -633,14 +596,6 @@ public class LocalStore {
         return clearPassword;
     }
 
-    public void setSignInRemembered(boolean remembered) {
-        this.rememberSignInfo = remembered;
-    }
-
-    public boolean getSignInRemembered() {
-        return rememberSignInfo;
-    }
-
     public boolean isAudioCall() {
         return isAudioCall;
     }
@@ -672,14 +627,6 @@ public class LocalStore {
 
     public void setRealName(String realName) {
         this.realName = realName;
-    }
-
-    public boolean isRememberPwd() {
-        return rememberPwd;
-    }
-
-    public void setRememberPwd(boolean remember) {
-        this.rememberPwd = remember;
     }
 
     public String getClientId() {
