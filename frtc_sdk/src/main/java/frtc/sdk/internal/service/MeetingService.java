@@ -411,7 +411,11 @@ public class MeetingService implements IMeetingService {
 
         if (!TextUtils.isEmpty(serverAddress)) {
             userToken = "";
-            meetingStatusInfo.setCrossServer(true);
+            if(!serverAddress.equals(preConfigServerAddress)){
+                meetingStatusInfo.setCrossServer(true);
+            }else{
+                meetingStatusInfo.setCrossServer(false);
+            }
             if (TextUtils.isEmpty(displayName)) {
                 displayName = Build.PRODUCT + Build.VERSION.RELEASE;
             }
@@ -422,6 +426,8 @@ public class MeetingService implements IMeetingService {
             serverAddress = preConfigServerAddress;
             meetingStatusInfo.setCrossServer(false);
         }
+
+        Log.d(TAG,"joinMeetingWithParam:"+serverAddress+","+preConfigServerAddress+","+meetingStatusInfo.isCrossServer());
 
         meetingConfig.setAudioMuted(muteAudio);
         meetingConfig.setVideoMuted(muteVideo);
