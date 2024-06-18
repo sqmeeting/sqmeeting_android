@@ -2,6 +2,7 @@ package frtc.sdk.ui.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import frtc.sdk.log.Log;
 
@@ -144,6 +145,14 @@ public class MeetingCall {
 
     public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MeetingCall)) return false;
+        MeetingCall that = (MeetingCall) o;
+        return Objects.equals(getMeetingNumber(), that.getMeetingNumber()) && Objects.equals(getServerAddress(), that.getServerAddress());
     }
 
 }
