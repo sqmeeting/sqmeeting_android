@@ -39,15 +39,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/upload_icon"
-            android:layout_marginHorizontal="3dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/call_icon_up"
-            app:layout_constraintStart_toEndOf="@+id/media"
-            app:layout_constraintTop_toTopOf="@+id/media_text"
-            app:layout_constraintBottom_toBottomOf="@+id/media_text" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView
