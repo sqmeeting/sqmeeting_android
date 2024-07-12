@@ -63,7 +63,7 @@ public class MeetingMediaStatsDlg extends BaseDialog {
         listView = findViewById(R.id.stats_list_view);
         listView.setFooterDividersEnabled(true);
 
-        adapter = new MeetingStatsAdapter(context,R.layout.participants_listview_item, meetingStatsInfoList);
+        adapter = new MeetingStatsAdapter(context,R.layout.meeting_stats_item, meetingStatsInfoList);
         listView.setAdapter(adapter);
 
         closeBtn.setOnClickListener(new View.OnClickListener() {

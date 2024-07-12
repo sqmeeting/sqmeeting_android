@@ -13,6 +13,7 @@ import java.util.List;
 
 import frtc.sdk.R;
 import frtc.sdk.internal.model.MediaStatsInfo;
+import frtc.sdk.log.Log;
 import frtc.sdk.ui.model.MeetingStatsInfo;
 
 public class MeetingStatsAdapter extends ArrayAdapter<MeetingStatsInfo> {
@@ -64,7 +65,6 @@ public class MeetingStatsAdapter extends ArrayAdapter<MeetingStatsInfo> {
             holder.packageLoss = convertView.findViewById(R.id.packet_loss);
             holder.jitter = convertView.findViewById(R.id.jitter);
 
-            holder.uploadIcon = convertView.findViewById(R.id.upload_icon);
             convertView.setTag(holder);
         } else {
             holder = (MeetingStatsAdapter.Holder) convertView.getTag();
@@ -74,10 +74,14 @@ public class MeetingStatsAdapter extends ArrayAdapter<MeetingStatsInfo> {
         String mediaType = meetingStatsInfoList.get(position).getMediaType();
         if(item != null && mediaType != null){
             holder.name.setText(item.getParticipantName());
-            holder.media.setText(formatMediaText(mediaType));
+            String mediaTypeStr = formatMediaText(mediaType);
+            if(isLocal(mediaType)){
+                mediaTypeStr += "\u2191";
+            }
+            holder.media.setText(mediaTypeStr);
             holder.format.setText(item.getResolution());
-            holder.actualRate.setText(""+item.getRtpActualBitRate());
-            holder.frameRate.setText(""+item.getFrameRate());
+            holder.actualRate.setText(String.valueOf(item.getRtpActualBitRate()));
+            holder.frameRate.setText(String.valueOf(item.getFrameRate()));
 
             String packageLossStr = "";
             if("apr".equals(mediaType)){
@@ -89,12 +93,6 @@ public class MeetingStatsAdapter extends ArrayAdapter<MeetingStatsInfo> {
             holder.packageLoss.setText(packageLossStr);
 
             holder.jitter.setText(""+item.getJitter());
-
-            if(isLocal(mediaType)){
-                holder.uploadIcon.setVisibility(View.VISIBLE);
-            }else{
-                holder.uploadIcon.setVisibility(View.GONE);
-            }
         }
 
         return convertView;
@@ -132,7 +130,6 @@ public class MeetingStatsAdapter extends ArrayAdapter<MeetingStatsInfo> {
         public TextView frameRate;
         public TextView packageLoss;
         public TextView jitter;
-        public ImageView uploadIcon;
 
     }
 
