@@ -5,6 +5,7 @@ public class MediaStatsInfo {
     private String resolution;
     private int frameRate;
     private int jitter;
+    private int logicPacketLoss;
     private int logicPacketLossRate;
     private int packageLoss;
     private int packageLossRate;
@@ -42,6 +43,14 @@ public class MediaStatsInfo {
 
     public void setJitter(int jitter) {
         this.jitter = jitter;
+    }
+
+    public int getLogicPacketLoss() {
+        return logicPacketLoss;
+    }
+
+    public void setLogicPacketLoss(int logicPacketLoss) {
+        this.logicPacketLoss = logicPacketLoss;
     }
 
     public int getLogicPacketLossRate() {
