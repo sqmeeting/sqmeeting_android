@@ -86,7 +86,7 @@ public class MeetingStatsAdapter extends ArrayAdapter<MeetingStatsInfo> {
             String packageLossStr = "";
             if("apr".equals(mediaType)){
                 packageLossStr = item.getPackageLoss() + "(" + item.getPackageLossRate() + "%)/"
-                        + item.getPackageLoss() + "(" + item.getLogicPacketLossRate() +"%)";
+                        + item.getLogicPacketLoss() + "(" + item.getLogicPacketLossRate() +"%)";
             }else{
                 packageLossStr = item.getPackageLoss() + "(" + item.getPackageLossRate() + "%)";
             }
