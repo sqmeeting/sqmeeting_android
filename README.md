@@ -4,6 +4,8 @@
 
 # SQMeeting Android客户端
 
+![screenshot](./image1.png)
+
 # 系统要求
 
 ## 操作系统
